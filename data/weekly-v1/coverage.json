@@ -1,0 +1,98 @@
+{
+  "end": "2026-03-01T00:00:00Z",
+  "events": 1382,
+  "pairs": {
+    "BCHUSDT": {
+      "complete_days": 1124,
+      "eligible_decisions": 155,
+      "excluded_weeks": 0,
+      "files_found": 37,
+      "incomplete_days": 0,
+      "minutes": 1618560,
+      "scored_decisions": 155,
+      "unscorable_events": 0
+    },
+    "BNBUSDT": {
+      "complete_days": 1124,
+      "eligible_decisions": 155,
+      "excluded_weeks": 0,
+      "files_found": 37,
+      "incomplete_days": 0,
+      "minutes": 1618560,
+      "scored_decisions": 155,
+      "unscorable_events": 0
+    },
+    "BTCUSDT": {
+      "complete_days": 1121,
+      "eligible_decisions": 150,
+      "excluded_weeks": 6,
+      "files_found": 37,
+      "incomplete_days": 1,
+      "minutes": 1614420,
+      "scored_decisions": 149,
+      "unscorable_events": 1
+    },
+    "DOTUSDT": {
+      "complete_days": 1124,
+      "eligible_decisions": 155,
+      "excluded_weeks": 0,
+      "files_found": 37,
+      "incomplete_days": 0,
+      "minutes": 1618560,
+      "scored_decisions": 155,
+      "unscorable_events": 0
+    },
+    "ETHUSDT": {
+      "complete_days": 1120,
+      "eligible_decisions": 151,
+      "excluded_weeks": 5,
+      "files_found": 37,
+      "incomplete_days": 1,
+      "minutes": 1612860,
+      "scored_decisions": 150,
+      "unscorable_events": 1
+    },
+    "LINKUSDT": {
+      "complete_days": 1096,
+      "eligible_decisions": 151,
+      "excluded_weeks": 4,
+      "files_found": 36,
+      "incomplete_days": 0,
+      "minutes": 1578240,
+      "scored_decisions": 151,
+      "unscorable_events": 0
+    },
+    "SOLUSDT": {
+      "complete_days": 1124,
+      "eligible_decisions": 155,
+      "excluded_weeks": 0,
+      "files_found": 37,
+      "incomplete_days": 0,
+      "minutes": 1618560,
+      "scored_decisions": 155,
+      "unscorable_events": 0
+    },
+    "TRXUSDT": {
+      "complete_days": 1124,
+      "eligible_decisions": 155,
+      "excluded_weeks": 0,
+      "files_found": 37,
+      "incomplete_days": 0,
+      "minutes": 1618560,
+      "scored_decisions": 155,
+      "unscorable_events": 0
+    },
+    "UNIUSDT": {
+      "complete_days": 1124,
+      "eligible_decisions": 155,
+      "excluded_weeks": 0,
+      "files_found": 37,
+      "incomplete_days": 0,
+      "minutes": 1618560,
+      "scored_decisions": 155,
+      "unscorable_events": 0
+    }
+  },
+  "source_root": "/mnt/second/trender/backtests/data",
+  "start": "2023-02-01T00:00:00Z"
+}

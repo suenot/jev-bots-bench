@@ -4,6 +4,12 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-09-26
+
+### Added
+
+- Commit 1,382 causal model-facing weekly requests, pair coverage, and SHA-256 commitments for the sealed settlement file before model inference.
+
 ## [0.1.0] - 2026-09-26
 
 ### Added

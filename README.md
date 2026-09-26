@@ -14,6 +14,8 @@ results from pending, blocked, and incompatible projects.
 - [`benchmark/run.py`](benchmark/run.py) and
   [`benchmark/README.md`](benchmark/README.md): causal market preparation,
   replay, baselines, validation, and exact server-side commands.
+- [`data/weekly-v1/`](data/weekly-v1/COMMITMENT.md): 1,382 committed model inputs,
+  pair coverage, and the pre-inference hash of sealed outcomes.
 - [`adapters/`](adapters/): engine-specific JSONL adapters, pinned dependencies,
   and setup instructions. An adapter is measured only after a real model run.
 - [`results/summary.json`](results/summary.json): public aggregate data used by
