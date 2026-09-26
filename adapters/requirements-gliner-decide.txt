@@ -1,0 +1,7 @@
+# Install a CPU-only PyTorch wheel first, as shown in README.md.
+numpy==2.2.6
+torch==2.8.0+cpu
+transformers==4.56.2
+safetensors==0.6.2
+peft==0.17.1
+gliner2[local] @ git+https://github.com/fastino-ai/GLiNER2.git@55656fbfa01d3d4a77485e1a1eeeaf682990ccdf

@@ -1,0 +1,8 @@
+# Install a CPU-only PyTorch wheel first, as shown in README.md.
+numpy==2.2.6
+torch==2.8.0+cpu
+transformers==4.56.2
+accelerate==1.10.1
+gliner==0.2.29
+scipy==1.16.1
+gliformer @ git+https://github.com/Knowledgator/GLiFormer.git@b5c0a0fd2aacff64736fbfa0bac0bdcc032d5eff

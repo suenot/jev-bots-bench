@@ -1,0 +1,153 @@
+{
+  "baselines": [],
+  "generated_at": "2026-09-26T11:09:31Z",
+  "methodology": {
+    "decision_schedule": "Monday 00:00 UTC, nonoverlapping 7-day intervals",
+    "features": "28 complete UTC daily candles ending Sunday 23:59 UTC; model-facing state contains only relative returns and volatility",
+    "fee_bps_per_side": 5.0,
+    "fills": "open of Monday 01:00 UTC minute; exit at next Monday 01:00 UTC",
+    "market": "legacy Binance USDT perpetual futures candle proxy; funding and spread unavailable",
+    "policy": "long/cash target weight in [0,1]; independent pair portfolios; reset at year boundaries for yearly rows",
+    "slippage_bps_per_side": 4.0
+  },
+  "models": [
+    {
+      "id": "laya",
+      "name": "Laya",
+      "reason": "No benchmark adapter or measured response file yet",
+      "source_sha": "4066d5d5fbf08b66c6757ddeedbd797bd7655bc0",
+      "source_url": "https://github.com/NandhaKishorM/laya",
+      "status": "pending"
+    },
+    {
+      "id": "kev",
+      "name": "Kev",
+      "reason": "No benchmark adapter or measured response file yet",
+      "source_sha": "f1535963cea021439370c23127bc970b6788e730",
+      "source_url": "https://github.com/jaredpalmer/kev",
+      "status": "pending"
+    },
+    {
+      "id": "gliner25",
+      "name": "GLiNER2.5-Decide",
+      "reason": "No measured response file yet",
+      "source_sha": "7ee5da4c2415e32259bcdc0b1a7367c32ce8d6f6",
+      "source_url": "https://huggingface.co/fastino/GLiNER2.5-Decide",
+      "status": "pending"
+    },
+    {
+      "id": "jevk5",
+      "name": "JevK5",
+      "reason": "No benchmark adapter or measured response file yet",
+      "source_sha": "1e5ae1b533b9eb80c0cbe3fbd010607d0b4e26ae",
+      "source_url": "https://github.com/allebee/jevk5",
+      "status": "pending",
+      "weights_sha": "c4f7fdb3aeab5582336406e78d3bef11bf98833d",
+      "weights_url": "https://huggingface.co/alibiserikbay/JevK5"
+    },
+    {
+      "id": "gliformer",
+      "name": "GLiFormer",
+      "reason": "No benchmark adapter or measured response file yet",
+      "source_sha": "d0a4e53d09cebe6bc963dd9be319d4279084bb2d",
+      "source_url": "https://huggingface.co/knowledgator/gliformer-large-v1",
+      "status": "pending"
+    },
+    {
+      "id": "playjev",
+      "name": "PlayJev",
+      "reason": "No benchmark adapter or measured response file yet",
+      "source_sha": "ea3a514d2fcbc0756c36eabe052439db54544542",
+      "source_url": "https://github.com/OmniJev/PlayJev",
+      "status": "pending"
+    },
+    {
+      "id": "semif",
+      "name": "SemIf-OpenJev",
+      "reason": "No benchmark adapter or measured response file yet",
+      "source_sha": "23cf1f39fc9534fe81437200959b6dfc7106e45a",
+      "source_url": "https://github.com/TheoLeeCJ/SemIf-OpenJev",
+      "status": "pending"
+    },
+    {
+      "id": "nanojev",
+      "name": "NanoJev",
+      "reason": "No benchmark adapter or measured response file yet",
+      "source_sha": "76fdfc9ecdca45a9bcef17991a07d3041a87685a",
+      "source_url": "https://github.com/TianyuCodings/NanoJev",
+      "status": "pending"
+    },
+    {
+      "id": "jevlike",
+      "name": "jevlike",
+      "reason": "No benchmark adapter or measured response file yet",
+      "source_sha": "94f5fd1b0b11d52bbdfdf4e0ee6aa96b568f8452",
+      "source_url": "https://github.com/vinnylarouge/jevlike",
+      "status": "pending"
+    },
+    {
+      "id": "simple_jev",
+      "name": "simple-jev",
+      "reason": "No benchmark adapter or measured response file yet",
+      "source_sha": "c077d5dfdb5c2c7dd24b17d5f556f07e0162dc1c",
+      "source_url": "https://github.com/featherless-ai/simple-jev",
+      "status": "pending"
+    },
+    {
+      "id": "anyjev",
+      "name": "AnyJev",
+      "reason": "No benchmark adapter or measured response file yet",
+      "source_sha": "795a4970b47218b7c0686cd579d691fc2cf8df2f",
+      "source_url": "https://github.com/nokia-applied-research/AnyJev",
+      "status": "pending"
+    },
+    {
+      "id": "mini_jev",
+      "name": "mini-jev",
+      "reason": "No benchmark adapter or measured response file yet",
+      "source_sha": "ca612198bfb69f538f029a4615f6d0a18b4f814c",
+      "source_url": "https://github.com/r-ms/mini-jev",
+      "status": "pending"
+    },
+    {
+      "id": "nico_open_jev",
+      "name": "nico-martin/open-jev",
+      "reason": "No benchmark adapter or measured response file yet",
+      "source_sha": "52667199e8a55553e1865a41f43fcb7d4dd92779",
+      "source_url": "https://github.com/nico-martin/open-jev",
+      "status": "pending"
+    },
+    {
+      "id": "minojev",
+      "name": "minojev",
+      "reason": "No benchmark adapter or measured response file yet",
+      "source_sha": "622dd952c3db2769a7a32d1a13cc89db04bba95e",
+      "source_url": "https://github.com/zeredy879/minojev",
+      "status": "pending"
+    },
+    {
+      "id": "zefan_open_jev",
+      "name": "Zefan-Cai/Open-Jev",
+      "reason": "No benchmark adapter or measured response file yet",
+      "source_sha": "3308a15ccd7eea1df7a37d6ddc39b023b801ba16",
+      "source_url": "https://github.com/Zefan-Cai/Open-Jev",
+      "status": "pending"
+    },
+    {
+      "id": "dasein_open_jev",
+      "name": "daseinlabs/open-jev",
+      "reason": "No benchmark adapter or measured response file yet",
+      "source_sha": "6cb37c3cee9d8477d49d8ac0c99056e48ccc292c",
+      "source_url": "https://github.com/daseinlabs/open-jev",
+      "status": "pending"
+    }
+  ],
+  "provenance": {
+    "event_count": null,
+    "measured_model_count": 0,
+    "model_count": 16
+  },
+  "runs": [],
+  "schema_version": 1,
+  "status": "running"
+}

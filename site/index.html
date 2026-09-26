@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101814">
+  <meta name="description" content="16 движков принятия решений в одном тестовом торговом контуре: измеренные результаты, ограничения, исходный код и воспроизводимая методика.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Jev Bots Bench — 16 движков, один торговый контур">
+  <meta property="og:description" content="Сравнение движков принятия решений на одной тестовой политике: пары, периоды, методика, исходный код и измеренные результаты.">
+  <meta property="og:url" content="https://jev-bots-bench.marketmaker.cc/">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://jev-bots-bench.marketmaker.cc/">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Jev Bots Bench — 16 движков, один торговый контур</title>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">К содержанию</a>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="Jev Bots Bench, наверх"><span class="brand-mark" aria-hidden="true">J<span class="brand-dot">.</span></span><span>JEV BOTS<br><strong>BENCH</strong></span></a>
+      <nav class="nav-links" aria-label="Основная навигация">
+        <a href="#results">Результаты</a>
+        <a href="#coverage">Движки</a>
+        <a href="#methodology">Методика</a>
+      </nav>
+      <a class="header-link" href="https://github.com/suenot/jev-bots-bench" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" id="top" aria-labelledby="hero-title">
+      <div class="eyebrow"><span class="pulse" aria-hidden="true"></span> Открытое исследование <span class="eyebrow-rule" aria-hidden="true"></span> 16 движков</div>
+      <div class="hero-grid">
+        <div>
+          <h1 id="hero-title">16 движков.<br><em>Один торговый контур.</em></h1>
+          <p class="hero-lead">Проверяем решения моделей на исторических данных в одной тестовой торговой политике. Каждый запуск привязан к паре, периоду и исходному коду. Пустые и несовместимые эксперименты показаны открыто.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#results">Смотреть измерения <span aria-hidden="true">↓</span></a>
+            <a class="button button-ghost" href="https://github.com/suenot/jev-bots-bench" target="_blank" rel="noopener noreferrer">Код и запуск <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <div class="hero-aside" aria-label="Правила публикации">
+          <div class="aside-top"><span class="tiny-label">ПРИНЦИП 01 / 03</span><span aria-hidden="true">↗</span></div>
+          <div class="aside-number">01</div>
+          <h2>Сначала данные.<br>Потом выводы.</h2>
+          <p>До завершения прогона у движка нет доходности. Разные пары, периоды и правила исполнения остаются разными строками.</p>
+          <div class="aside-bottom"><span>ОТКРЫТЫЙ ПРОТОКОЛ</span><span>↓</span></div>
+        </div>
+      </div>
+      <div class="snapshot" aria-label="Состояние бенчмарка">
+        <div><span class="snapshot-label">ДВИЖКОВ В ПЛАНЕ</span><strong>16</strong></div>
+        <div><span class="snapshot-label">ИЗМЕРЕНО</span><strong id="measured-count">—</strong></div>
+        <div><span class="snapshot-label">ОПУБЛИКОВАНО ПРОГОНОВ</span><strong id="run-count">—</strong></div>
+        <div><span class="snapshot-label">ПОСЛЕДНЕЕ ОБНОВЛЕНИЕ</span><strong class="snapshot-date" id="updated-at">Ожидаем данные</strong></div>
+      </div>
+    </section>
+
+    <section class="section results-section" id="results" aria-labelledby="results-title">
+      <div class="wrap">
+        <div class="section-head"><div><div class="section-index">01 / РЕЗУЛЬТАТЫ</div><h2 id="results-title">Что удалось измерить</h2></div><p>Каждая строка — отдельный запуск. Показатели выводятся только там, где они есть в опубликованных данных.</p></div>
+        <div class="notice"><span class="notice-icon" aria-hidden="true">!</span><p>P&amp;L показан после издержек, заявленных в методике. Точность прогноза и задержка отвечают на другие вопросы. Сравнивайте только одинаковые пары и периоды; отсутствие показателя не означает ноль.</p></div>
+        <div class="filters" aria-label="Фильтры результатов">
+          <label for="pair-filter">Пара <select id="pair-filter" disabled><option value="">Все пары</option></select></label>
+          <label for="year-filter">Год <select id="year-filter" disabled><option value="">Все годы</option></select></label>
+          <span class="filter-count" id="filter-count" aria-live="polite">Загрузка данных…</span>
+        </div>
+        <p class="filter-note">Фильтр года показывает только запуски внутри одного года. Многолетние агрегаты доступны в режиме "Все годы".</p>
+        <div id="results-content" aria-live="polite"><div class="empty-state"><span class="empty-code">DATA / 00</span><h3>Загружаем результаты</h3><p>Проверяем опубликованный файл данных.</p></div></div>
+        <div class="data-foot"><span>Первичные данные: <a href="https://github.com/suenot/jev-bots-bench/blob/main/results/summary.json" target="_blank" rel="noopener noreferrer">summary.json на GitHub <span aria-hidden="true">↗</span></a></span><span>Никакой подстановки демонстрационных результатов</span></div>
+      </div>
+    </section>
+
+    <section class="section coverage-section" id="coverage" aria-labelledby="coverage-title">
+      <div class="wrap">
+        <div class="section-head"><div><div class="section-index">02 / ПОКРЫТИЕ</div><h2 id="coverage-title">Состояние движков</h2></div><p>Здесь видны все 16 движков принятия решений, включая ожидающие прогона и несовместимые с имеющимися данными.</p></div>
+        <div class="legend" aria-label="Обозначения статуса"><span><i class="status-dot measured"></i> Измерен</span><span><i class="status-dot pending"></i> В очереди</span><span><i class="status-dot incompatible"></i> Несовместим</span><span><i class="status-dot blocked"></i> Заблокирован</span><span><i class="status-dot error"></i> Ошибка</span></div>
+        <div id="coverage-content" aria-live="polite"><div class="empty-state compact"><h3>Список загружается</h3><p>Модели появятся из опубликованного файла данных.</p></div></div>
+      </div>
+    </section>
+
+    <section class="section methodology-section" id="methodology" aria-labelledby="methodology-title">
+      <div class="wrap methodology-grid">
+        <div><div class="section-index">03 / МЕТОДИКА</div><h2 id="methodology-title">Повторить.<br><em>Проверить.</em></h2><p class="method-intro">Все движки подключены к одной тестовой торговой политике. Параметры данных, издержек и исполнения публикуются вместе с результатами.</p><div class="method-links"><a href="https://github.com/suenot/jev-bots-bench#readme" target="_blank" rel="noopener noreferrer">Инструкция и исходники <span aria-hidden="true">↗</span></a><a href="https://github.com/suenot/jev-bots-bench/blob/main/results/summary.json" target="_blank" rel="noopener noreferrer">Результаты на GitHub <span aria-hidden="true">↗</span></a><a href="./data/summary.json">JSON на сайте <span aria-hidden="true">↗</span></a></div></div>
+        <div class="method-panel"><div class="panel-head"><span>ПАРАМЕТРЫ ОПУБЛИКОВАННОГО ПРОГОНА</span><span>↗</span></div><dl id="methodology-content"><div><dt>Состояние</dt><dd>Ожидаем файл данных</dd></div></dl><p class="method-note">Точные команды, зависимости и версии исходников находятся в публичном репозитории. Для каждой модели ниже есть ссылка на ее первоисточник и commit SHA, если он опубликован.</p></div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wrap footer-inner"><div><strong>JEV BOTS BENCH</strong><span>Открытые данные. Воспроизводимые запуски.</span></div><div><a href="https://github.com/suenot/jev-bots-bench" target="_blank" rel="noopener noreferrer">Исходный код ↗</a><a href="#top">Наверх ↑</a></div></div></footer>
+</body>
+</html>

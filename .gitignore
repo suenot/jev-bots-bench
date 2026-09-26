@@ -1,0 +1,17 @@
+.DS_Store
+.vercel/
+.venv/
+__pycache__/
+*.pyc
+node_modules/
+site/dist/
+*.parquet
+*.gguf
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.onnx
+*.log
+secrets/
+tmp/
