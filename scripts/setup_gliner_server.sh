@@ -3,6 +3,10 @@ set -euo pipefail
 
 bench_root="${1:-/mnt/third/jev-bots-bench}"
 cd "$bench_root"
+bench_root="$(pwd -P)"
+if [[ -n "${GLINER_MODEL_PATH:-}" ]]; then
+  (cd "$GLINER_MODEL_PATH" && sha256sum --check "$bench_root/adapters/gliner25_checkpoint.sha256")
+fi
 python3 -m venv .venv-gliner
 python_bin="$bench_root/.venv-gliner/bin/python"
 "$python_bin" -m pip install --disable-pip-version-check --no-input --upgrade pip

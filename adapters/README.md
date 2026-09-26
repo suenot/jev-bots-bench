@@ -55,6 +55,9 @@ directory and set `GLINER_MODEL_PATH=/absolute/path/to/checkpoint`. It must
 contain `model.safetensors`, both config files, and the tokenizer files. The
 checkpoint's `model.safetensors` SHA-256 is
 `40a5a23ff860dc3dff426cecd1048cacdd29c648c96db209dad818e9686dc997`.
+With `GLINER_MODEL_PATH` set, the setup script verifies every transferred
+checkpoint file against [`gliner25_checkpoint.sha256`](gliner25_checkpoint.sha256)
+before installing packages. Keep the pinned local directory for inference.
 Only source code and model weights are transferred; historical candles stay
 beside the warehouse replay.
 
@@ -90,6 +93,8 @@ verifies source archive SHA-256
 Set `LAYA_MODEL_PATH` during setup as well to verify the checkpoint's
 `model.safetensors` SHA-256
 `891102d372688fc2a094dac56a384bc537b87c63f21f9f3dac0be2b7cbc8d86c`.
+The setup script checks all five transferred files against
+[`laya_checkpoint.sha256`](laya_checkpoint.sha256).
 The local path selects the exact transferred files; the adapter reports the
 pinned upstream model revision in every response.
 

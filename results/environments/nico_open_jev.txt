@@ -1,0 +1,9 @@
+Node.js 22.16.0 (Linux x64)
+npm 10.9.2
+open-jev 0.1.2
+@huggingface/transformers 4.3.0
+onnxruntime-node 1.30.0
+onnxruntime-common 1.30.0 (via onnxruntime-node)
+Adapter npm lockfile: adapters/nico_open_jev_package-lock.json
+Adapter npm lockfile SHA-256: 9109f2a5edbd6e121ba9eebe28ad541a97a4f4dc8664036a73e6148777012647
+Installed source package-lock.json SHA-256: 9109f2a5edbd6e121ba9eebe28ad541a97a4f4dc8664036a73e6148777012647

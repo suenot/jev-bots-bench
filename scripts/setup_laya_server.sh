@@ -7,6 +7,10 @@ expected_source_sha="4203c0832f92a5981a9422107e30b7a6ae157c787fa6e3a9c97b75bcbf2
 printf '%s  %s\n' "$expected_source_sha" "$archive" | sha256sum --check
 
 cd "$bench_root"
+bench_root="$(pwd -P)"
+if [[ -n "${LAYA_MODEL_PATH:-}" ]]; then
+  (cd "$LAYA_MODEL_PATH" && sha256sum --check "$bench_root/adapters/laya_checkpoint.sha256")
+fi
 python3 -m venv .venv-laya
 python_bin="$bench_root/.venv-laya/bin/python"
 "$python_bin" -m pip install --disable-pip-version-check --no-input --upgrade pip
@@ -18,8 +22,3 @@ tar -xzf "$archive" -C .venv-laya/source --strip-components=1
 "$python_bin" -m pip install --disable-pip-version-check --no-input --no-deps .venv-laya/source
 "$python_bin" -m pip freeze > .venv-laya/requirements-installed.txt
 "$python_bin" -c 'import torch, laya; print("torch", torch.__version__, "laya imported")'
-
-if [[ -n "${LAYA_MODEL_PATH:-}" ]]; then
-  expected_model_sha="891102d372688fc2a094dac56a384bc537b87c63f21f9f3dac0be2b7cbc8d86c"
-  printf '%s  %s\n' "$expected_model_sha" "$LAYA_MODEL_PATH/model.safetensors" | sha256sum --check
-fi

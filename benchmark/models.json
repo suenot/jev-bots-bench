@@ -35,7 +35,7 @@
       "category": "model_weights",
       "runtime": "python",
       "status": "pending",
-      "reason": "Pinned CPU adapter passed a real smoke; full inference is in progress."
+      "reason": "Full pinned CPU response stream is complete; the summary derives measured status when this response file is supplied."
     },
     {
       "id": "jevk5",
@@ -151,7 +151,7 @@
       "category": "decision_engine",
       "runtime": "adapter_required",
       "status": "pending",
-      "reason": "Pinned ONNX CPU adapter passed a real one-request smoke; full run is in progress."
+      "reason": "Full pinned ONNX response stream is complete; the summary derives measured status when this response file is supplied."
     },
     {
       "id": "minojev",

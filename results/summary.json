@@ -721,7 +721,7 @@
       "trade_count": 84
     }
   ],
-  "generated_at": "2026-09-26T15:56:25Z",
+  "generated_at": "2026-09-26T17:04:38Z",
   "methodology": {
     "decision_schedule": "Monday 00:00 UTC, nonoverlapping 7-day intervals",
     "drawdown_sampling": "weekly exit equity marks; intraweek excursions not measured",
@@ -758,10 +758,10 @@
     {
       "id": "gliner25",
       "name": "GLiNER2.5-Decide",
-      "reason": "Pinned CPU adapter passed a real smoke; full inference is in progress.",
+      "reason": null,
       "source_sha": "55656fbfa01d3d4a77485e1a1eeeaf682990ccdf",
       "source_url": "https://github.com/fastino-ai/GLiNER2",
-      "status": "pending",
+      "status": "measured",
       "weights_sha": "7ee5da4c2415e32259bcdc0b1a7367c32ce8d6f6",
       "weights_url": "https://huggingface.co/fastino/GLiNER2.5-Decide"
     },
@@ -854,10 +854,10 @@
     {
       "id": "nico_open_jev",
       "name": "nico-martin/open-jev",
-      "reason": "Pinned ONNX CPU adapter passed a real one-request smoke; full run is in progress.",
+      "reason": null,
       "source_sha": "52667199e8a55553e1865a41f43fcb7d4dd92779",
       "source_url": "https://github.com/nico-martin/open-jev",
-      "status": "pending",
+      "status": "measured",
       "weights_sha": "7c79f25b5ac496089f448a969c801872ad59d31c",
       "weights_url": "https://huggingface.co/onnx-community/open-jev-deberta-v3-large-ONNX"
     },
@@ -892,7 +892,7 @@
   ],
   "provenance": {
     "event_count": 1382,
-    "measured_model_count": 1,
+    "measured_model_count": 3,
     "model_count": 16
   },
   "runs": [
@@ -910,6 +910,32 @@
       "trade_count": 22
     },
     {
+      "accuracy": 0.3953488372093023,
+      "brier": null,
+      "latency_ms_p50": 7995.34,
+      "latency_ms_p95": 12685.992,
+      "max_drawdown_pct": 42.18861757393106,
+      "model_id": "gliner25",
+      "n_decisions": 43,
+      "pair": "BCHUSDT",
+      "period": "2023",
+      "return_pct": 72.05677589199107,
+      "trade_count": 18
+    },
+    {
+      "accuracy": 0.4418604651162791,
+      "brier": 0.2855466737067462,
+      "latency_ms_p50": 5025.903,
+      "latency_ms_p95": 9996.744,
+      "max_drawdown_pct": 35.84892518378645,
+      "model_id": "nico_open_jev",
+      "n_decisions": 43,
+      "pair": "BCHUSDT",
+      "period": "2023",
+      "return_pct": 109.89669747998829,
+      "trade_count": 2
+    },
+    {
       "accuracy": 0.41509433962264153,
       "brier": 0.42708442188679246,
       "latency_ms_p50": 804.251,
@@ -921,6 +947,32 @@
       "period": "2024",
       "return_pct": -51.319339303822616,
       "trade_count": 26
+    },
+    {
+      "accuracy": 0.5283018867924528,
+      "brier": null,
+      "latency_ms_p50": 11240.66,
+      "latency_ms_p95": 16623.892,
+      "max_drawdown_pct": 59.37425629908644,
+      "model_id": "gliner25",
+      "n_decisions": 53,
+      "pair": "BCHUSDT",
+      "period": "2024",
+      "return_pct": 28.86566315423935,
+      "trade_count": 26
+    },
+    {
+      "accuracy": 0.49056603773584906,
+      "brier": 0.275837589332817,
+      "latency_ms_p50": 6445.596,
+      "latency_ms_p95": 11938.596,
+      "max_drawdown_pct": 56.17267376068686,
+      "model_id": "nico_open_jev",
+      "n_decisions": 53,
+      "pair": "BCHUSDT",
+      "period": "2024",
+      "return_pct": 79.39308229325475,
+      "trade_count": 2
     },
     {
       "accuracy": 0.4807692307692308,
@@ -936,6 +988,32 @@
       "trade_count": 20
     },
     {
+      "accuracy": 0.5769230769230769,
+      "brier": null,
+      "latency_ms_p50": 10831.913,
+      "latency_ms_p95": 15340.055,
+      "max_drawdown_pct": 27.250826930591533,
+      "model_id": "gliner25",
+      "n_decisions": 52,
+      "pair": "BCHUSDT",
+      "period": "2025",
+      "return_pct": 72.27903626722309,
+      "trade_count": 18
+    },
+    {
+      "accuracy": 0.4807692307692308,
+      "brier": 0.2781412732682381,
+      "latency_ms_p50": 7291.683,
+      "latency_ms_p95": 11613.315,
+      "max_drawdown_pct": 42.303666497872584,
+      "model_id": "nico_open_jev",
+      "n_decisions": 52,
+      "pair": "BCHUSDT",
+      "period": "2025",
+      "return_pct": 38.74588488945447,
+      "trade_count": 2
+    },
+    {
       "accuracy": 0.7142857142857143,
       "brier": 0.2700578742857143,
       "latency_ms_p50": 768.902,
@@ -947,6 +1025,32 @@
       "period": "2026",
       "return_pct": -3.9445369626723292,
       "trade_count": 4
+    },
+    {
+      "accuracy": 0.7142857142857143,
+      "brier": null,
+      "latency_ms_p50": 10149.142,
+      "latency_ms_p95": 15610.678,
+      "max_drawdown_pct": 10.748279700170126,
+      "model_id": "gliner25",
+      "n_decisions": 7,
+      "pair": "BCHUSDT",
+      "period": "2026",
+      "return_pct": -3.9445369626723292,
+      "trade_count": 4
+    },
+    {
+      "accuracy": 0.5714285714285714,
+      "brier": 0.23860131193311043,
+      "latency_ms_p50": 8246.664,
+      "latency_ms_p95": 10459.729,
+      "max_drawdown_pct": 20.526073171269687,
+      "model_id": "nico_open_jev",
+      "n_decisions": 7,
+      "pair": "BCHUSDT",
+      "period": "2026",
+      "return_pct": -13.461029697519233,
+      "trade_count": 2
     },
     {
       "accuracy": 0.4645161290322581,
@@ -962,6 +1066,32 @@
       "trade_count": 68
     },
     {
+      "accuracy": 0.5161290322580645,
+      "brier": null,
+      "latency_ms_p50": 10408.181,
+      "latency_ms_p95": 15473.296,
+      "max_drawdown_pct": 59.37425629908644,
+      "model_id": "gliner25",
+      "n_decisions": 155,
+      "pair": "BCHUSDT",
+      "period": "full",
+      "return_pct": 268.9000277722573,
+      "trade_count": 60
+    },
+    {
+      "accuracy": 0.4774193548387097,
+      "brier": 0.277622287725868,
+      "latency_ms_p50": 6262.647,
+      "latency_ms_p95": 11299.14,
+      "max_drawdown_pct": 60.935125716359074,
+      "model_id": "nico_open_jev",
+      "n_decisions": 155,
+      "pair": "BCHUSDT",
+      "period": "full",
+      "return_pct": 354.5569712306764,
+      "trade_count": 2
+    },
+    {
       "accuracy": 0.3023255813953488,
       "brier": 0.43787094,
       "latency_ms_p50": 908.629,
@@ -973,6 +1103,32 @@
       "period": "2023",
       "return_pct": -7.1373197884595285,
       "trade_count": 24
+    },
+    {
+      "accuracy": 0.4186046511627907,
+      "brier": null,
+      "latency_ms_p50": 7648.812,
+      "latency_ms_p95": 12137.695,
+      "max_drawdown_pct": 21.505542119121834,
+      "model_id": "gliner25",
+      "n_decisions": 43,
+      "pair": "BNBUSDT",
+      "period": "2023",
+      "return_pct": 28.987915977464816,
+      "trade_count": 16
+    },
+    {
+      "accuracy": 0.46511627906976744,
+      "brier": 0.28239816638808096,
+      "latency_ms_p50": 5234.402,
+      "latency_ms_p95": 9058.212,
+      "max_drawdown_pct": 39.32966629905168,
+      "model_id": "nico_open_jev",
+      "n_decisions": 43,
+      "pair": "BNBUSDT",
+      "period": "2023",
+      "return_pct": 8.40788173297804,
+      "trade_count": 2
     },
     {
       "accuracy": 0.41509433962264153,
@@ -988,6 +1144,32 @@
       "trade_count": 32
     },
     {
+      "accuracy": 0.49056603773584906,
+      "brier": null,
+      "latency_ms_p50": 10993.87,
+      "latency_ms_p95": 17456.436,
+      "max_drawdown_pct": 38.52997862284555,
+      "model_id": "gliner25",
+      "n_decisions": 53,
+      "pair": "BNBUSDT",
+      "period": "2024",
+      "return_pct": 83.28989520170866,
+      "trade_count": 18
+    },
+    {
+      "accuracy": 0.5660377358490566,
+      "brier": 0.2577302919454459,
+      "latency_ms_p50": 6707.203,
+      "latency_ms_p95": 11370.896,
+      "max_drawdown_pct": 29.150564424644408,
+      "model_id": "nico_open_jev",
+      "n_decisions": 53,
+      "pair": "BNBUSDT",
+      "period": "2024",
+      "return_pct": 125.39994868130746,
+      "trade_count": 2
+    },
+    {
       "accuracy": 0.5384615384615384,
       "brier": 0.3109630438461538,
       "latency_ms_p50": 994.603,
@@ -1001,6 +1183,32 @@
       "trade_count": 26
     },
     {
+      "accuracy": 0.5576923076923077,
+      "brier": null,
+      "latency_ms_p50": 11214.505,
+      "latency_ms_p95": 14783.044,
+      "max_drawdown_pct": 22.947578126932367,
+      "model_id": "gliner25",
+      "n_decisions": 52,
+      "pair": "BNBUSDT",
+      "period": "2025",
+      "return_pct": 71.46256895436494,
+      "trade_count": 16
+    },
+    {
+      "accuracy": 0.5,
+      "brier": 0.2669633373222475,
+      "latency_ms_p50": 6517.213,
+      "latency_ms_p95": 11619.429,
+      "max_drawdown_pct": 36.434897539531654,
+      "model_id": "nico_open_jev",
+      "n_decisions": 52,
+      "pair": "BNBUSDT",
+      "period": "2025",
+      "return_pct": 26.990652929814708,
+      "trade_count": 2
+    },
+    {
       "accuracy": 0.8571428571428571,
       "brier": 0.16934768714285714,
       "latency_ms_p50": 759.685,
@@ -1011,6 +1219,32 @@
       "pair": "BNBUSDT",
       "period": "2026",
       "return_pct": -3.8056697502871217,
+      "trade_count": 2
+    },
+    {
+      "accuracy": 0.42857142857142855,
+      "brier": null,
+      "latency_ms_p50": 10883.828,
+      "latency_ms_p95": 13545.131,
+      "max_drawdown_pct": 33.008101345447436,
+      "model_id": "gliner25",
+      "n_decisions": 7,
+      "pair": "BNBUSDT",
+      "period": "2026",
+      "return_pct": -31.717506547508734,
+      "trade_count": 2
+    },
+    {
+      "accuracy": 0.2857142857142857,
+      "brier": 0.3087179318853482,
+      "latency_ms_p50": 8647.663,
+      "latency_ms_p95": 12910.535,
+      "max_drawdown_pct": 34.08442752665245,
+      "model_id": "nico_open_jev",
+      "n_decisions": 7,
+      "pair": "BNBUSDT",
+      "period": "2026",
+      "return_pct": -32.814568086245735,
       "trade_count": 2
     },
     {
@@ -1027,6 +1261,32 @@
       "trade_count": 78
     },
     {
+      "accuracy": 0.49032258064516127,
+      "brier": null,
+      "latency_ms_p50": 10306.007,
+      "latency_ms_p95": 15689.696,
+      "max_drawdown_pct": 43.52344456709852,
+      "model_id": "gliner25",
+      "n_decisions": 155,
+      "pair": "BNBUSDT",
+      "period": "full",
+      "return_pct": 178.2988667181169,
+      "trade_count": 46
+    },
+    {
+      "accuracy": 0.5032258064516129,
+      "brier": 0.2699738431725833,
+      "latency_ms_p50": 6326.041,
+      "latency_ms_p95": 11370.896,
+      "max_drawdown_pct": 53.85789671316408,
+      "model_id": "nico_open_jev",
+      "n_decisions": 155,
+      "pair": "BNBUSDT",
+      "period": "full",
+      "return_pct": 109.60745829852105,
+      "trade_count": 2
+    },
+    {
       "accuracy": 0.5135135135135135,
       "brier": 0.36372831216216217,
       "latency_ms_p50": 773.488,
@@ -1038,6 +1298,32 @@
       "period": "2023",
       "return_pct": 88.25421107954598,
       "trade_count": 16
+    },
+    {
+      "accuracy": 0.5405405405405406,
+      "brier": null,
+      "latency_ms_p50": 7856.067,
+      "latency_ms_p95": 13136.756,
+      "max_drawdown_pct": 10.697217112761038,
+      "model_id": "gliner25",
+      "n_decisions": 37,
+      "pair": "BTCUSDT",
+      "period": "2023",
+      "return_pct": 107.6521784127293,
+      "trade_count": 12
+    },
+    {
+      "accuracy": 0.6216216216216216,
+      "brier": 0.24156783390649314,
+      "latency_ms_p50": 4590.989,
+      "latency_ms_p95": 11191.6,
+      "max_drawdown_pct": 12.99801970552743,
+      "model_id": "nico_open_jev",
+      "n_decisions": 37,
+      "pair": "BTCUSDT",
+      "period": "2023",
+      "return_pct": 118.65946049979787,
+      "trade_count": 4
     },
     {
       "accuracy": 0.49056603773584906,
@@ -1053,6 +1339,32 @@
       "trade_count": 24
     },
     {
+      "accuracy": 0.5094339622641509,
+      "brier": null,
+      "latency_ms_p50": 11493.285,
+      "latency_ms_p95": 17909.439,
+      "max_drawdown_pct": 32.98579398633085,
+      "model_id": "gliner25",
+      "n_decisions": 53,
+      "pair": "BTCUSDT",
+      "period": "2024",
+      "return_pct": 64.66862569959655,
+      "trade_count": 22
+    },
+    {
+      "accuracy": 0.5283018867924528,
+      "brier": 0.26506492521941105,
+      "latency_ms_p50": 6225.468,
+      "latency_ms_p95": 13302.761,
+      "max_drawdown_pct": 22.77996241485901,
+      "model_id": "nico_open_jev",
+      "n_decisions": 53,
+      "pair": "BTCUSDT",
+      "period": "2024",
+      "return_pct": 130.58976850795938,
+      "trade_count": 2
+    },
+    {
       "accuracy": 0.4807692307692308,
       "brier": 0.36393369442307694,
       "latency_ms_p50": 882.316,
@@ -1064,6 +1376,32 @@
       "period": "2025",
       "return_pct": 9.837532431208462,
       "trade_count": 26
+    },
+    {
+      "accuracy": 0.4807692307692308,
+      "brier": null,
+      "latency_ms_p50": 11268.684,
+      "latency_ms_p95": 14025.803,
+      "max_drawdown_pct": 16.445225256208793,
+      "model_id": "gliner25",
+      "n_decisions": 52,
+      "pair": "BTCUSDT",
+      "period": "2025",
+      "return_pct": 16.663976740226595,
+      "trade_count": 14
+    },
+    {
+      "accuracy": 0.5,
+      "brier": 0.26979507795808344,
+      "latency_ms_p50": 6478.593,
+      "latency_ms_p95": 12561.927,
+      "max_drawdown_pct": 29.679977822660486,
+      "model_id": "nico_open_jev",
+      "n_decisions": 52,
+      "pair": "BTCUSDT",
+      "period": "2025",
+      "return_pct": -6.093997740831747,
+      "trade_count": 2
     },
     {
       "accuracy": 0.5714285714285714,
@@ -1079,6 +1417,32 @@
       "trade_count": 4
     },
     {
+      "accuracy": 0.42857142857142855,
+      "brier": null,
+      "latency_ms_p50": 10305.405,
+      "latency_ms_p95": 17342.676,
+      "max_drawdown_pct": 18.384967006216925,
+      "model_id": "gliner25",
+      "n_decisions": 7,
+      "pair": "BTCUSDT",
+      "period": "2026",
+      "return_pct": -18.202165760070987,
+      "trade_count": 4
+    },
+    {
+      "accuracy": 0.14285714285714285,
+      "brier": 0.3632504899489829,
+      "latency_ms_p50": 5678.267,
+      "latency_ms_p95": 9168.945,
+      "max_drawdown_pct": 28.073544046710662,
+      "model_id": "nico_open_jev",
+      "n_decisions": 7,
+      "pair": "BTCUSDT",
+      "period": "2026",
+      "return_pct": -27.912443262984652,
+      "trade_count": 2
+    },
+    {
       "accuracy": 0.4966442953020134,
       "brier": 0.3582816580536913,
       "latency_ms_p50": 804.871,
@@ -1090,6 +1454,32 @@
       "period": "full",
       "return_pct": 202.64357231711472,
       "trade_count": 70
+    },
+    {
+      "accuracy": 0.5033557046979866,
+      "brier": null,
+      "latency_ms_p50": 10414.411,
+      "latency_ms_p95": 14818.861,
+      "max_drawdown_pct": 32.98579398633083,
+      "model_id": "gliner25",
+      "n_decisions": 149,
+      "pair": "BTCUSDT",
+      "period": "full",
+      "return_pct": 228.07347935787982,
+      "trade_count": 46
+    },
+    {
+      "accuracy": 0.5234899328859061,
+      "brier": 0.26549361325256543,
+      "latency_ms_p50": 6137.426,
+      "latency_ms_p95": 12192.561,
+      "max_drawdown_pct": 45.94648929737436,
+      "model_id": "nico_open_jev",
+      "n_decisions": 149,
+      "pair": "BTCUSDT",
+      "period": "full",
+      "return_pct": 243.1682933616432,
+      "trade_count": 4
     },
     {
       "accuracy": 0.5116279069767442,
@@ -1105,6 +1495,32 @@
       "trade_count": 18
     },
     {
+      "accuracy": 0.46511627906976744,
+      "brier": null,
+      "latency_ms_p50": 7822.737,
+      "latency_ms_p95": 13159.558,
+      "max_drawdown_pct": 20.979123783963193,
+      "model_id": "gliner25",
+      "n_decisions": 43,
+      "pair": "DOTUSDT",
+      "period": "2023",
+      "return_pct": 49.84433327086511,
+      "trade_count": 18
+    },
+    {
+      "accuracy": 0.4186046511627907,
+      "brier": 0.28687972586829286,
+      "latency_ms_p50": 5234.825,
+      "latency_ms_p95": 9517.693,
+      "max_drawdown_pct": 43.7903577782496,
+      "model_id": "nico_open_jev",
+      "n_decisions": 43,
+      "pair": "DOTUSDT",
+      "period": "2023",
+      "return_pct": 38.442942881404086,
+      "trade_count": 2
+    },
+    {
       "accuracy": 0.4528301886792453,
       "brier": 0.40990026509433963,
       "latency_ms_p50": 766.607,
@@ -1116,6 +1532,32 @@
       "period": "2024",
       "return_pct": -18.069376481956066,
       "trade_count": 30
+    },
+    {
+      "accuracy": 0.41509433962264153,
+      "brier": null,
+      "latency_ms_p50": 11597.459,
+      "latency_ms_p95": 18830.642,
+      "max_drawdown_pct": 71.42864088207826,
+      "model_id": "gliner25",
+      "n_decisions": 53,
+      "pair": "DOTUSDT",
+      "period": "2024",
+      "return_pct": -54.358955725472825,
+      "trade_count": 28
+    },
+    {
+      "accuracy": 0.5094339622641509,
+      "brier": 0.26938803435511927,
+      "latency_ms_p50": 6718.35,
+      "latency_ms_p95": 13853.664,
+      "max_drawdown_pct": 62.556986529090565,
+      "model_id": "nico_open_jev",
+      "n_decisions": 53,
+      "pair": "DOTUSDT",
+      "period": "2024",
+      "return_pct": -8.517289165868192,
+      "trade_count": 2
     },
     {
       "accuracy": 0.38461538461538464,
@@ -1131,6 +1573,32 @@
       "trade_count": 26
     },
     {
+      "accuracy": 0.4807692307692308,
+      "brier": null,
+      "latency_ms_p50": 10826.66,
+      "latency_ms_p95": 15259.715,
+      "max_drawdown_pct": 66.88223485378214,
+      "model_id": "gliner25",
+      "n_decisions": 52,
+      "pair": "DOTUSDT",
+      "period": "2025",
+      "return_pct": -61.944826684845154,
+      "trade_count": 24
+    },
+    {
+      "accuracy": 0.46153846153846156,
+      "brier": 0.2809314674684309,
+      "latency_ms_p50": 7645.763,
+      "latency_ms_p95": 11435.409,
+      "max_drawdown_pct": 76.18866715895334,
+      "model_id": "nico_open_jev",
+      "n_decisions": 52,
+      "pair": "DOTUSDT",
+      "period": "2025",
+      "return_pct": -71.82601383891011,
+      "trade_count": 2
+    },
+    {
       "accuracy": 0.42857142857142855,
       "brier": 0.39091581999999997,
       "latency_ms_p50": 917.504,
@@ -1142,6 +1610,32 @@
       "period": "2026",
       "return_pct": -13.775732696874199,
       "trade_count": 6
+    },
+    {
+      "accuracy": 0.5714285714285714,
+      "brier": null,
+      "latency_ms_p50": 8527.109,
+      "latency_ms_p95": 15204.579,
+      "max_drawdown_pct": 17.90581650429378,
+      "model_id": "gliner25",
+      "n_decisions": 7,
+      "pair": "DOTUSDT",
+      "period": "2026",
+      "return_pct": -17.90581650429378,
+      "trade_count": 4
+    },
+    {
+      "accuracy": 0.14285714285714285,
+      "brier": 0.35117595244207944,
+      "latency_ms_p50": 8589.614,
+      "latency_ms_p95": 10265.784,
+      "max_drawdown_pct": 39.92132666900571,
+      "model_id": "nico_open_jev",
+      "n_decisions": 7,
+      "pair": "DOTUSDT",
+      "period": "2026",
+      "return_pct": -39.92132666900571,
+      "trade_count": 2
     },
     {
       "accuracy": 0.44516129032258067,
@@ -1157,6 +1651,32 @@
       "trade_count": 76
     },
     {
+      "accuracy": 0.45806451612903226,
+      "brier": null,
+      "latency_ms_p50": 10503.475,
+      "latency_ms_p95": 15992.233,
+      "max_drawdown_pct": 87.42380293510017,
+      "model_id": "gliner25",
+      "n_decisions": 155,
+      "pair": "DOTUSDT",
+      "period": "full",
+      "return_pct": -78.51837261959179,
+      "trade_count": 68
+    },
+    {
+      "accuracy": 0.45161290322580644,
+      "brier": 0.28180685166845726,
+      "latency_ms_p50": 6426.508,
+      "latency_ms_p95": 11632.689,
+      "max_drawdown_pct": 87.39873872823158,
+      "model_id": "nico_open_jev",
+      "n_decisions": 155,
+      "pair": "DOTUSDT",
+      "period": "full",
+      "return_pct": -78.44620889488954,
+      "trade_count": 2
+    },
+    {
       "accuracy": 0.5348837209302325,
       "brier": 0.35017230930232557,
       "latency_ms_p50": 801.152,
@@ -1168,6 +1688,32 @@
       "period": "2023",
       "return_pct": 23.99110772843582,
       "trade_count": 18
+    },
+    {
+      "accuracy": 0.4883720930232558,
+      "brier": null,
+      "latency_ms_p50": 7964.135,
+      "latency_ms_p95": 11815.065,
+      "max_drawdown_pct": 21.846689327380275,
+      "model_id": "gliner25",
+      "n_decisions": 43,
+      "pair": "ETHUSDT",
+      "period": "2023",
+      "return_pct": 46.77367471488558,
+      "trade_count": 14
+    },
+    {
+      "accuracy": 0.5581395348837209,
+      "brier": 0.2550912725492891,
+      "latency_ms_p50": 4698.707,
+      "latency_ms_p95": 10453.598,
+      "max_drawdown_pct": 25.25117201485201,
+      "model_id": "nico_open_jev",
+      "n_decisions": 43,
+      "pair": "ETHUSDT",
+      "period": "2023",
+      "return_pct": 46.35579534427494,
+      "trade_count": 2
     },
     {
       "accuracy": 0.5283018867924528,
@@ -1183,6 +1729,32 @@
       "trade_count": 28
     },
     {
+      "accuracy": 0.5094339622641509,
+      "brier": null,
+      "latency_ms_p50": 11923.51,
+      "latency_ms_p95": 16077.029,
+      "max_drawdown_pct": 31.36213672029338,
+      "model_id": "gliner25",
+      "n_decisions": 53,
+      "pair": "ETHUSDT",
+      "period": "2024",
+      "return_pct": 65.6580180056207,
+      "trade_count": 28
+    },
+    {
+      "accuracy": 0.5283018867924528,
+      "brier": 0.26094373437835916,
+      "latency_ms_p50": 6762.363,
+      "latency_ms_p95": 12746.901,
+      "max_drawdown_pct": 40.205323266350646,
+      "model_id": "nico_open_jev",
+      "n_decisions": 53,
+      "pair": "ETHUSDT",
+      "period": "2024",
+      "return_pct": 57.310146667188945,
+      "trade_count": 2
+    },
+    {
       "accuracy": 0.4791666666666667,
       "brier": 0.38828009520833334,
       "latency_ms_p50": 931.059,
@@ -1194,6 +1766,32 @@
       "period": "2025",
       "return_pct": -3.545259006340429,
       "trade_count": 24
+    },
+    {
+      "accuracy": 0.6041666666666666,
+      "brier": null,
+      "latency_ms_p50": 10618.864,
+      "latency_ms_p95": 15020.163,
+      "max_drawdown_pct": 40.65960160889111,
+      "model_id": "gliner25",
+      "n_decisions": 48,
+      "pair": "ETHUSDT",
+      "period": "2025",
+      "return_pct": 43.7402167289642,
+      "trade_count": 18
+    },
+    {
+      "accuracy": 0.4791666666666667,
+      "brier": 0.2759134982056471,
+      "latency_ms_p50": 7240.377,
+      "latency_ms_p95": 12543.986,
+      "max_drawdown_pct": 56.61880733946452,
+      "model_id": "nico_open_jev",
+      "n_decisions": 48,
+      "pair": "ETHUSDT",
+      "period": "2025",
+      "return_pct": -16.674729155059897,
+      "trade_count": 4
     },
     {
       "accuracy": 0.5714285714285714,
@@ -1209,6 +1807,32 @@
       "trade_count": 4
     },
     {
+      "accuracy": 0.14285714285714285,
+      "brier": null,
+      "latency_ms_p50": 9879.398,
+      "latency_ms_p95": 13113.573,
+      "max_drawdown_pct": 39.84906419149399,
+      "model_id": "gliner25",
+      "n_decisions": 7,
+      "pair": "ETHUSDT",
+      "period": "2026",
+      "return_pct": -39.84906419149399,
+      "trade_count": 4
+    },
+    {
+      "accuracy": 0.14285714285714285,
+      "brier": 0.36375596283107064,
+      "latency_ms_p50": 9601.031,
+      "latency_ms_p95": 13847.988,
+      "max_drawdown_pct": 40.00022628444403,
+      "model_id": "nico_open_jev",
+      "n_decisions": 7,
+      "pair": "ETHUSDT",
+      "period": "2026",
+      "return_pct": -39.23257055935962,
+      "trade_count": 2
+    },
+    {
       "accuracy": 0.5165562913907285,
       "brier": 0.36689913562913906,
       "latency_ms_p50": 879.656,
@@ -1220,6 +1844,32 @@
       "period": "full",
       "return_pct": 79.38185916177476,
       "trade_count": 70
+    },
+    {
+      "accuracy": 0.5165562913907285,
+      "brier": null,
+      "latency_ms_p50": 10209.512,
+      "latency_ms_p95": 15020.163,
+      "max_drawdown_pct": 48.40505747516084,
+      "model_id": "gliner25",
+      "n_decisions": 151,
+      "pair": "ETHUSDT",
+      "period": "full",
+      "return_pct": 111.36180209879956,
+      "trade_count": 58
+    },
+    {
+      "accuracy": 0.5033112582781457,
+      "brier": 0.2688018695057021,
+      "latency_ms_p50": 6584.468,
+      "latency_ms_p95": 12396.778,
+      "max_drawdown_pct": 60.880658953746945,
+      "model_id": "nico_open_jev",
+      "n_decisions": 151,
+      "pair": "ETHUSDT",
+      "period": "full",
+      "return_pct": 17.208592386411105,
+      "trade_count": 4
     },
     {
       "accuracy": 0.4358974358974359,
@@ -1235,6 +1885,32 @@
       "trade_count": 22
     },
     {
+      "accuracy": 0.5128205128205128,
+      "brier": null,
+      "latency_ms_p50": 8078.06,
+      "latency_ms_p95": 13921.745,
+      "max_drawdown_pct": 15.603054768935342,
+      "model_id": "gliner25",
+      "n_decisions": 39,
+      "pair": "LINKUSDT",
+      "period": "2023",
+      "return_pct": 138.35597194226642,
+      "trade_count": 16
+    },
+    {
+      "accuracy": 0.48717948717948717,
+      "brier": 0.27034645180385714,
+      "latency_ms_p50": 5812.978,
+      "latency_ms_p95": 11049.741,
+      "max_drawdown_pct": 35.33047587903469,
+      "model_id": "nico_open_jev",
+      "n_decisions": 39,
+      "pair": "LINKUSDT",
+      "period": "2023",
+      "return_pct": 108.39816483416396,
+      "trade_count": 2
+    },
+    {
       "accuracy": 0.4339622641509434,
       "brier": 0.4106163720754717,
       "latency_ms_p50": 765.124,
@@ -1246,6 +1922,32 @@
       "period": "2024",
       "return_pct": -10.236243726205485,
       "trade_count": 26
+    },
+    {
+      "accuracy": 0.41509433962264153,
+      "brier": null,
+      "latency_ms_p50": 11612.736,
+      "latency_ms_p95": 18563.321,
+      "max_drawdown_pct": 60.75756591126058,
+      "model_id": "gliner25",
+      "n_decisions": 53,
+      "pair": "LINKUSDT",
+      "period": "2024",
+      "return_pct": -24.84438465451626,
+      "trade_count": 20
+    },
+    {
+      "accuracy": 0.5283018867924528,
+      "brier": 0.2671084341037585,
+      "latency_ms_p50": 7073.329,
+      "latency_ms_p95": 11955.975,
+      "max_drawdown_pct": 53.45196071698373,
+      "model_id": "nico_open_jev",
+      "n_decisions": 53,
+      "pair": "LINKUSDT",
+      "period": "2024",
+      "return_pct": 52.75769526366334,
+      "trade_count": 2
     },
     {
       "accuracy": 0.4423076923076923,
@@ -1261,6 +1963,32 @@
       "trade_count": 28
     },
     {
+      "accuracy": 0.5384615384615384,
+      "brier": null,
+      "latency_ms_p50": 11263.818,
+      "latency_ms_p95": 14643.782,
+      "max_drawdown_pct": 46.44072370903272,
+      "model_id": "gliner25",
+      "n_decisions": 52,
+      "pair": "LINKUSDT",
+      "period": "2025",
+      "return_pct": -1.2072759471829841,
+      "trade_count": 20
+    },
+    {
+      "accuracy": 0.38461538461538464,
+      "brier": 0.29643802177789136,
+      "latency_ms_p50": 6942.873,
+      "latency_ms_p95": 10201.279,
+      "max_drawdown_pct": 54.250614674727935,
+      "model_id": "nico_open_jev",
+      "n_decisions": 52,
+      "pair": "LINKUSDT",
+      "period": "2025",
+      "return_pct": -41.50004053515469,
+      "trade_count": 2
+    },
+    {
       "accuracy": 0.5714285714285714,
       "brier": 0.30126586571428576,
       "latency_ms_p50": 1098.43,
@@ -1271,6 +1999,32 @@
       "pair": "LINKUSDT",
       "period": "2026",
       "return_pct": -14.336902262432405,
+      "trade_count": 2
+    },
+    {
+      "accuracy": 0.14285714285714285,
+      "brier": null,
+      "latency_ms_p50": 13991.623,
+      "latency_ms_p95": 18401.604,
+      "max_drawdown_pct": 35.42173005914292,
+      "model_id": "gliner25",
+      "n_decisions": 7,
+      "pair": "LINKUSDT",
+      "period": "2026",
+      "return_pct": -35.42173005914292,
+      "trade_count": 2
+    },
+    {
+      "accuracy": 0.0,
+      "brier": 0.3860222696201196,
+      "latency_ms_p50": 6476.157,
+      "latency_ms_p95": 9196.309,
+      "max_drawdown_pct": 37.105869621549495,
+      "model_id": "nico_open_jev",
+      "n_decisions": 7,
+      "pair": "LINKUSDT",
+      "period": "2026",
+      "return_pct": -37.105869621549495,
       "trade_count": 2
     },
     {
@@ -1287,6 +2041,32 @@
       "trade_count": 76
     },
     {
+      "accuracy": 0.47019867549668876,
+      "brier": null,
+      "latency_ms_p50": 10514.557,
+      "latency_ms_p95": 15630.444,
+      "max_drawdown_pct": 65.39787902393846,
+      "model_id": "gliner25",
+      "n_decisions": 151,
+      "pair": "LINKUSDT",
+      "period": "full",
+      "return_pct": 14.493430851433953,
+      "trade_count": 56
+    },
+    {
+      "accuracy": 0.44370860927152317,
+      "brier": 0.2835575605804027,
+      "latency_ms_p50": 6564.956,
+      "latency_ms_p95": 10707.466,
+      "max_drawdown_pct": 71.0116941979523,
+      "model_id": "nico_open_jev",
+      "n_decisions": 151,
+      "pair": "LINKUSDT",
+      "period": "full",
+      "return_pct": 17.762728681513316,
+      "trade_count": 2
+    },
+    {
       "accuracy": 0.4883720930232558,
       "brier": 0.35556687,
       "latency_ms_p50": 958.993,
@@ -1298,6 +2078,32 @@
       "period": "2023",
       "return_pct": 84.24038520536882,
       "trade_count": 22
+    },
+    {
+      "accuracy": 0.5348837209302325,
+      "brier": null,
+      "latency_ms_p50": 8171.725,
+      "latency_ms_p95": 11977.547,
+      "max_drawdown_pct": 37.73457006753853,
+      "model_id": "gliner25",
+      "n_decisions": 43,
+      "pair": "SOLUSDT",
+      "period": "2023",
+      "return_pct": 246.64658093395744,
+      "trade_count": 14
+    },
+    {
+      "accuracy": 0.5116279069767442,
+      "brier": 0.2688662371923394,
+      "latency_ms_p50": 5631.716,
+      "latency_ms_p95": 10671.257,
+      "max_drawdown_pct": 37.67848070016869,
+      "model_id": "nico_open_jev",
+      "n_decisions": 43,
+      "pair": "SOLUSDT",
+      "period": "2023",
+      "return_pct": 385.49330930625524,
+      "trade_count": 2
     },
     {
       "accuracy": 0.41509433962264153,
@@ -1313,6 +2119,32 @@
       "trade_count": 28
     },
     {
+      "accuracy": 0.4716981132075472,
+      "brier": null,
+      "latency_ms_p50": 11593.054,
+      "latency_ms_p95": 17696.222,
+      "max_drawdown_pct": 51.062413519580744,
+      "model_id": "gliner25",
+      "n_decisions": 53,
+      "pair": "SOLUSDT",
+      "period": "2024",
+      "return_pct": 50.5471441362821,
+      "trade_count": 18
+    },
+    {
+      "accuracy": 0.5283018867924528,
+      "brier": 0.2651476672036602,
+      "latency_ms_p50": 5820.124,
+      "latency_ms_p95": 12854.604,
+      "max_drawdown_pct": 36.24835539579166,
+      "model_id": "nico_open_jev",
+      "n_decisions": 53,
+      "pair": "SOLUSDT",
+      "period": "2024",
+      "return_pct": 107.42714876036685,
+      "trade_count": 2
+    },
+    {
       "accuracy": 0.46153846153846156,
       "brier": 0.3681781026923077,
       "latency_ms_p50": 965.945,
@@ -1326,6 +2158,32 @@
       "trade_count": 26
     },
     {
+      "accuracy": 0.46153846153846156,
+      "brier": null,
+      "latency_ms_p50": 10659.128,
+      "latency_ms_p95": 14572.88,
+      "max_drawdown_pct": 53.83907646137922,
+      "model_id": "gliner25",
+      "n_decisions": 52,
+      "pair": "SOLUSDT",
+      "period": "2025",
+      "return_pct": -27.55155828090161,
+      "trade_count": 18
+    },
+    {
+      "accuracy": 0.4807692307692308,
+      "brier": 0.2741533384788682,
+      "latency_ms_p50": 6849.426,
+      "latency_ms_p95": 11660.947,
+      "max_drawdown_pct": 55.897092323413844,
+      "model_id": "nico_open_jev",
+      "n_decisions": 52,
+      "pair": "SOLUSDT",
+      "period": "2025",
+      "return_pct": -36.21658787867757,
+      "trade_count": 2
+    },
+    {
       "accuracy": 0.8571428571428571,
       "brier": 0.16162181571428572,
       "latency_ms_p50": 1117.914,
@@ -1336,6 +2194,32 @@
       "pair": "SOLUSDT",
       "period": "2026",
       "return_pct": -1.4912246616203606,
+      "trade_count": 2
+    },
+    {
+      "accuracy": 0.42857142857142855,
+      "brier": null,
+      "latency_ms_p50": 6592.814,
+      "latency_ms_p95": 11315.612,
+      "max_drawdown_pct": 31.9950555576454,
+      "model_id": "gliner25",
+      "n_decisions": 7,
+      "pair": "SOLUSDT",
+      "period": "2026",
+      "return_pct": -29.162744681209006,
+      "trade_count": 4
+    },
+    {
+      "accuracy": 0.14285714285714285,
+      "brier": 0.3471336548094646,
+      "latency_ms_p50": 7310.477,
+      "latency_ms_p95": 11827.059,
+      "max_drawdown_pct": 42.477128706475696,
+      "model_id": "nico_open_jev",
+      "n_decisions": 7,
+      "pair": "SOLUSDT",
+      "period": "2026",
+      "return_pct": -40.08138152449536,
       "trade_count": 2
     },
     {
@@ -1352,6 +2236,32 @@
       "trade_count": 76
     },
     {
+      "accuracy": 0.4838709677419355,
+      "brier": null,
+      "latency_ms_p50": 10211.512,
+      "latency_ms_p95": 15274.413,
+      "max_drawdown_pct": 54.055276940395714,
+      "model_id": "gliner25",
+      "n_decisions": 155,
+      "pair": "SOLUSDT",
+      "period": "full",
+      "return_pct": 168.79035274962635,
+      "trade_count": 50
+    },
+    {
+      "accuracy": 0.49032258064516127,
+      "brier": 0.27290312093956115,
+      "latency_ms_p50": 6232.196,
+      "latency_ms_p95": 11827.059,
+      "max_drawdown_pct": 67.66026959886922,
+      "model_id": "nico_open_jev",
+      "n_decisions": 155,
+      "pair": "SOLUSDT",
+      "period": "full",
+      "return_pct": 286.9577751918082,
+      "trade_count": 2
+    },
+    {
       "accuracy": 0.5116279069767442,
       "brier": 0.3232442693023256,
       "latency_ms_p50": 826.689,
@@ -1363,6 +2273,32 @@
       "period": "2023",
       "return_pct": 27.89255861163431,
       "trade_count": 22
+    },
+    {
+      "accuracy": 0.6046511627906976,
+      "brier": null,
+      "latency_ms_p50": 8676.965,
+      "latency_ms_p95": 13272.427,
+      "max_drawdown_pct": 13.841599700138495,
+      "model_id": "gliner25",
+      "n_decisions": 43,
+      "pair": "TRXUSDT",
+      "period": "2023",
+      "return_pct": 48.21008340929445,
+      "trade_count": 10
+    },
+    {
+      "accuracy": 0.6744186046511628,
+      "brier": 0.22406948977076702,
+      "latency_ms_p50": 5059.546,
+      "latency_ms_p95": 9957.26,
+      "max_drawdown_pct": 13.841599700138485,
+      "model_id": "nico_open_jev",
+      "n_decisions": 43,
+      "pair": "TRXUSDT",
+      "period": "2023",
+      "return_pct": 60.568037892266105,
+      "trade_count": 2
     },
     {
       "accuracy": 0.4716981132075472,
@@ -1378,6 +2314,32 @@
       "trade_count": 30
     },
     {
+      "accuracy": 0.5094339622641509,
+      "brier": null,
+      "latency_ms_p50": 11696.904,
+      "latency_ms_p95": 17526.898,
+      "max_drawdown_pct": 19.28834305143604,
+      "model_id": "gliner25",
+      "n_decisions": 53,
+      "pair": "TRXUSDT",
+      "period": "2024",
+      "return_pct": 60.154693374568716,
+      "trade_count": 20
+    },
+    {
+      "accuracy": 0.6037735849056604,
+      "brier": 0.24717457512581262,
+      "latency_ms_p50": 7366.604,
+      "latency_ms_p95": 12272.213,
+      "max_drawdown_pct": 22.86982617595609,
+      "model_id": "nico_open_jev",
+      "n_decisions": 53,
+      "pair": "TRXUSDT",
+      "period": "2024",
+      "return_pct": 139.61439542377025,
+      "trade_count": 2
+    },
+    {
       "accuracy": 0.4807692307692308,
       "brier": 0.35309672326923075,
       "latency_ms_p50": 825.581,
@@ -1389,6 +2351,32 @@
       "period": "2025",
       "return_pct": -7.618655053634349,
       "trade_count": 24
+    },
+    {
+      "accuracy": 0.5769230769230769,
+      "brier": null,
+      "latency_ms_p50": 11246.612,
+      "latency_ms_p95": 14497.267,
+      "max_drawdown_pct": 16.30604993545023,
+      "model_id": "gliner25",
+      "n_decisions": 52,
+      "pair": "TRXUSDT",
+      "period": "2025",
+      "return_pct": 21.11201327795309,
+      "trade_count": 18
+    },
+    {
+      "accuracy": 0.5192307692307693,
+      "brier": 0.26405314692946463,
+      "latency_ms_p50": 7542.178,
+      "latency_ms_p95": 11990.295,
+      "max_drawdown_pct": 23.21558575988383,
+      "model_id": "nico_open_jev",
+      "n_decisions": 52,
+      "pair": "TRXUSDT",
+      "period": "2025",
+      "return_pct": 12.818686200144104,
+      "trade_count": 2
     },
     {
       "accuracy": 0.5714285714285714,
@@ -1404,6 +2392,32 @@
       "trade_count": 4
     },
     {
+      "accuracy": 0.5714285714285714,
+      "brier": null,
+      "latency_ms_p50": 12893.932,
+      "latency_ms_p95": 16289.086,
+      "max_drawdown_pct": 12.0787941875653,
+      "model_id": "gliner25",
+      "n_decisions": 7,
+      "pair": "TRXUSDT",
+      "period": "2026",
+      "return_pct": -1.6997196464821451,
+      "trade_count": 2
+    },
+    {
+      "accuracy": 0.5714285714285714,
+      "brier": 0.24749904991502486,
+      "latency_ms_p50": 8663.601,
+      "latency_ms_p95": 10372.777,
+      "max_drawdown_pct": 12.0787941875653,
+      "model_id": "nico_open_jev",
+      "n_decisions": 7,
+      "pair": "TRXUSDT",
+      "period": "2026",
+      "return_pct": -1.6997196464821451,
+      "trade_count": 2
+    },
+    {
       "accuracy": 0.49032258064516127,
       "brier": 0.3469061769032258,
       "latency_ms_p50": 826.689,
@@ -1415,6 +2429,32 @@
       "period": "full",
       "return_pct": 48.424779496928316,
       "trade_count": 76
+    },
+    {
+      "accuracy": 0.5612903225806452,
+      "brier": null,
+      "latency_ms_p50": 10833.167,
+      "latency_ms_p95": 16137.289,
+      "max_drawdown_pct": 19.288343051436073,
+      "model_id": "gliner25",
+      "n_decisions": 155,
+      "pair": "TRXUSDT",
+      "period": "full",
+      "return_pct": 184.12182319385676,
+      "trade_count": 44
+    },
+    {
+      "accuracy": 0.5935483870967742,
+      "brier": 0.24644191955837666,
+      "latency_ms_p50": 7130.728,
+      "latency_ms_p95": 11990.295,
+      "max_drawdown_pct": 32.4718538868712,
+      "model_id": "nico_open_jev",
+      "n_decisions": 155,
+      "pair": "TRXUSDT",
+      "period": "full",
+      "return_pct": 328.99575173323836,
+      "trade_count": 2
     },
     {
       "accuracy": 0.3953488372093023,
@@ -1430,6 +2470,32 @@
       "trade_count": 26
     },
     {
+      "accuracy": 0.4186046511627907,
+      "brier": null,
+      "latency_ms_p50": 9048.523,
+      "latency_ms_p95": 11862.665,
+      "max_drawdown_pct": 37.42787578118393,
+      "model_id": "gliner25",
+      "n_decisions": 43,
+      "pair": "UNIUSDT",
+      "period": "2023",
+      "return_pct": -22.242734794807774,
+      "trade_count": 18
+    },
+    {
+      "accuracy": 0.5116279069767442,
+      "brier": 0.27005996114247405,
+      "latency_ms_p50": 6256.049,
+      "latency_ms_p95": 10885.188,
+      "max_drawdown_pct": 37.52889048348832,
+      "model_id": "nico_open_jev",
+      "n_decisions": 43,
+      "pair": "UNIUSDT",
+      "period": "2023",
+      "return_pct": 14.925870041133882,
+      "trade_count": 2
+    },
+    {
       "accuracy": 0.4716981132075472,
       "brier": 0.38458789226415097,
       "latency_ms_p50": 905.011,
@@ -1441,6 +2507,32 @@
       "period": "2024",
       "return_pct": 153.5880948016819,
       "trade_count": 24
+    },
+    {
+      "accuracy": 0.5094339622641509,
+      "brier": null,
+      "latency_ms_p50": 10913.875,
+      "latency_ms_p95": 17378.214,
+      "max_drawdown_pct": 46.94701726812346,
+      "model_id": "gliner25",
+      "n_decisions": 53,
+      "pair": "UNIUSDT",
+      "period": "2024",
+      "return_pct": 155.3924928659799,
+      "trade_count": 20
+    },
+    {
+      "accuracy": 0.5471698113207547,
+      "brier": 0.25822576663743224,
+      "latency_ms_p50": 6415.238,
+      "latency_ms_p95": 13598.722,
+      "max_drawdown_pct": 59.546068439934174,
+      "model_id": "nico_open_jev",
+      "n_decisions": 53,
+      "pair": "UNIUSDT",
+      "period": "2024",
+      "return_pct": 106.24135942882265,
+      "trade_count": 2
     },
     {
       "accuracy": 0.4230769230769231,
@@ -1456,6 +2548,32 @@
       "trade_count": 28
     },
     {
+      "accuracy": 0.46153846153846156,
+      "brier": null,
+      "latency_ms_p50": 10165.663,
+      "latency_ms_p95": 16779.465,
+      "max_drawdown_pct": 61.15733654797311,
+      "model_id": "gliner25",
+      "n_decisions": 52,
+      "pair": "UNIUSDT",
+      "period": "2025",
+      "return_pct": -57.01512349123139,
+      "trade_count": 22
+    },
+    {
+      "accuracy": 0.4230769230769231,
+      "brier": 0.2896146723489426,
+      "latency_ms_p50": 7336.38,
+      "latency_ms_p95": 12215.423,
+      "max_drawdown_pct": 66.60194084118788,
+      "model_id": "nico_open_jev",
+      "n_decisions": 52,
+      "pair": "UNIUSDT",
+      "period": "2025",
+      "return_pct": -60.92874203138399,
+      "trade_count": 2
+    },
+    {
       "accuracy": 0.5714285714285714,
       "brier": 0.26360991,
       "latency_ms_p50": 898.859,
@@ -1469,6 +2587,32 @@
       "trade_count": 4
     },
     {
+      "accuracy": 0.5714285714285714,
+      "brier": null,
+      "latency_ms_p50": 11303.724,
+      "latency_ms_p95": 13590.094,
+      "max_drawdown_pct": 18.065163797179707,
+      "model_id": "gliner25",
+      "n_decisions": 7,
+      "pair": "UNIUSDT",
+      "period": "2026",
+      "return_pct": -18.065163797179707,
+      "trade_count": 4
+    },
+    {
+      "accuracy": 0.14285714285714285,
+      "brier": 0.34756510411823555,
+      "latency_ms_p50": 6244.01,
+      "latency_ms_p95": 11335.124,
+      "max_drawdown_pct": 42.10464338728388,
+      "model_id": "nico_open_jev",
+      "n_decisions": 7,
+      "pair": "UNIUSDT",
+      "period": "2026",
+      "return_pct": -42.10464338728388,
+      "trade_count": 2
+    },
+    {
       "accuracy": 0.43870967741935485,
       "brier": 0.39586226696774196,
       "latency_ms_p50": 896.542,
@@ -1480,6 +2624,32 @@
       "period": "full",
       "return_pct": -27.1325481572958,
       "trade_count": 80
+    },
+    {
+      "accuracy": 0.47096774193548385,
+      "brier": null,
+      "latency_ms_p50": 10253.09,
+      "latency_ms_p95": 16139.193,
+      "max_drawdown_pct": 71.45596583246416,
+      "model_id": "gliner25",
+      "n_decisions": 155,
+      "pair": "UNIUSDT",
+      "period": "full",
+      "return_pct": -29.68004745803765,
+      "trade_count": 58
+    },
+    {
+      "accuracy": 0.4774193548387097,
+      "brier": 0.27607395259279327,
+      "latency_ms_p50": 6771.706,
+      "latency_ms_p95": 11515.257,
+      "max_drawdown_pct": 81.6670562039857,
+      "model_id": "nico_open_jev",
+      "n_decisions": 155,
+      "pair": "UNIUSDT",
+      "period": "full",
+      "return_pct": -46.09365562530369,
+      "trade_count": 2
     }
   ],
   "schema_version": 1,

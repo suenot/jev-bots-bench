@@ -41,6 +41,10 @@ def equivalent(left: object, right: object) -> bool:
     return left == right
 
 
+def order_rows(rows: list[dict], keys: tuple[str, ...]) -> list[dict]:
+    return sorted(rows, key=lambda row: tuple(row[key] for key in keys))
+
+
 def main() -> None:
     record = json.loads((ROOT / "results/model-provenance.json").read_text())
     inventory = {
@@ -60,6 +64,14 @@ def main() -> None:
         verify(model["adapter_path"], model["adapter_sha256"])
         verify(model["environment_path"], model["environment_sha256"])
         verify(model["responses_path"], model["responses_sha256"])
+        manifest_path = model.get("checkpoint_manifest_path")
+        if manifest_path:
+            verify(manifest_path, model["checkpoint_manifest_sha256"])
+            lines = (ROOT / manifest_path).read_text().splitlines()
+            if not any(line.startswith(model["weight_file_sha256"] + "  ") for line in lines):
+                raise ValueError(f"weight checksum missing from checkpoint manifest: {model['id']}")
+        if model.get("npm_lock_path"):
+            verify(model["npm_lock_path"], model["npm_lock_sha256"])
         with (ROOT / model["responses_path"]).open() as source:
             response_ids = [json.loads(line)["id"] for line in source if line.strip()]
         if len(response_ids) != model["response_count"] or response_ids != event_ids:
@@ -76,7 +88,14 @@ def main() -> None:
         replayed = json.loads(output.read_text())
     published = json.loads((ROOT / "results/summary.json").read_text())
     for key in ("schema_version", "status", "methodology", "models", "runs", "baselines", "provenance"):
-        if not equivalent(replayed[key], published[key]):
+        actual, expected = replayed[key], published[key]
+        if key == "runs":
+            actual = order_rows(actual, ("model_id", "pair", "period"))
+            expected = order_rows(expected, ("model_id", "pair", "period"))
+        elif key == "baselines":
+            actual = order_rows(actual, ("name", "pair", "period"))
+            expected = order_rows(expected, ("name", "pair", "period"))
+        if not equivalent(actual, expected):
             raise ValueError(f"published aggregate differs from replay: {key}")
     print(f"verified {len(specs)} model response files and {len(published['runs'])} published model rows")
 

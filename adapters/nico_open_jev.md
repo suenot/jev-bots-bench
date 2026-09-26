@@ -39,7 +39,10 @@ the following files elsewhere and transfer **only model/source artifacts**:
    `tokenizer.json`, `tokenizer_config.json`, `special_tokens_map.json`,
    `added_tokens.json`, `spm.model`, `open_jev_config.json`,
    `onnx/model_q4.onnx`, and `onnx/model_q4.onnx_data`. Keep the same paths
-   beneath the local model directory. Verify the large weight hash above.
+   beneath the local model directory. The
+   [checkpoint hash manifest](nico_open_jev_checkpoint.sha256) pins all nine
+   files, including the tokenizer and model configuration. Setup verifies
+   every file before extracting the runtime or running inference.
 
 Then, at the benchmark repository root:
 
@@ -72,3 +75,25 @@ One-event Linux x64 CPU smoke with two assigned cores and event `e000001`
 returned `up` with `p(up)=0.6171370202118195` in 10.341 seconds of inference,
 excluding model load. The response passed the benchmark runner's
 `valid_decision` check. This is a protocol check, not a trading result.
+
+## Option-order control
+
+The [one-event probe](../scripts/probe_nico_option_order.mjs) loads the same
+checkpoint and asks the same question about `e000001` twice, swapping only
+the option order. It verifies the committed event-file SHA-256 before loading
+the model. With the environment variables from the setup command above, run:
+
+```sh
+NICO_OPEN_JEV_SOURCE_DIR="$PWD/.runtime-nico-open-jev/source" \
+NICO_OPEN_JEV_MODEL_PATH=/path/to/model \
+  .runtime-nico-open-jev/node-v22.16.0-linux-x64/bin/node \
+  scripts/probe_nico_option_order.mjs
+```
+
+If the prepared events are at `weekly/events.jsonl`, also set
+`NICO_OPEN_JEV_EVENTS_PATH=weekly/events.jsonl`. On the pinned CPU checkpoint,
+`["up", "down"]` gave `p(up)=0.6171370202118195`; `["down", "up"]` gave
+`p(down)=0.6154262651820454`. This control shows sensitivity to the first
+option for this event. It does not alter the canonical adapter or its response
+stream and does not establish how the other events would answer under the
+reversed order.

@@ -12,6 +12,10 @@ checksums of transferred source archives and weight files, adapter checksum,
 dependency environment, response checksum and model training cutoff when
 known. The source and weight archives are large and stay outside this Git
 repository. The small dependency environment records are in `environments/`.
+Checkpoint manifests under `../adapters/` list every local model file used by
+the three published runs, including tokenizers and configuration. Their hashes
+are checked during server setup; the publication verifier pins the manifest
+files themselves and Nico's npm lockfile.
 
 To verify the published result without the raw minute candles:
 
@@ -34,3 +38,21 @@ These checks establish that the posted table follows the posted inputs,
 responses and calculation code. They cannot establish that a model released
 after the historical period was never trained on that period. Unknown training
 cutoffs remain marked unknown, and such results are retrospective diagnostics.
+
+## Nico option-order diagnostic
+
+The pinned `nico-martin/open-jev` adapter chose `up` on all 1,382 requests.
+Its long/cash policy therefore equals the always-long hold baseline for every
+pair and period. The recorded `up` probabilities vary (about 0.538 to 0.706),
+but this is not evidence of directional forecasting skill. We reviewed the
+upstream label mapping: the option order is preserved through encoding,
+inference and the named output probabilities. A fresh run of event `e000001`
+with the canonical options `["up", "down"]` reproduced `up` with probability
+0.6171370202. Keeping the event, model and option text fixed but reversing
+the options to `["down", "up"]` returned `down` with probability 0.6154262652.
+This one-event control demonstrates sensitivity to option order. It does not
+establish what all 1,382 reversed-order predictions would be. The published
+canonical stream and its trading rule were not changed after this inspection.
+Run the [one-event probe](../scripts/probe_nico_option_order.mjs) with the
+pinned runtime and model as described in
+[`../adapters/nico_open_jev.md`](../adapters/nico_open_jev.md#option-order-control).

@@ -4,6 +4,23 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-09-26
+
+### Added
+
+- Publish complete GLiNER2.5-Decide and nico-martin/open-jev response streams and their environment and artifact provenance.
+- Compare three measured engines with hold and seven-day momentum across the same nine pairs and partial or full calendar periods.
+- Publish checkpoint hash manifests and a reproducible one-event Nico option-order diagnostic.
+
+### Changed
+
+- Update the live dashboard from one to three verified model runs while the remaining CPU queues continue.
+
+### Fixed
+
+- Compare independently replayed result rows by model, pair, and period instead of depending on response-file argument order.
+- Check all local checkpoint files during measured-model setup and verify Nico's npm lockfile in the publication replay.
+
 ## [0.5.0] - 2026-09-26
 
 ### Added
