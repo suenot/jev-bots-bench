@@ -18,8 +18,9 @@ results from pending, blocked, and incompatible projects.
   pair coverage, and the pre-inference hash of sealed outcomes.
 - [`adapters/`](adapters/): engine-specific JSONL adapters, pinned dependencies,
   and setup instructions. An adapter is measured only after a real model run.
-- [`results/summary.json`](results/summary.json): public aggregate data used by
-  the dashboard. Empty results are explicitly labeled; no synthetic P&L is shown.
+- [`results/`](results/README.md): the dashboard aggregate, complete model
+  response streams, environment records, and checksums for independent replay.
+  Pending models have no P&L; no synthetic result is shown.
 - [`site/`](site/): source of the dashboard.
 
 The market data stays on the machine running the benchmark. `prepare` reads
@@ -38,6 +39,13 @@ these candles. A historical replay using a model released later is diagnostic,
 not a live or truly point-in-time investment result. The harness checks that
 its *inputs* never contain a future candle; that does not certify what a
 third-party model saw during training.
+
+This is an exploratory cross-model comparison. The event and settlement hashes,
+trading policy, fees, and baselines were committed before model P&L was
+evaluated. Laya's complete result was inspected while other CPU adapters were
+still being implemented. Those adapters use the same fixed market question and
+have not been fitted or selected using their own trading outcomes, but the
+campaign should not be described as a blind preregistered model contest.
 
 ## Repeat a run
 
@@ -59,6 +67,19 @@ then run `invoke` and `evaluate` exactly as shown in
 [`benchmark/README.md`](benchmark/README.md). `prepare` requires `pyarrow`;
 the unit tests and replay use the Python standard library. Do not commit raw
 warehouse files, private credentials, or large model checkpoints.
+
+Once a model's complete response stream and the sealed settlements are
+published, an independent reader can verify the reported scores without the
+raw minute archive:
+
+```sh
+python3 scripts/verify_published.py
+```
+
+This checks the event, settlement, adapter, response, and environment file
+hashes recorded in `results/model-provenance.json`, then reruns `evaluate`
+and compares its pair/year metrics with the published summary. See the
+[result file guide](results/README.md) for what the checks do and do not prove.
 
 ## Previous trading-bot study
 

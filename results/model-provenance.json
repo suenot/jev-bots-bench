@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "benchmark_event_sha256": "d17d4fb3bfcacd898e0a81a07ed704d598f931fc4db9ff683ba649646fdbbecc",
+  "settlement_sha256": "888eccbc7c999a606436559425966f459901d222f81a9af1bf3010db9294b0a6",
+  "runner_sha256": "1e20a30540e8e4a20fa133f677b22d4380b26dd7bc57c5bed390dcdaeb00d0e0",
+  "models": [
+    {
+      "id": "laya",
+      "inference_date": "2026-09-26",
+      "training_cutoff": "unknown",
+      "source_revision": "4066d5d5fbf08b66c6757ddeedbd797bd7655bc0",
+      "source_archive_sha256": "4203c0832f92a5981a9422107e30b7a6ae157c787fa6e3a9c97b75bcbf2deaf7",
+      "weights_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+      "weight_file_sha256": "891102d372688fc2a094dac56a384bc537b87c63f21f9f3dac0be2b7cbc8d86c",
+      "adapter_path": "adapters/laya_decide.py",
+      "adapter_sha256": "a7ff8f0b6ab85691a4ca4d6c71e6e0e6bff13daf3ac774e31c46cfa599a014a7",
+      "environment_path": "results/environments/laya.txt",
+      "environment_sha256": "929738ab291c95ea6ba66bc3896df28fe69ceba5de52afcd65931d3100f68d1c",
+      "responses_path": "results/responses/laya.jsonl",
+      "responses_sha256": "170d725f2fe6ca039e381cd6701e57a9a14e705f7e29631babead343f6f99e06",
+      "response_count": 1382,
+      "runtime": "Python 3.12, torch 2.8.0+cpu, Laya 0.3.20 on CPU"
+    }
+  ]
+}

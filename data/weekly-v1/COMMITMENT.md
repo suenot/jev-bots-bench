@@ -3,9 +3,9 @@
 The model-facing requests in `events.jsonl` were prepared on 2026-09-26 from
 the existing warehouse, before running any of the sixteen candidate engines.
 The request stream contains 1,382 opaque IDs and causal feature text. The
-paired settlement file has 1,381 scorable rows. It is kept separate during
-inference and will be published with the final results so anyone can check
-these hashes and replay the exact evaluation.
+paired settlement file has 1,381 scorable rows. It was kept separate during
+inference and is now published with the first measured result so anyone can
+check these hashes and replay the exact evaluation.
 
 | Artifact | SHA-256 |
 | --- | --- |

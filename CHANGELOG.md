@@ -4,6 +4,24 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-09-26
+
+### Added
+
+- Add pinned CPU adapters and reproduction guides for Kev, NanoJev, minojev, AnyJev, mini-jev, and Zefan-Cai/Open-Jev, with real one-event protocol checks.
+- Publish Laya's complete response stream, sealed settlement rows, environment record, and a checksum and replay verifier for measured engines.
+- Add a model-by-pair full-period comparison matrix with matching hold and seven-day momentum reference rows.
+- Add durable, resumable server queues for the longer CPU runs.
+
+### Changed
+
+- Describe this as an exploratory retrospective comparison, including unknown model-training cutoffs and the order in which adapters were finished.
+- Update the 16-engine inventory with pinned weight revisions and observed run status.
+
+### Fixed
+
+- Verify exact event IDs before a completed NanoJev or minojev response file is accepted by its queue.
+
 ## [0.4.0] - 2026-09-26
 
 ### Added

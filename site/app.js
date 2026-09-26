@@ -122,6 +122,58 @@
     return node('td', number(value) ? 'metric' : 'dash', metric(value, suffix, digits));
   }
 
+  function renderComparison(data) {
+    const container = $('comparison-content');
+    container.replaceChildren();
+    const models = Array.isArray(data.models) ? data.models : [];
+    const runs = (Array.isArray(data.runs) ? data.runs : []).filter((run) => run.period === 'full');
+    const baselines = (Array.isArray(data.baselines) ? data.baselines : []).filter((baseline) => baseline.period === 'full');
+    const pairs = [...new Set([...runs, ...baselines].map((item) => text(item.pair)).filter(Boolean))].sort();
+    if (!pairs.length) {
+      empty(container, 'Сравнения пока нет', 'Результаты за полный период еще не опубликованы.', true);
+      return;
+    }
+
+    const modelReturns = new Map(runs.map((run) => [`${run.model_id}\u0000${run.pair}`, run.return_pct]));
+    const baselineReturns = new Map(baselines.map((baseline) => [`${baseline.name}\u0000${baseline.pair}`, baseline.return_pct]));
+    const outer = node('div', 'table-wrap comparison-wrap');
+    const table = node('table', 'data-table comparison-table');
+    table.append(node('caption', '', 'P&L после издержек за полный период, %; строки — модели и базовые стратегии, столбцы — торговые пары.'));
+    const thead = node('thead');
+    const headerRow = node('tr');
+    for (const heading of ['Движок / база', ...pairs]) {
+      const cell = node('th', '', heading);
+      cell.scope = 'col';
+      headerRow.append(cell);
+    }
+    thead.append(headerRow);
+    table.append(thead);
+
+    const modelBody = node('tbody');
+    for (const model of models) {
+      const row = node('tr');
+      const label = node('th', 'row-name', text(model.name) || text(model.id) || 'Без названия');
+      label.scope = 'row';
+      row.append(label);
+      for (const pair of pairs) row.append(valueCell(modelReturns.get(`${model.id}\u0000${pair}`), '%'));
+      modelBody.append(row);
+    }
+    table.append(modelBody);
+
+    const referenceBody = node('tbody', 'comparison-references');
+    for (const name of ['hold', 'momentum_7d']) {
+      const row = node('tr');
+      const label = node('th', 'row-name', name);
+      label.scope = 'row';
+      row.append(label);
+      for (const pair of pairs) row.append(valueCell(baselineReturns.get(`${name}\u0000${pair}`), '%'));
+      referenceBody.append(row);
+    }
+    table.append(referenceBody);
+    outer.append(table);
+    container.append(outer);
+  }
+
   function renderRuns(data) {
     const container = $('results-content');
     container.replaceChildren();
@@ -281,6 +333,7 @@
       dataset = data;
       renderSnapshot(data);
       renderFilters(data);
+      renderComparison(data);
       renderRuns(data);
       renderCoverage(data);
       renderMethodology(data);
@@ -291,6 +344,7 @@
       $('run-count').textContent = '—';
       $('updated-at').textContent = 'Данные недоступны';
       $('filter-count').textContent = 'Файл не загружен';
+      empty($('comparison-content'), 'Сравнение недоступно', 'Не удалось загрузить опубликованный summary.json.', true);
       empty($('results-content'), 'Данные недоступны', 'Не удалось загрузить опубликованный summary.json. Попробуйте обновить страницу позже или откройте файл по ссылке ниже.');
       empty($('coverage-content'), 'Список временно недоступен', 'Состав движков опубликован вместе с файлом результатов.', true);
       console.error('Benchmark data load failed:', error);

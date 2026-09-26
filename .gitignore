@@ -1,7 +1,11 @@
 .DS_Store
 .vercel/
 .venv/
-.runtime-nico-open-jev/
+.venv-*/
+.runtime-*/
+models/
+nanojev-source/
+llama-jevk5/
 __pycache__/
 *.pyc
 node_modules/

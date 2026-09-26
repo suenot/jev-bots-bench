@@ -1,0 +1,4 @@
+# CPU adaptation of source commit 76fdfc9ecdca45a9bcef17991a07d3041a87685a.
+transformers==5.17.0
+safetensors==0.8.0
+numpy==2.5.3

@@ -9,7 +9,7 @@
       "category": "decision_engine",
       "runtime": "adapter_required",
       "status": "pending",
-      "reason": "CPU adapter is ready; real inference has not been recorded.",
+      "reason": "Full pinned CPU response stream is published; the summary derives measured status when this response file is supplied.",
       "weights_url": "https://huggingface.co/convaiinnovations/laya",
       "weights_sha": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
     },
@@ -18,10 +18,12 @@
       "name": "Kev",
       "source_url": "https://github.com/jaredpalmer/kev",
       "source_sha": "f1535963cea021439370c23127bc970b6788e730",
+      "weights_url": "https://huggingface.co/jaredpalmer/kev-0.8b",
+      "weights_sha": "9a45d25eb2ab761841196625383fa1dff0e56c1e",
       "category": "decision_engine",
       "runtime": "adapter_required",
-      "status": "blocked",
-      "reason": "Published serving path targets GPU or MLX; no pinned CPU runner is available for this host."
+      "status": "pending",
+      "reason": "Pinned Kev-0.8B trained LoRA and pointer head with separate Qwen3.5-0.8B-Base passed a real CPU smoke; full market run is queued."
     },
     {
       "id": "gliner25",
@@ -33,7 +35,7 @@
       "category": "model_weights",
       "runtime": "python",
       "status": "pending",
-      "reason": "CPU adapter is ready; real inference has not been recorded."
+      "reason": "Pinned CPU adapter passed a real smoke; full inference is in progress."
     },
     {
       "id": "jevk5",
@@ -86,10 +88,12 @@
       "name": "NanoJev",
       "source_url": "https://github.com/TianyuCodings/NanoJev",
       "source_sha": "76fdfc9ecdca45a9bcef17991a07d3041a87685a",
+      "weights_url": "https://huggingface.co/C-Tianyu/NanoJev",
+      "weights_sha": "047b927b30882a1138fc504821b82ac145a4b81a",
       "category": "decision_engine",
       "runtime": "adapter_required",
       "status": "pending",
-      "reason": "Released checkpoint is game-focused; text-market transfer remains unmeasured."
+      "reason": "Game-trained checkpoint accepts the causal text protocol and passed a real CPU smoke; full market run is queued."
     },
     {
       "id": "jevlike",
@@ -99,7 +103,7 @@
       "category": "decision_engine",
       "runtime": "adapter_required",
       "status": "blocked",
-      "reason": "Research toolkit has no fixed trained trading checkpoint for this common protocol."
+      "reason": "The text scorer requires trained weights, but the pinned release provides only game/vision checkpoints; no public trained text checkpoint is available."
     },
     {
       "id": "simple_jev",
@@ -111,27 +115,31 @@
       "category": "decision_engine",
       "runtime": "adapter_required",
       "status": "pending",
-      "reason": "Pinned CPU adapter passed a real one-request smoke; full run is pending."
+      "reason": "Pinned CPU adapter passed a real one-request smoke; full sharded inference is in progress."
     },
     {
       "id": "anyjev",
       "name": "AnyJev",
       "source_url": "https://github.com/nokia-applied-research/AnyJev",
       "source_sha": "795a4970b47218b7c0686cd579d691fc2cf8df2f",
+      "weights_url": "https://huggingface.co/Qwen/Qwen3.5-0.8B",
+      "weights_sha": "2fc06364715b967f1860aea9cf38778875588b17",
       "category": "decision_engine",
       "runtime": "adapter_required",
-      "status": "blocked",
-      "reason": "Requires a selected base model and, for fitted modes, task labels; a fixed comparable configuration is not defined."
+      "status": "pending",
+      "reason": "Pinned zero-label L0 with Qwen3.5-0.8B and no fitted market labels passed a real CPU smoke; full run is queued. Choice scores are uncalibrated for markets."
     },
     {
       "id": "mini_jev",
       "name": "mini-jev",
       "source_url": "https://github.com/r-ms/mini-jev",
       "source_sha": "ca612198bfb69f538f029a4615f6d0a18b4f814c",
+      "weights_url": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+      "weights_sha": "cdbee75f17c01a7cc42f958dc650907174af0554",
       "category": "decision_engine",
       "runtime": "adapter_required",
-      "status": "blocked",
-      "reason": "Published benchmark setup requires MPS or CUDA; the available server has no GPU."
+      "status": "pending",
+      "reason": "The pinned frozen Qwen3-4B B1 letter scorer passed a real CPU float32 smoke; full run is queued. It has no separately trained mini-jev head."
     },
     {
       "id": "nico_open_jev",
@@ -150,20 +158,24 @@
       "name": "minojev",
       "source_url": "https://github.com/zeredy879/minojev",
       "source_sha": "622dd952c3db2769a7a32d1a13cc89db04bba95e",
+      "weights_url": "https://huggingface.co/zeredy879/minojev",
+      "weights_sha": "e1e4bbec238c36af6db1af3b1890634440228cb7",
       "category": "decision_engine",
       "runtime": "adapter_required",
       "status": "pending",
-      "reason": "CPU checkpoint path is documented; benchmark adapter and run are pending."
+      "reason": "Pinned trained general checkpoint passed a real CPU smoke; full market run is queued. Native temperature is calibrated on nonmarket tasks."
     },
     {
       "id": "zefan_open_jev",
       "name": "Zefan-Cai/Open-Jev",
       "source_url": "https://github.com/Zefan-Cai/Open-Jev",
       "source_sha": "3308a15ccd7eea1df7a37d6ddc39b023b801ba16",
+      "weights_url": "https://huggingface.co/ZefanCai/Open-Jev-2B",
+      "weights_sha": "0c7aa498b1627be8da4acf34c863ff0ee0a92785",
       "category": "decision_engine",
       "runtime": "adapter_required",
       "status": "pending",
-      "reason": "CPU server option is documented but slow; benchmark adapter and run are pending."
+      "reason": "Pinned trained 2B checkpoint passed a real CPU smoke; full run is queued. Per-week nine-pair serving has a narrow one-hour margin."
     },
     {
       "id": "dasein_open_jev",

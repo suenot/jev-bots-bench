@@ -161,12 +161,24 @@ returns. The source and base model are separate revision pins.
 
 ## Other CPU decision engines
 
+- [`kev.md`](kev.md): the released Kev-0.8B trained LoRA and pointer head with
+  its separate Qwen3.5-0.8B-Base on CPU.
 - [`jevk5.md`](jevk5.md): pinned JevK5 4B Q4_K_M GGUF through its own
   `JevK5GGUF` interface and a pinned llama.cpp HTTP server.
 - [`semif.md`](semif.md): SemIf direct option scoring with a pinned
   Qwen3.5-4B GGUF and reference tokenizer.
 - [`nico_open_jev.md`](nico_open_jev.md): the released open-jev DeBERTa ONNX
   decision head on Node.js CPU with q4 weights.
+- [`nanojev.md`](nanojev.md): the released game-trained NanoJev decision head,
+  loaded and scored on CPU without changing its weights.
+- [`minojev.md`](minojev.md): the released minojev general decision head and
+  Qwen3-1.7B backbone on CPU.
+- [`anyjev.md`](anyjev.md): AnyJev's zero-label L0 path with a fixed
+  Qwen3.5-0.8B base and no market-fitted artifacts.
+- [`mini_jev.md`](mini_jev.md): mini-jev's frozen Qwen3-4B letter scorer on
+  CPU float32, without a separately trained decision head.
+- [`zefan_open_jev.md`](zefan_open_jev.md): the released Open-Jev-2B trained
+  head with its fixed Qwen3.5-2B base through a local CPU service.
 
 Each guide records source and weight revisions separately, checkpoint hashes,
 setup commands, a real one-event protocol smoke, and the limits of that smoke.
