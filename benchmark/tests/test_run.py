@@ -1,11 +1,12 @@
 import unittest
+import sys
 from argparse import Namespace
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest.mock import patch
 
-from benchmark.run import build_pair, evaluate, prepare, read_jsonl, replay, valid_decision, write_jsonl
+from benchmark.run import build_pair, check_model_deadlines, evaluate, invoke, prepare, read_jsonl, replay, valid_decision, write_jsonl
 
 
 class BenchmarkTests(unittest.TestCase):
@@ -65,9 +66,9 @@ class BenchmarkTests(unittest.TestCase):
 
     def test_prepare_and_evaluate_without_future_selection(self):
         start, end, days, fills = self.synthetic()
-        # One future week cannot be scored, but its causal request must remain.
-        broken = (start + timedelta(days=50)).strftime("%Y-%m-%d")
-        del days[broken]
+        # One future fill is absent, but its causal request must remain.
+        broken = (start + timedelta(days=54)).strftime("%Y-%m-%d")
+        del fills[broken]
         with TemporaryDirectory() as directory, patch("benchmark.run.daily_warehouse") as warehouse:
             warehouse.return_value = (days, fills, {"complete_days": len(days)})
             base = Path(directory)
@@ -80,7 +81,7 @@ class BenchmarkTests(unittest.TestCase):
             self.assertEqual(set(events[0]), {"id", "state"})
             self.assertTrue(events[0]["id"].startswith("e"))
             responses = base / "responses.jsonl"
-            write_jsonl(responses, [{"id": row["id"], "prediction": "up"} for row in events])
+            write_jsonl(responses, [{"id": row["id"], "prediction": "up", "latency_ms": 1.0} for row in events])
             result = base / "summary.json"
             evaluate(Namespace(events=args.events, settlements=args.settlements,
                                models=Path(__file__).resolve().parents[1] / "models.json",
@@ -92,6 +93,69 @@ class BenchmarkTests(unittest.TestCase):
             self.assertTrue(summary["runs"])
             self.assertTrue(summary["baselines"])
             self.assertEqual(len(summary["models"]), 16)
+
+    def test_future_daily_gap_does_not_select_scored_sample(self):
+        start, end, days, fills = self.synthetic()
+        original_events, original_settlements, _ = build_pair("SOLUSDT", days, fills, start, end)
+        missing_day = (start + timedelta(days=50)).strftime("%Y-%m-%d")
+        del days[missing_day]
+        _, changed_settlements, _ = build_pair("SOLUSDT", days, fills, start, end)
+        original_ids = {row["id"] for row in original_events if row["id"].split(":")[-1] <= missing_day}
+        self.assertTrue(original_ids <= {row["id"] for row in original_settlements})
+        self.assertTrue(original_ids <= {row["id"] for row in changed_settlements})
+
+    def test_evaluate_rejects_unmeasured_or_late_inference(self):
+        start, end, days, fills = self.synthetic()
+        events, settlements, _ = build_pair("SOLUSDT", days, fills, start, end)
+        with TemporaryDirectory() as directory:
+            base = Path(directory)
+            event_file, settlement_file, response_file = (base / name for name in ("events.jsonl", "settlements.jsonl", "responses.jsonl"))
+            write_jsonl(event_file, events)
+            write_jsonl(settlement_file, settlements)
+            args = Namespace(events=event_file, settlements=settlement_file,
+                             models=Path(__file__).resolve().parents[1] / "models.json",
+                             responses=[f"gliner25={response_file}"], fee_bps=5.0,
+                             slippage_bps=4.0, ledger=None, output=base / "summary.json")
+            for latency in (None, 3_600_001):
+                rows = [{"id": event["id"], "prediction": "up"} for event in events]
+                if latency is not None:
+                    for row in rows:
+                        row["latency_ms"] = latency
+                write_jsonl(response_file, rows)
+                with self.assertRaisesRegex(ValueError, "one-hour fill delay"):
+                    evaluate(args)
+
+    def test_serial_simultaneous_deadline(self):
+        events = [{"id": "a"}, {"id": "b"}, {"id": "c"}]
+        choices = {row["id"]: {"latency_ms": 2_000_000} for row in events}
+        with self.assertRaisesRegex(ValueError, "potentially simultaneous"):
+            check_model_deadlines(events, choices, 2)
+        check_model_deadlines(events, choices, 1)
+
+    def test_partial_adapter_line_still_times_out(self):
+        with TemporaryDirectory() as directory:
+            base = Path(directory)
+            events = base / "events.jsonl"
+            write_jsonl(events, [{"id": "a", "state": "past only"}])
+            args = Namespace(events=events, output=base / "responses.jsonl", timeout_seconds=0.05,
+                             command=[sys.executable, "-c", "import sys,time; sys.stdout.write('{'); sys.stdout.flush(); time.sleep(10)"])
+            with self.assertRaises(TimeoutError):
+                invoke(args)
+
+    def test_invoke_resume_requires_exact_prefix(self):
+        with TemporaryDirectory() as directory:
+            base = Path(directory)
+            events, output = base / "events.jsonl", base / "responses.jsonl"
+            command = [sys.executable, "-c", "import json,sys; [(lambda q: print(json.dumps({'id':q['id'],'prediction':'up'}),flush=True))(json.loads(line)) for line in sys.stdin]"]
+            write_jsonl(events, [{"id": "a", "state": "past"}])
+            args = Namespace(events=events, output=output, timeout_seconds=1, command=command, resume=False)
+            invoke(args)
+            with self.assertRaises(FileExistsError):
+                invoke(args)
+            write_jsonl(events, [{"id": "a", "state": "past"}, {"id": "b", "state": "past"}])
+            args.resume = True
+            invoke(args)
+            self.assertEqual([row["id"] for row in read_jsonl(output)], ["a", "b"])
 
 
 if __name__ == "__main__":

@@ -66,7 +66,7 @@ The earlier [Jev trading-bot review](https://marketmaker.cc/ru/blog/post/jev-bot
 examined 28 different trading projects. Its bot-level backtests and the present
 decision-engine comparison answer different questions; their P&L figures should
 not be ranked against one another. The upstream bot sources are linked from
-that review and its research catalog.
+that review and the public [pinned research catalog and replay code](https://github.com/suenot/jev-trading-bots-research).
 
 This repository's own code is MIT-licensed. Linked upstream projects and model
 weights retain their individual licenses and access terms.

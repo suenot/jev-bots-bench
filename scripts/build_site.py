@@ -21,7 +21,7 @@ def main() -> None:
     if len(data["models"]) != 16:
         raise ValueError("benchmark inventory must contain all 16 engines")
     OUTPUT.mkdir(parents=True, exist_ok=True)
-    for name in ("index.html", "styles.css", "app.js"):
+    for name in ("index.html", "styles.css", "app.js", ".vercelignore"):
         shutil.copy2(SOURCE / name, OUTPUT / name)
     (OUTPUT / "data").mkdir(exist_ok=True)
     shutil.copy2(SUMMARY, OUTPUT / "data" / "summary.json")

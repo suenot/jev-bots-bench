@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""CPU Laya adapter for the weekly market JSONL protocol."""
+"""Run pinned Simple Jev on one causal market state per JSONL line."""
 
 from __future__ import annotations
 
+import asyncio
 import contextlib
 import json
 import math
@@ -10,26 +11,30 @@ import os
 import sys
 import time
 
-MODEL = "convaiinnovations/laya"
-REVISION = "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+MODEL = "Qwen/Qwen3.5-0.8B"
+MODEL_REVISION = "2fc06364715b967f1860aea9cf38778875588b17"
+SOURCE_REVISION = "c077d5dfdb5c2c7dd24b17d5f556f07e0162dc1c"
 TASK = "next_7_day_price_direction"
-LABELS = ("up", "down")
-QUESTIONS = {
-    TASK: {
-        "type": "choice",
-        "instructions": TASK,
-        "criteria": {label: label for label in LABELS},
-    }
-}
 
 
-def main() -> None:
-    # The direct SDK keeps one English checkpoint resident across all rows.
-    # Its model loader and dependencies must not write to protocol stdout.
+async def serve() -> None:
+    # The source package is installed from the pinned Simple Jev checkout.
     with contextlib.redirect_stdout(sys.stderr):
-        import laya
+        from hf_server import load_service
 
-        model = laya.load(os.environ.get("LAYA_MODEL_PATH", MODEL), device="cpu", revision=REVISION)
+        model_path = os.environ.get("SIMPLE_JEV_MODEL_PATH", MODEL)
+        service = load_service(
+            model_path,
+            revision=None if model_path != MODEL else MODEL_REVISION,
+            served_model_name=MODEL,
+            device="cpu",
+            dtype="float32",
+            prompt_policy="baseline",
+            max_model_len=2048,
+            max_choice_options=2,
+            max_batch_size=1,
+            max_batch_tokens=2048,
+        )
 
     for line_number, line in enumerate(sys.stdin, 1):
         if not line.strip():
@@ -43,15 +48,24 @@ def main() -> None:
 
         started = time.perf_counter()
         with contextlib.redirect_stdout(sys.stderr):
-            result = model.predict(state, QUESTIONS)
+            result = await service.classify({
+                "model": MODEL,
+                "state": state,
+                "questions": {
+                    TASK: {
+                        "type": "choice",
+                        "instructions": TASK,
+                        "criteria": {"up": "Up", "down": "Down"},
+                    }
+                },
+            })
         probabilities = result["answers"][TASK]["probabilities"]
-        up, down = (float(probabilities[label]) for label in LABELS)
+        up, down = (float(probabilities[label]) for label in ("up", "down"))
         if not all(math.isfinite(value) and value >= 0 for value in (up, down)):
             raise ValueError(f"line {line_number}: invalid model probabilities")
         total = up + down
         if total <= 0:
             raise ValueError(f"line {line_number}: zero probability mass")
-        # Laya rounds each returned choice probability to four decimals.
         up, down = up / total, down / total
         prediction = "up" if up > down else "down"
         response = {
@@ -61,9 +75,11 @@ def main() -> None:
             "prob_up": up,
             "target_weight": float(prediction == "up"),
             "latency_ms": round((time.perf_counter() - started) * 1000, 3),
-            "source": "laya-direct-sdk",
+            "source": "simple-jev-hf",
+            "source_revision": SOURCE_REVISION,
             "model": MODEL,
-            "model_revision": REVISION,
+            "model_revision": MODEL_REVISION,
+            "prompt_policy": "baseline",
         }
         sys.stdout.write(json.dumps(response, ensure_ascii=False, allow_nan=False) + "\n")
         sys.stdout.flush()
@@ -71,7 +87,7 @@ def main() -> None:
 
 if __name__ == "__main__":
     try:
-        main()
+        asyncio.run(serve())
     except Exception as error:
-        print(f"laya_decide: {error}", file=sys.stderr)
+        print(f"simple_jev_decide: {error}", file=sys.stderr)
         raise SystemExit(1) from error

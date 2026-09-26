@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import contextlib
 import json
-import math
+import os
 import sys
 import time
 
@@ -19,10 +19,13 @@ def main() -> None:
     # Keep stdout reserved for one JSON response per request. Some model loaders
     # print progress during initialization or inference.
     with contextlib.redirect_stdout(sys.stderr):
-        from gliner2.classification import Classifier, ClassificationSchema
+        from gliner2 import AutoExtractor
 
-        model = Classifier.from_pretrained(MODEL, revision=REVISION, device="cpu")
-        schema = ClassificationSchema().single(TASK, LABELS)
+        local_path = os.environ.get("GLINER_MODEL_PATH")
+        if local_path:
+            model = AutoExtractor.from_pretrained(local_path, map_location="cpu")
+        else:
+            model = AutoExtractor.from_pretrained(MODEL, revision=REVISION, map_location="cpu")
 
     for line_number, line in enumerate(sys.stdin, 1):
         if not line.strip():
@@ -36,24 +39,16 @@ def main() -> None:
 
         started = time.perf_counter()
         with contextlib.redirect_stdout(sys.stderr):
-            result = model.classify(state, schema)
-        probabilities = result.probabilities(TASK)
-        up, down = (float(probabilities[label]) for label in LABELS)
-        if not all(math.isfinite(value) and value >= 0 for value in (up, down)):
-            raise ValueError(f"line {line_number}: invalid model probabilities")
-        total = up + down
-        if total <= 0:
-            raise ValueError(f"line {line_number}: zero probability mass")
-        up, down = up / total, down / total
-        prediction = "up" if up > down else "down"
+            result = model.classify_text(state, {TASK: list(LABELS)})
+        prediction = result[TASK]
+        if prediction not in LABELS:
+            raise ValueError(f"line {line_number}: unexpected class {prediction!r}")
         response = {
             "id": request["id"],
             "prediction": prediction,
-            "probabilities": {"up": up, "down": down},
-            "prob_up": up,
             "target_weight": float(prediction == "up"),
             "latency_ms": round((time.perf_counter() - started) * 1000, 3),
-            "source": "gliner2-classifier",
+            "source": "gliner2-autoextractor",
             "model": MODEL,
             "model_revision": REVISION,
         }

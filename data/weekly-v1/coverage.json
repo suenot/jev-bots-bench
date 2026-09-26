@@ -45,12 +45,12 @@
     "ETHUSDT": {
       "complete_days": 1120,
       "eligible_decisions": 151,
-      "excluded_weeks": 5,
+      "excluded_weeks": 4,
       "files_found": 37,
       "incomplete_days": 1,
       "minutes": 1612860,
-      "scored_decisions": 150,
-      "unscorable_events": 1
+      "scored_decisions": 151,
+      "unscorable_events": 0
     },
     "LINKUSDT": {
       "complete_days": 1096,

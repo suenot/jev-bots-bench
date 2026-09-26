@@ -23,6 +23,8 @@
     seed: 'Случайное зерно', notes: 'Примечания',
     fee_bps: 'Комиссия, б.п.', slippage_bps: 'Проскальзывание, б.п.',
     funding_bps: 'Фандинг, б.п.', source_url: 'Источник',
+    max_model_latency_ms: 'Предел задержки модели, мс',
+    drawdown_sampling: 'Частота отметок просадки',
     limitations: 'Ограничения', protocol: 'Протокол',
   };
   let dataset = null;
@@ -139,7 +141,7 @@
         row.append(nameCell, valueCell(run.return_pct, '%'), valueCell(run.max_drawdown_pct, '%'), valueCell(run.accuracy === null || run.accuracy === undefined ? null : run.accuracy <= 1 ? run.accuracy * 100 : run.accuracy, '%'), valueCell(run.brier, '', 3), valueCell(run.n_decisions, '', 0), valueCell(run.trade_count, '', 0), valueCell(run.latency_ms_p50, ' мс', 0), valueCell(run.latency_ms_p95, ' мс', 0));
         return row;
       });
-      container.append(...makeTable(['Движок / рынок / период', 'P&L после издержек', 'Просадка', 'Точность', 'Brier', 'Решений', 'Сделок', 'p50', 'p95'], rows, 'P&L и просадка — в процентах. Издержки указаны в методике. Точность и Brier относятся к задачам прогноза. «—» означает, что показатель не опубликован.'));
+      container.append(...makeTable(['Движок / рынок / период', 'P&L после издержек', 'Просадка по неделям', 'Точность', 'Brier', 'Решений', 'Сделок', 'p50', 'p95'], rows, 'P&L и просадка по недельным отметкам — в процентах. Издержки указаны в методике. Точность и Brier относятся к задачам прогноза. «—» означает, что показатель не опубликован.'));
     }
     if (baselines.length) {
       const block = node('div', 'baseline-block');
@@ -151,7 +153,7 @@
         row.append(nameCell, valueCell(baseline.return_pct, '%'), valueCell(baseline.max_drawdown_pct, '%'), valueCell(baseline.trade_count, '', 0));
         return row;
       });
-      block.append(...makeTable(['Стратегия / рынок / период', 'P&L', 'Просадка', 'Сделок'], rows, 'Базовые строки представлены отдельно и не образуют общий рейтинг.'));
+      block.append(...makeTable(['Стратегия / рынок / период', 'P&L', 'Просадка по неделям', 'Сделок'], rows, 'Базовые строки представлены отдельно и не образуют общий рейтинг.'));
       container.append(block);
     }
     const comparisons = runs.flatMap((run) => baselines
@@ -208,6 +210,18 @@
         if (url.hostname === 'github.com') link.href = `${url.origin}${repoPath}/commit/${encodeURIComponent(sha)}`;
         else if (url.hostname === 'huggingface.co') link.href = `${url.origin}${repoPath}/tree/${encodeURIComponent(sha)}`;
         else link.href = source;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        links.append(link);
+      }
+      const weights = safeLink(model.weights_url);
+      if (weights) {
+        const link = node('a', '', 'Веса модели ↗');
+        const url = new URL(weights);
+        const revision = text(model.weights_sha);
+        link.href = revision && url.hostname === 'huggingface.co'
+          ? `${url.origin}${url.pathname.replace(/\/$/, '')}/tree/${encodeURIComponent(revision)}`
+          : weights;
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
         links.append(link);

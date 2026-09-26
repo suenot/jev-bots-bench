@@ -1,44 +1,772 @@
 {
-  "baselines": [],
-  "generated_at": "2026-09-26T11:09:31Z",
+  "baselines": [
+    {
+      "max_drawdown_pct": 35.84892518378645,
+      "name": "hold",
+      "pair": "BCHUSDT",
+      "period": "2023",
+      "return_pct": 109.89669747998829,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 45.52737310836176,
+      "name": "momentum_7d",
+      "pair": "BCHUSDT",
+      "period": "2023",
+      "return_pct": 48.84129822049934,
+      "trade_count": 24
+    },
+    {
+      "max_drawdown_pct": 56.17267376068686,
+      "name": "hold",
+      "pair": "BCHUSDT",
+      "period": "2024",
+      "return_pct": 79.39308229325475,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 60.60730538463892,
+      "name": "momentum_7d",
+      "pair": "BCHUSDT",
+      "period": "2024",
+      "return_pct": -57.1987895307995,
+      "trade_count": 28
+    },
+    {
+      "max_drawdown_pct": 42.303666497872584,
+      "name": "hold",
+      "pair": "BCHUSDT",
+      "period": "2025",
+      "return_pct": 38.74588488945447,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 25.486256350050063,
+      "name": "momentum_7d",
+      "pair": "BCHUSDT",
+      "period": "2025",
+      "return_pct": 12.369357175695006,
+      "trade_count": 28
+    },
+    {
+      "max_drawdown_pct": 20.526073171269687,
+      "name": "hold",
+      "pair": "BCHUSDT",
+      "period": "2026",
+      "return_pct": -13.461029697519233,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 10.748279700170126,
+      "name": "momentum_7d",
+      "pair": "BCHUSDT",
+      "period": "2026",
+      "return_pct": -3.9445369626723292,
+      "trade_count": 4
+    },
+    {
+      "max_drawdown_pct": 60.935125716359074,
+      "name": "hold",
+      "pair": "BCHUSDT",
+      "period": "full",
+      "return_pct": 354.5569712306764,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 75.68079181354916,
+      "name": "momentum_7d",
+      "pair": "BCHUSDT",
+      "period": "full",
+      "return_pct": -30.989856930997938,
+      "trade_count": 80
+    },
+    {
+      "max_drawdown_pct": 39.32966629905168,
+      "name": "hold",
+      "pair": "BNBUSDT",
+      "period": "2023",
+      "return_pct": 8.40788173297804,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 27.240678390633477,
+      "name": "momentum_7d",
+      "pair": "BNBUSDT",
+      "period": "2023",
+      "return_pct": -2.9910594413478986,
+      "trade_count": 26
+    },
+    {
+      "max_drawdown_pct": 29.150564424644408,
+      "name": "hold",
+      "pair": "BNBUSDT",
+      "period": "2024",
+      "return_pct": 125.39994868130746,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 25.610129650482328,
+      "name": "momentum_7d",
+      "pair": "BNBUSDT",
+      "period": "2024",
+      "return_pct": 40.73637801520709,
+      "trade_count": 32
+    },
+    {
+      "max_drawdown_pct": 36.434897539531654,
+      "name": "hold",
+      "pair": "BNBUSDT",
+      "period": "2025",
+      "return_pct": 26.990652929814708,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 20.91140284196197,
+      "name": "momentum_7d",
+      "pair": "BNBUSDT",
+      "period": "2025",
+      "return_pct": 22.130552256564194,
+      "trade_count": 26
+    },
+    {
+      "max_drawdown_pct": 34.08442752665245,
+      "name": "hold",
+      "pair": "BNBUSDT",
+      "period": "2026",
+      "return_pct": -32.814568086245735,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 5.623821020610242,
+      "name": "momentum_7d",
+      "pair": "BNBUSDT",
+      "period": "2026",
+      "return_pct": -3.8056697502871217,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 53.85789671316408,
+      "name": "hold",
+      "pair": "BNBUSDT",
+      "period": "full",
+      "return_pct": 109.60745829852105,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 27.240678390633477,
+      "name": "momentum_7d",
+      "pair": "BNBUSDT",
+      "period": "full",
+      "return_pct": 61.26388512052306,
+      "trade_count": 80
+    },
+    {
+      "max_drawdown_pct": 12.99801970552743,
+      "name": "hold",
+      "pair": "BTCUSDT",
+      "period": "2023",
+      "return_pct": 118.65946049979787,
+      "trade_count": 4
+    },
+    {
+      "max_drawdown_pct": 13.348184245400885,
+      "name": "momentum_7d",
+      "pair": "BTCUSDT",
+      "period": "2023",
+      "return_pct": 39.16900184458716,
+      "trade_count": 20
+    },
+    {
+      "max_drawdown_pct": 22.77996241485901,
+      "name": "hold",
+      "pair": "BTCUSDT",
+      "period": "2024",
+      "return_pct": 130.58976850795938,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 27.201513041586868,
+      "name": "momentum_7d",
+      "pair": "BTCUSDT",
+      "period": "2024",
+      "return_pct": 46.271770369264665,
+      "trade_count": 28
+    },
+    {
+      "max_drawdown_pct": 29.679977822660486,
+      "name": "hold",
+      "pair": "BTCUSDT",
+      "period": "2025",
+      "return_pct": -6.093997740831747,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 14.629657496768045,
+      "name": "momentum_7d",
+      "pair": "BTCUSDT",
+      "period": "2025",
+      "return_pct": 3.995494909033437,
+      "trade_count": 28
+    },
+    {
+      "max_drawdown_pct": 28.073544046710662,
+      "name": "hold",
+      "pair": "BTCUSDT",
+      "period": "2026",
+      "return_pct": -27.912443262984652,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 7.800777506949441,
+      "name": "momentum_7d",
+      "pair": "BTCUSDT",
+      "period": "2026",
+      "return_pct": -7.800777506949441,
+      "trade_count": 4
+    },
+    {
+      "max_drawdown_pct": 45.94648929737436,
+      "name": "hold",
+      "pair": "BTCUSDT",
+      "period": "full",
+      "return_pct": 243.1682933616432,
+      "trade_count": 4
+    },
+    {
+      "max_drawdown_pct": 27.201513041586878,
+      "name": "momentum_7d",
+      "pair": "BTCUSDT",
+      "period": "full",
+      "return_pct": 95.18427009775819,
+      "trade_count": 80
+    },
+    {
+      "max_drawdown_pct": 43.7903577782496,
+      "name": "hold",
+      "pair": "DOTUSDT",
+      "period": "2023",
+      "return_pct": 38.442942881404086,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 20.308374848587473,
+      "name": "momentum_7d",
+      "pair": "DOTUSDT",
+      "period": "2023",
+      "return_pct": 30.831201599640103,
+      "trade_count": 20
+    },
+    {
+      "max_drawdown_pct": 62.556986529090565,
+      "name": "hold",
+      "pair": "DOTUSDT",
+      "period": "2024",
+      "return_pct": -8.517289165868192,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 55.432758871207255,
+      "name": "momentum_7d",
+      "pair": "DOTUSDT",
+      "period": "2024",
+      "return_pct": 7.360887579001196,
+      "trade_count": 30
+    },
+    {
+      "max_drawdown_pct": 76.18866715895334,
+      "name": "hold",
+      "pair": "DOTUSDT",
+      "period": "2025",
+      "return_pct": -71.82601383891011,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 63.45594966287006,
+      "name": "momentum_7d",
+      "pair": "DOTUSDT",
+      "period": "2025",
+      "return_pct": -58.00772899145814,
+      "trade_count": 26
+    },
+    {
+      "max_drawdown_pct": 39.92132666900571,
+      "name": "hold",
+      "pair": "DOTUSDT",
+      "period": "2026",
+      "return_pct": -39.92132666900571,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 8.165827776286594,
+      "name": "momentum_7d",
+      "pair": "DOTUSDT",
+      "period": "2026",
+      "return_pct": -8.165827776286594,
+      "trade_count": 4
+    },
+    {
+      "max_drawdown_pct": 87.39873872823158,
+      "name": "hold",
+      "pair": "DOTUSDT",
+      "period": "full",
+      "return_pct": -78.44620889488954,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 68.95678659106271,
+      "name": "momentum_7d",
+      "pair": "DOTUSDT",
+      "period": "full",
+      "return_pct": -45.638108147013575,
+      "trade_count": 76
+    },
+    {
+      "max_drawdown_pct": 25.25117201485201,
+      "name": "hold",
+      "pair": "ETHUSDT",
+      "period": "2023",
+      "return_pct": 46.35579534427494,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 28.037890956428058,
+      "name": "momentum_7d",
+      "pair": "ETHUSDT",
+      "period": "2023",
+      "return_pct": 18.444833553499862,
+      "trade_count": 24
+    },
+    {
+      "max_drawdown_pct": 40.205323266350646,
+      "name": "hold",
+      "pair": "ETHUSDT",
+      "period": "2024",
+      "return_pct": 57.310146667188945,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 23.336773560344394,
+      "name": "momentum_7d",
+      "pair": "ETHUSDT",
+      "period": "2024",
+      "return_pct": 72.1650637670674,
+      "trade_count": 28
+    },
+    {
+      "max_drawdown_pct": 56.61880733946452,
+      "name": "hold",
+      "pair": "ETHUSDT",
+      "period": "2025",
+      "return_pct": -16.674729155059897,
+      "trade_count": 4
+    },
+    {
+      "max_drawdown_pct": 34.440915334415436,
+      "name": "momentum_7d",
+      "pair": "ETHUSDT",
+      "period": "2025",
+      "return_pct": -9.943100576216624,
+      "trade_count": 26
+    },
+    {
+      "max_drawdown_pct": 40.00022628444403,
+      "name": "hold",
+      "pair": "ETHUSDT",
+      "period": "2026",
+      "return_pct": -39.23257055935962,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 13.19276696665842,
+      "name": "momentum_7d",
+      "pair": "ETHUSDT",
+      "period": "2026",
+      "return_pct": -13.19276696665842,
+      "trade_count": 4
+    },
+    {
+      "max_drawdown_pct": 60.880658953746945,
+      "name": "hold",
+      "pair": "ETHUSDT",
+      "period": "full",
+      "return_pct": 17.208592386411105,
+      "trade_count": 4
+    },
+    {
+      "max_drawdown_pct": 35.224928623430905,
+      "name": "momentum_7d",
+      "pair": "ETHUSDT",
+      "period": "full",
+      "return_pct": 59.991722528133806,
+      "trade_count": 78
+    },
+    {
+      "max_drawdown_pct": 35.33047587903469,
+      "name": "hold",
+      "pair": "LINKUSDT",
+      "period": "2023",
+      "return_pct": 108.39816483416396,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 18.934636314728294,
+      "name": "momentum_7d",
+      "pair": "LINKUSDT",
+      "period": "2023",
+      "return_pct": 34.36673401780179,
+      "trade_count": 18
+    },
+    {
+      "max_drawdown_pct": 53.45196071698373,
+      "name": "hold",
+      "pair": "LINKUSDT",
+      "period": "2024",
+      "return_pct": 52.75769526366334,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 45.58550407467994,
+      "name": "momentum_7d",
+      "pair": "LINKUSDT",
+      "period": "2024",
+      "return_pct": -24.61693423408181,
+      "trade_count": 28
+    },
+    {
+      "max_drawdown_pct": 54.250614674727935,
+      "name": "hold",
+      "pair": "LINKUSDT",
+      "period": "2025",
+      "return_pct": -41.50004053515469,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 42.55568537453382,
+      "name": "momentum_7d",
+      "pair": "LINKUSDT",
+      "period": "2025",
+      "return_pct": -32.46929776085832,
+      "trade_count": 28
+    },
+    {
+      "max_drawdown_pct": 37.105869621549495,
+      "name": "hold",
+      "pair": "LINKUSDT",
+      "period": "2026",
+      "return_pct": -37.105869621549495,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 11.787803684080489,
+      "name": "momentum_7d",
+      "pair": "LINKUSDT",
+      "period": "2026",
+      "return_pct": -11.787803684080489,
+      "trade_count": 4
+    },
+    {
+      "max_drawdown_pct": 71.0116941979523,
+      "name": "hold",
+      "pair": "LINKUSDT",
+      "period": "full",
+      "return_pct": 17.762728681513316,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 64.89603414372532,
+      "name": "momentum_7d",
+      "pair": "LINKUSDT",
+      "period": "full",
+      "return_pct": -39.55266082212692,
+      "trade_count": 76
+    },
+    {
+      "max_drawdown_pct": 37.67848070016869,
+      "name": "hold",
+      "pair": "SOLUSDT",
+      "period": "2023",
+      "return_pct": 385.49330930625524,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 41.14215092017807,
+      "name": "momentum_7d",
+      "pair": "SOLUSDT",
+      "period": "2023",
+      "return_pct": 95.39661481956925,
+      "trade_count": 20
+    },
+    {
+      "max_drawdown_pct": 36.24835539579166,
+      "name": "hold",
+      "pair": "SOLUSDT",
+      "period": "2024",
+      "return_pct": 107.42714876036685,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 46.283907290723256,
+      "name": "momentum_7d",
+      "pair": "SOLUSDT",
+      "period": "2024",
+      "return_pct": 8.466634426174124,
+      "trade_count": 30
+    },
+    {
+      "max_drawdown_pct": 55.897092323413844,
+      "name": "hold",
+      "pair": "SOLUSDT",
+      "period": "2025",
+      "return_pct": -36.21658787867757,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 48.224523083216596,
+      "name": "momentum_7d",
+      "pair": "SOLUSDT",
+      "period": "2025",
+      "return_pct": -46.675704362773274,
+      "trade_count": 28
+    },
+    {
+      "max_drawdown_pct": 42.477128706475696,
+      "name": "hold",
+      "pair": "SOLUSDT",
+      "period": "2026",
+      "return_pct": -40.08138152449536,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 5.429935648652496,
+      "name": "momentum_7d",
+      "pair": "SOLUSDT",
+      "period": "2026",
+      "return_pct": -1.4912246616203606,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 67.66026959886922,
+      "name": "hold",
+      "pair": "SOLUSDT",
+      "period": "full",
+      "return_pct": 286.9577751918082,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 58.64687435554754,
+      "name": "momentum_7d",
+      "pair": "SOLUSDT",
+      "period": "full",
+      "return_pct": 11.530841255370206,
+      "trade_count": 78
+    },
+    {
+      "max_drawdown_pct": 13.841599700138485,
+      "name": "hold",
+      "pair": "TRXUSDT",
+      "period": "2023",
+      "return_pct": 60.568037892266105,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 14.105997657083059,
+      "name": "momentum_7d",
+      "pair": "TRXUSDT",
+      "period": "2023",
+      "return_pct": 27.89255861163431,
+      "trade_count": 22
+    },
+    {
+      "max_drawdown_pct": 22.86982617595609,
+      "name": "hold",
+      "pair": "TRXUSDT",
+      "period": "2024",
+      "return_pct": 139.61439542377025,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 16.982878501321498,
+      "name": "momentum_7d",
+      "pair": "TRXUSDT",
+      "period": "2024",
+      "return_pct": 8.562628279215701,
+      "trade_count": 32
+    },
+    {
+      "max_drawdown_pct": 23.21558575988383,
+      "name": "hold",
+      "pair": "TRXUSDT",
+      "period": "2025",
+      "return_pct": 12.818686200144104,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 19.320825298572853,
+      "name": "momentum_7d",
+      "pair": "TRXUSDT",
+      "period": "2025",
+      "return_pct": -7.62240027531349,
+      "trade_count": 26
+    },
+    {
+      "max_drawdown_pct": 12.0787941875653,
+      "name": "hold",
+      "pair": "TRXUSDT",
+      "period": "2026",
+      "return_pct": -1.6997196464821451,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 6.253687242848061,
+      "name": "momentum_7d",
+      "pair": "TRXUSDT",
+      "period": "2026",
+      "return_pct": 3.6325147014079073,
+      "trade_count": 4
+    },
+    {
+      "max_drawdown_pct": 32.4718538868712,
+      "name": "hold",
+      "pair": "TRXUSDT",
+      "period": "full",
+      "return_pct": 328.99575173323836,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 27.424447758755456,
+      "name": "momentum_7d",
+      "pair": "TRXUSDT",
+      "period": "full",
+      "return_pct": 33.398760963127685,
+      "trade_count": 80
+    },
+    {
+      "max_drawdown_pct": 37.52889048348832,
+      "name": "hold",
+      "pair": "UNIUSDT",
+      "period": "2023",
+      "return_pct": 14.925870041133882,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 37.90404956913398,
+      "name": "momentum_7d",
+      "pair": "UNIUSDT",
+      "period": "2023",
+      "return_pct": -33.22594819375724,
+      "trade_count": 30
+    },
+    {
+      "max_drawdown_pct": 59.546068439934174,
+      "name": "hold",
+      "pair": "UNIUSDT",
+      "period": "2024",
+      "return_pct": 106.24135942882265,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 27.226462594616528,
+      "name": "momentum_7d",
+      "pair": "UNIUSDT",
+      "period": "2024",
+      "return_pct": 138.26158648757746,
+      "trade_count": 26
+    },
+    {
+      "max_drawdown_pct": 66.60194084118788,
+      "name": "hold",
+      "pair": "UNIUSDT",
+      "period": "2025",
+      "return_pct": -60.92874203138399,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 58.71943960417643,
+      "name": "momentum_7d",
+      "pair": "UNIUSDT",
+      "period": "2025",
+      "return_pct": -58.71943960417643,
+      "trade_count": 28
+    },
+    {
+      "max_drawdown_pct": 42.10464338728388,
+      "name": "hold",
+      "pair": "UNIUSDT",
+      "period": "2026",
+      "return_pct": -42.10464338728388,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 1.781995887504506,
+      "name": "momentum_7d",
+      "pair": "UNIUSDT",
+      "period": "2026",
+      "return_pct": -1.781995887504506,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 81.6670562039857,
+      "name": "hold",
+      "pair": "UNIUSDT",
+      "period": "full",
+      "return_pct": -46.09365562530369,
+      "trade_count": 2
+    },
+    {
+      "max_drawdown_pct": 62.275974790908926,
+      "name": "momentum_7d",
+      "pair": "UNIUSDT",
+      "period": "full",
+      "return_pct": -35.3780322546814,
+      "trade_count": 84
+    }
+  ],
+  "generated_at": "2026-09-26T12:50:13Z",
   "methodology": {
     "decision_schedule": "Monday 00:00 UTC, nonoverlapping 7-day intervals",
-    "features": "28 complete UTC daily candles ending Sunday 23:59 UTC; model-facing state contains only relative returns and volatility",
+    "drawdown_sampling": "weekly exit equity marks; intraweek excursions not measured",
+    "features": "28 complete UTC daily candles ending Sunday 23:59 UTC",
     "fee_bps_per_side": 5.0,
     "fills": "open of Monday 01:00 UTC minute; exit at next Monday 01:00 UTC",
     "market": "legacy Binance USDT perpetual futures candle proxy; funding and spread unavailable",
+    "max_model_latency_ms": 3600000,
     "policy": "long/cash target weight in [0,1]; independent pair portfolios; reset at year boundaries for yearly rows",
+    "simultaneous_request_rule": "sum of every rolling group of up to the number of scored pairs must fit within one hour under serial execution",
     "slippage_bps_per_side": 4.0
   },
   "models": [
     {
       "id": "laya",
       "name": "Laya",
-      "reason": "No benchmark adapter or measured response file yet",
+      "reason": "CPU adapter is ready; real inference has not been recorded.",
       "source_sha": "4066d5d5fbf08b66c6757ddeedbd797bd7655bc0",
       "source_url": "https://github.com/NandhaKishorM/laya",
-      "status": "pending"
+      "status": "pending",
+      "weights_sha": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+      "weights_url": "https://huggingface.co/convaiinnovations/laya"
     },
     {
       "id": "kev",
       "name": "Kev",
-      "reason": "No benchmark adapter or measured response file yet",
+      "reason": "Published serving path targets GPU or MLX; no pinned CPU runner is available for this host.",
       "source_sha": "f1535963cea021439370c23127bc970b6788e730",
       "source_url": "https://github.com/jaredpalmer/kev",
-      "status": "pending"
+      "status": "blocked"
     },
     {
       "id": "gliner25",
       "name": "GLiNER2.5-Decide",
-      "reason": "No measured response file yet",
-      "source_sha": "7ee5da4c2415e32259bcdc0b1a7367c32ce8d6f6",
-      "source_url": "https://huggingface.co/fastino/GLiNER2.5-Decide",
-      "status": "pending"
+      "reason": "CPU adapter is ready; real inference has not been recorded.",
+      "source_sha": "55656fbfa01d3d4a77485e1a1eeeaf682990ccdf",
+      "source_url": "https://github.com/fastino-ai/GLiNER2",
+      "status": "pending",
+      "weights_sha": "7ee5da4c2415e32259bcdc0b1a7367c32ce8d6f6",
+      "weights_url": "https://huggingface.co/fastino/GLiNER2.5-Decide"
     },
     {
       "id": "jevk5",
       "name": "JevK5",
-      "reason": "No benchmark adapter or measured response file yet",
+      "reason": "A GGUF CPU path is documented; benchmark adapter and run are pending.",
       "source_sha": "1e5ae1b533b9eb80c0cbe3fbd010607d0b4e26ae",
       "source_url": "https://github.com/allebee/jevk5",
       "status": "pending",
@@ -48,23 +776,25 @@
     {
       "id": "gliformer",
       "name": "GLiFormer",
-      "reason": "No benchmark adapter or measured response file yet",
-      "source_sha": "d0a4e53d09cebe6bc963dd9be319d4279084bb2d",
-      "source_url": "https://huggingface.co/knowledgator/gliformer-large-v1",
-      "status": "pending"
+      "reason": "CPU adapter is ready; real inference has not been recorded.",
+      "source_sha": "b5c0a0fd2aacff64736fbfa0bac0bdcc032d5eff",
+      "source_url": "https://github.com/Knowledgator/GLiFormer",
+      "status": "pending",
+      "weights_sha": "d0a4e53d09cebe6bc963dd9be319d4279084bb2d",
+      "weights_url": "https://huggingface.co/knowledgator/gliformer-large-v1"
     },
     {
       "id": "playjev",
       "name": "PlayJev",
-      "reason": "No benchmark adapter or measured response file yet",
+      "reason": "The released model takes game frames and legal game moves, not this text-only market state.",
       "source_sha": "ea3a514d2fcbc0756c36eabe052439db54544542",
       "source_url": "https://github.com/OmniJev/PlayJev",
-      "status": "pending"
+      "status": "incompatible"
     },
     {
       "id": "semif",
       "name": "SemIf-OpenJev",
-      "reason": "No benchmark adapter or measured response file yet",
+      "reason": "A llama.cpp GGUF CPU path is documented; benchmark adapter and run are pending.",
       "source_sha": "23cf1f39fc9534fe81437200959b6dfc7106e45a",
       "source_url": "https://github.com/TheoLeeCJ/SemIf-OpenJev",
       "status": "pending"
@@ -72,7 +802,7 @@
     {
       "id": "nanojev",
       "name": "NanoJev",
-      "reason": "No benchmark adapter or measured response file yet",
+      "reason": "Released checkpoint is game-focused; text-market transfer remains unmeasured.",
       "source_sha": "76fdfc9ecdca45a9bcef17991a07d3041a87685a",
       "source_url": "https://github.com/TianyuCodings/NanoJev",
       "status": "pending"
@@ -80,39 +810,41 @@
     {
       "id": "jevlike",
       "name": "jevlike",
-      "reason": "No benchmark adapter or measured response file yet",
+      "reason": "Research toolkit has no fixed trained trading checkpoint for this common protocol.",
       "source_sha": "94f5fd1b0b11d52bbdfdf4e0ee6aa96b568f8452",
       "source_url": "https://github.com/vinnylarouge/jevlike",
-      "status": "pending"
+      "status": "blocked"
     },
     {
       "id": "simple_jev",
       "name": "simple-jev",
-      "reason": "No benchmark adapter or measured response file yet",
+      "reason": "Pinned CPU adapter passed a real one-request smoke; full run is pending.",
       "source_sha": "c077d5dfdb5c2c7dd24b17d5f556f07e0162dc1c",
       "source_url": "https://github.com/featherless-ai/simple-jev",
-      "status": "pending"
+      "status": "pending",
+      "weights_sha": "2fc06364715b967f1860aea9cf38778875588b17",
+      "weights_url": "https://huggingface.co/Qwen/Qwen3.5-0.8B"
     },
     {
       "id": "anyjev",
       "name": "AnyJev",
-      "reason": "No benchmark adapter or measured response file yet",
+      "reason": "Requires a selected base model and, for fitted modes, task labels; a fixed comparable configuration is not defined.",
       "source_sha": "795a4970b47218b7c0686cd579d691fc2cf8df2f",
       "source_url": "https://github.com/nokia-applied-research/AnyJev",
-      "status": "pending"
+      "status": "blocked"
     },
     {
       "id": "mini_jev",
       "name": "mini-jev",
-      "reason": "No benchmark adapter or measured response file yet",
+      "reason": "Published benchmark setup requires MPS or CUDA; the available server has no GPU.",
       "source_sha": "ca612198bfb69f538f029a4615f6d0a18b4f814c",
       "source_url": "https://github.com/r-ms/mini-jev",
-      "status": "pending"
+      "status": "blocked"
     },
     {
       "id": "nico_open_jev",
       "name": "nico-martin/open-jev",
-      "reason": "No benchmark adapter or measured response file yet",
+      "reason": "ONNX/WASM CPU path is documented; benchmark adapter and run are pending.",
       "source_sha": "52667199e8a55553e1865a41f43fcb7d4dd92779",
       "source_url": "https://github.com/nico-martin/open-jev",
       "status": "pending"
@@ -120,7 +852,7 @@
     {
       "id": "minojev",
       "name": "minojev",
-      "reason": "No benchmark adapter or measured response file yet",
+      "reason": "CPU checkpoint path is documented; benchmark adapter and run are pending.",
       "source_sha": "622dd952c3db2769a7a32d1a13cc89db04bba95e",
       "source_url": "https://github.com/zeredy879/minojev",
       "status": "pending"
@@ -128,7 +860,7 @@
     {
       "id": "zefan_open_jev",
       "name": "Zefan-Cai/Open-Jev",
-      "reason": "No benchmark adapter or measured response file yet",
+      "reason": "CPU server option is documented but slow; benchmark adapter and run are pending.",
       "source_sha": "3308a15ccd7eea1df7a37d6ddc39b023b801ba16",
       "source_url": "https://github.com/Zefan-Cai/Open-Jev",
       "status": "pending"
@@ -136,14 +868,14 @@
     {
       "id": "dasein_open_jev",
       "name": "daseinlabs/open-jev",
-      "reason": "No benchmark adapter or measured response file yet",
+      "reason": "Underlying Gemma checkpoint is gated by access terms; no authorized local weights are available.",
       "source_sha": "6cb37c3cee9d8477d49d8ac0c99056e48ccc292c",
       "source_url": "https://github.com/daseinlabs/open-jev",
-      "status": "pending"
+      "status": "blocked"
     }
   ],
   "provenance": {
-    "event_count": null,
+    "event_count": 1382,
     "measured_model_count": 0,
     "model_count": 16
   },

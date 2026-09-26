@@ -4,8 +4,10 @@
 from __future__ import annotations
 
 import argparse
+from collections import deque
 import json
 import math
+import os
 import select
 import statistics
 import subprocess
@@ -110,7 +112,6 @@ def build_pair(pair: str, days: dict[str, dict], fills: dict[str, float], start:
     skipped = 0
     while decision + timedelta(days=7) < end:
         history = [(decision - timedelta(days=i)).strftime("%Y-%m-%d") for i in range(28, 0, -1)]
-        interval = [(decision + timedelta(days=i)).strftime("%Y-%m-%d") for i in range(7)]
         key, next_key = decision.strftime("%Y-%m-%d"), (decision + timedelta(days=7)).strftime("%Y-%m-%d")
         if all(day in days for day in history):
             closes = [days[day]["close"] for day in history]
@@ -125,7 +126,10 @@ def build_pair(pair: str, days: dict[str, dict], fills: dict[str, float], start:
                      f"27-day daily log-return volatility: {volatility:.6f}. "
                      "Daily log returns oldest to newest: " + ", ".join(f"{value:+.6f}" for value in log_returns) + ".")
             events.append({"id": event_id, "state": state})
-            if all(day in days for day in interval) and key in fills and next_key in fills:
+            # The outcome needs only the two scheduled minute opens. Requiring
+            # complete future daily bars would select weeks using information
+            # unavailable at decision time and bias the scored sample.
+            if key in fills and next_key in fills:
                 settlements.append({"id": event_id, "pair": pair, "asof": stamp(decision),
                                     "fill_at": stamp(decision + timedelta(hours=1)), "fill_open": fills[key],
                                     "exit_at": stamp(decision + timedelta(days=7, hours=1)),
@@ -174,30 +178,57 @@ def prepare(args):
     print(f"prepared {len(events)} decisions; coverage: {args.coverage}")
 
 
+def read_adapter_line(stream, timeout_seconds: float, event_id: str) -> str:
+    """Read one complete UTF-8 line without allowing a partial line to bypass timeout."""
+    deadline = time.monotonic() + timeout_seconds
+    data = bytearray()
+    while b"\n" not in data:
+        remaining = deadline - time.monotonic()
+        if remaining <= 0 or not select.select([stream], [], [], remaining)[0]:
+            raise TimeoutError(f"adapter timed out for {event_id} after {timeout_seconds}s")
+        chunk = os.read(stream.fileno(), 65536)
+        if not chunk:
+            raise RuntimeError(f"adapter exited before responding to {event_id}")
+        data.extend(chunk)
+        if len(data) > 1_000_000:
+            raise ValueError(f"adapter response too large for {event_id}")
+    line, extra = bytes(data).split(b"\n", 1)
+    if extra.strip():
+        raise ValueError(f"adapter emitted unsolicited output after {event_id}")
+    return line.decode("utf-8")
+
+
 def invoke(args):
     """Stream one causal JSON request per line to an adapter, timing each response."""
     events = read_jsonl(args.events)
+    existing = read_jsonl(args.output) if getattr(args, "resume", False) and args.output.exists() else []
+    if args.output.exists() and not getattr(args, "resume", False):
+        raise FileExistsError(f"response file exists; use --resume to continue: {args.output}")
+    if [row.get("id") for row in existing] != [row.get("id") for row in events[:len(existing)]]:
+        raise ValueError("existing responses are not an exact event prefix")
+    if len(existing) == len(events):
+        print(f"already recorded {len(existing)} responses: {args.output}")
+        return
     command = args.command[1:] if args.command[:1] == ["--"] else args.command
     if not command:
         raise ValueError("command after -- is required")
+    args.output.parent.mkdir(parents=True, exist_ok=True)
     with subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=None,
-                          text=True, bufsize=1) as process:
-        responses = []
+                          bufsize=0) as process:
         try:
-            for event in events:
-                started = time.perf_counter()
-                process.stdin.write(json.dumps(event, allow_nan=False) + "\n")
-                process.stdin.flush()
-                if not select.select([process.stdout], [], [], args.timeout_seconds)[0]:
-                    raise TimeoutError(f"adapter timed out for {event['id']} after {args.timeout_seconds}s")
-                line = process.stdout.readline()
-                if not line:
-                    raise RuntimeError(f"adapter exited before responding to {event['id']}")
-                response = json.loads(line)
-                if response.get("id") != event["id"]:
-                    raise ValueError(f"adapter response id mismatch for {event['id']}")
-                response["latency_ms"] = round((time.perf_counter() - started) * 1000, 3)
-                responses.append(response)
+            with args.output.open("a" if existing else "w") as output:
+                for event in events[len(existing):]:
+                    started = time.perf_counter()
+                    process.stdin.write((json.dumps(event, allow_nan=False) + "\n").encode("utf-8"))
+                    process.stdin.flush()
+                    line = read_adapter_line(process.stdout, args.timeout_seconds, event["id"])
+                    response = json.loads(line)
+                    if response.get("id") != event["id"]:
+                        raise ValueError(f"adapter response id mismatch for {event['id']}")
+                    response["latency_ms"] = round((time.perf_counter() - started) * 1000, 3)
+                    output.write(json.dumps(response, sort_keys=True, allow_nan=False) + "\n")
+                    output.flush()
+                    os.fsync(output.fileno())
             process.stdin.close()
             if process.wait() != 0:
                 raise RuntimeError(f"adapter exited {process.returncode}")
@@ -205,8 +236,7 @@ def invoke(args):
             process.kill()
             process.wait()
             raise
-    write_jsonl(args.output, responses)
-    print(f"recorded {len(responses)} responses: {args.output}")
+    print(f"recorded {len(events)} responses: {args.output}")
 
 
 def valid_decision(row: dict) -> dict:
@@ -279,11 +309,12 @@ def replay(rows: list[dict], decisions: dict[str, dict], fee_bps: float, slippag
     for value in curve:
         peak = max(peak, value)
         drawdown = max(drawdown, 1 - value / peak)
-    up_rows = [((d.get("prob_up", d["target_weight"])), r["up"]) for r in rows for d in [decisions[r["id"]]]]
+    up_rows = [(d["target_weight"] > 0.5, r["up"]) for r in rows for d in [decisions[r["id"]]]]
+    probability_rows = [(d["prob_up"], r["up"]) for r in rows for d in [decisions[r["id"]]] if "prob_up" in d]
     latencies = sorted(d["latency_ms"] for r in rows for d in [decisions[r["id"]]] if "latency_ms" in d)
     percentile = lambda p: latencies[math.ceil(p * len(latencies)) - 1] if latencies else None
-    metrics = {"n_decisions": len(rows), "accuracy": sum((p > 0.5) == bool(y) for p, y in up_rows) / len(up_rows),
-               "brier": sum((p - y) ** 2 for p, y in up_rows) / len(up_rows),
+    metrics = {"n_decisions": len(rows), "accuracy": sum(p == bool(y) for p, y in up_rows) / len(up_rows),
+               "brier": sum((p - y) ** 2 for p, y in probability_rows) / len(probability_rows) if len(probability_rows) == len(rows) else None,
                "return_pct": (curve[-1] - 1) * 100, "max_drawdown_pct": drawdown * 100,
                "trade_count": trades, "latency_ms_p50": percentile(0.5), "latency_ms_p95": percentile(0.95)}
     return metrics, ledger
@@ -297,6 +328,22 @@ def grouped(settlements: list[dict]):
     for rows in groups.values():
         rows.sort(key=lambda row: row["asof"])
     return groups
+
+
+def check_model_deadlines(events: list[dict], choices: dict[str, dict], simultaneous: int) -> None:
+    """Conservatively bound serial completion of potentially simultaneous requests."""
+    window = deque()
+    total = 0.0
+    for event in events:
+        latency = choices[event["id"]].get("latency_ms")
+        if latency is None or latency > 3_600_000:
+            raise ValueError("all responses need measured latency within the one-hour fill delay")
+        window.append(latency)
+        total += latency
+        if len(window) > simultaneous:
+            total -= window.popleft()
+        if total > 3_600_000:
+            raise ValueError("a group of potentially simultaneous responses misses the one-hour fill delay")
 
 
 def evaluate(args):
@@ -321,6 +368,10 @@ def evaluate(args):
         by_id = {row["id"]: valid_decision(row) for row in rows}
         if len(by_id) != len(rows) or set(by_id) != event_ids:
             raise ValueError(f"{model_id}: response ids must match all prepared events exactly")
+        try:
+            check_model_deadlines(events, by_id, len({row["pair"] for row in settlements}))
+        except ValueError as error:
+            raise ValueError(f"{model_id}: {error}") from error
         responses[model_id] = by_id
     groups = grouped(settlements)
     baselines, runs, ledgers = [], [], []
@@ -345,6 +396,9 @@ def evaluate(args):
                "methodology": {"decision_schedule": "Monday 00:00 UTC, nonoverlapping 7-day intervals",
                                "features": "28 complete UTC daily candles ending Sunday 23:59 UTC",
                                "fills": "open of Monday 01:00 UTC minute; exit at next Monday 01:00 UTC",
+                               "max_model_latency_ms": 3_600_000,
+                               "simultaneous_request_rule": "sum of every rolling group of up to the number of scored pairs must fit within one hour under serial execution",
+                               "drawdown_sampling": "weekly exit equity marks; intraweek excursions not measured",
                                "policy": "long/cash target weight in [0,1]; independent pair portfolios; reset at year boundaries for yearly rows",
                                "fee_bps_per_side": args.fee_bps, "slippage_bps_per_side": args.slippage_bps,
                                "market": "legacy Binance USDT perpetual futures candle proxy; funding and spread unavailable"},
@@ -404,6 +458,7 @@ def main():
     inv = commands.add_parser("invoke", help="run an adapter over causal JSONL requests")
     inv.add_argument("--events", type=Path, required=True)
     inv.add_argument("--output", type=Path, required=True)
+    inv.add_argument("--resume", action="store_true", help="continue an exact response prefix after interruption")
     inv.add_argument("--timeout-seconds", type=float, default=900.0)
     inv.add_argument("command", nargs=argparse.REMAINDER)
     inv.set_defaults(func=invoke)

@@ -4,6 +4,24 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-09-26
+
+### Added
+
+- Publish actual nine-pair, three-year baseline aggregates and precise engine compatibility statuses.
+- Add verified CPU adapters and setup paths for GLiNER2.5-Decide, Laya, and Simple Jev; show code and weight revisions separately.
+- Resume long model invocations from an exact response prefix.
+
+### Fixed
+
+- Score a week when its scheduled entry and exit minute opens exist, without selecting on the completeness of intervening future days. Supersede the original settlement hash before model evaluation.
+- Enforce a one-hour model deadline across potentially simultaneous decisions and make partial adapter output subject to timeout.
+- Label drawdown as sampled at weekly marks and leave Brier absent for class-only responses.
+
+### Security
+
+- Exclude local Vercel environment and project-link files from static deployment uploads.
+
 ## [0.2.0] - 2026-09-26
 
 ### Added
