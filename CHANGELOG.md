@@ -4,6 +4,17 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-09-26
+
+### Added
+
+- Add checksum-verified CPU adapters and reproduction guides for JevK5 GGUF, SemIf, nico-martin/open-jev ONNX, and GLiFormer large-v1.
+- Add a deterministic event sharding and response merge helper for long CPU inference runs.
+
+### Changed
+
+- Pin the exact GGUF and ONNX weight revisions used in real one-event protocol smokes, separate from upstream source commits. Mark full runs as pending until their complete responses pass evaluation.
+
 ## [0.3.0] - 2026-09-26
 
 ### Added

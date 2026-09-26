@@ -1,6 +1,7 @@
 .DS_Store
 .vercel/
 .venv/
+.runtime-nico-open-jev/
 __pycache__/
 *.pyc
 node_modules/

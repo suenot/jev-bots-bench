@@ -40,12 +40,12 @@
       "name": "JevK5",
       "source_url": "https://github.com/allebee/jevk5",
       "source_sha": "1e5ae1b533b9eb80c0cbe3fbd010607d0b4e26ae",
-      "weights_url": "https://huggingface.co/alibiserikbay/JevK5",
-      "weights_sha": "c4f7fdb3aeab5582336406e78d3bef11bf98833d",
+      "weights_url": "https://huggingface.co/alibiserikbay/JevK5-GGUF",
+      "weights_sha": "ec67b0bfce5119a8b11a2cdb430bb43e3fa3e82a",
       "category": "decision_engine",
       "runtime": "adapter_required",
       "status": "pending",
-      "reason": "A GGUF CPU path is documented; benchmark adapter and run are pending."
+      "reason": "Pinned JevK5 4B Q4_K_M GGUF passed a real CPU smoke; full run is queued."
     },
     {
       "id": "gliformer",
@@ -55,7 +55,7 @@
       "category": "model_weights",
       "runtime": "adapter_required",
       "status": "pending",
-      "reason": "CPU adapter is ready; real inference has not been recorded.",
+      "reason": "Pinned GLiFormer large-v1 checkpoint passed a real CPU smoke; full run is in progress.",
       "weights_url": "https://huggingface.co/knowledgator/gliformer-large-v1",
       "weights_sha": "d0a4e53d09cebe6bc963dd9be319d4279084bb2d"
     },
@@ -74,10 +74,12 @@
       "name": "SemIf-OpenJev",
       "source_url": "https://github.com/TheoLeeCJ/SemIf-OpenJev",
       "source_sha": "23cf1f39fc9534fe81437200959b6dfc7106e45a",
+      "weights_url": "https://huggingface.co/bartowski/Qwen_Qwen3.5-4B-GGUF",
+      "weights_sha": "4168f45a16a1290d65a4ec0fa312ae917a4c15d6",
       "category": "decision_engine",
       "runtime": "adapter_required",
       "status": "pending",
-      "reason": "A llama.cpp GGUF CPU path is documented; benchmark adapter and run are pending."
+      "reason": "Pinned SemIf Qwen3.5-4B Q4_K_M GGUF passed a real CPU smoke; full run is queued."
     },
     {
       "id": "nanojev",
@@ -136,10 +138,12 @@
       "name": "nico-martin/open-jev",
       "source_url": "https://github.com/nico-martin/open-jev",
       "source_sha": "52667199e8a55553e1865a41f43fcb7d4dd92779",
+      "weights_url": "https://huggingface.co/onnx-community/open-jev-deberta-v3-large-ONNX",
+      "weights_sha": "7c79f25b5ac496089f448a969c801872ad59d31c",
       "category": "decision_engine",
       "runtime": "adapter_required",
       "status": "pending",
-      "reason": "ONNX/WASM CPU path is documented; benchmark adapter and run are pending."
+      "reason": "Pinned ONNX CPU adapter passed a real one-request smoke; full run is in progress."
     },
     {
       "id": "minojev",

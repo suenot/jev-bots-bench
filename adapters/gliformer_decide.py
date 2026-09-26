@@ -6,11 +6,13 @@ from __future__ import annotations
 import contextlib
 import json
 import math
+import os
 import sys
 import time
 
 MODEL = "knowledgator/gliformer-large-v1"
 REVISION = "d0a4e53d09cebe6bc963dd9be319d4279084bb2d"
+SOURCE_REVISION = "b5c0a0fd2aacff64736fbfa0bac0bdcc032d5eff"
 TASK = "next_7_day_price_direction"
 LABELS = ("up", "down")
 
@@ -19,7 +21,9 @@ def main() -> None:
     with contextlib.redirect_stdout(sys.stderr):
         from gliformer import GLiFormer
 
-        model = GLiFormer.from_pretrained(MODEL, revision=REVISION, load_tokenizer=True)
+        model_path = os.environ.get("GLIFORMER_MODEL_PATH")
+        options = {"model_dir": model_path, "local_files_only": True} if model_path else {}
+        model = GLiFormer.from_pretrained(MODEL, revision=REVISION, load_tokenizer=True, **options)
         model = model.to("cpu").eval()
 
     for line_number, line in enumerate(sys.stdin, 1):
@@ -58,6 +62,7 @@ def main() -> None:
             "target_weight": float(prediction == "up"),
             "latency_ms": round((time.perf_counter() - started) * 1000, 3),
             "source": "gliformer-classifier",
+            "source_revision": SOURCE_REVISION,
             "model": MODEL,
             "model_revision": REVISION,
             "probability_semantics": "normalized_independent_sigmoid_scores",

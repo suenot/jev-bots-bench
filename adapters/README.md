@@ -1,7 +1,6 @@
 # CPU classification adapters
 
-`gliner_decide.py`, `laya_decide.py`, `gliformer_decide.py`, and
-`simple_jev_decide.py` each accept one
+Each adapter accepts one
 UTF-8 JSON object per line on stdin:
 
 ```json
@@ -116,6 +115,10 @@ python3 adapters/smoke_gliformer_mock.py
 .venv-gliformer/bin/python adapters/gliformer_decide.py < events.jsonl > decisions-gliformer.jsonl
 ```
 
+For the checksum-verified offline CPU checkpoint and fixed dependency set used
+in this campaign, follow [`gliformer.md`](gliformer.md) and
+`scripts/setup_gliformer_server.sh`.
+
 ## Simple Jev with Qwen3.5-0.8B
 
 The [Simple Jev source](https://github.com/featherless-ai/simple-jev/tree/c077d5dfdb5c2c7dd24b17d5f556f07e0162dc1c)
@@ -155,3 +158,16 @@ Only the model files and source archive cross the network; the raw market
 history remains at the compute host. These probabilities come from a general
 language model's answer-token logits and are not calibrated to future crypto
 returns. The source and base model are separate revision pins.
+
+## Other CPU decision engines
+
+- [`jevk5.md`](jevk5.md): pinned JevK5 4B Q4_K_M GGUF through its own
+  `JevK5GGUF` interface and a pinned llama.cpp HTTP server.
+- [`semif.md`](semif.md): SemIf direct option scoring with a pinned
+  Qwen3.5-4B GGUF and reference tokenizer.
+- [`nico_open_jev.md`](nico_open_jev.md): the released open-jev DeBERTa ONNX
+  decision head on Node.js CPU with q4 weights.
+
+Each guide records source and weight revisions separately, checkpoint hashes,
+setup commands, a real one-event protocol smoke, and the limits of that smoke.
+Full trading P&L appears only after a complete response file passes evaluation.

@@ -1,0 +1,6 @@
+# SemIf commit 23cf1f39fc9534fe81437200959b6dfc7106e45a, CPU GGUF path.
+transformers==5.17.0
+tokenizers==0.23.2
+huggingface-hub==1.31.0
+numpy==2.2.6
+llama-cpp-python==0.3.35
