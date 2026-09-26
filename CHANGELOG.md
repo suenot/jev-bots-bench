@@ -4,6 +4,10 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+### Changed
+
+- Clarify when checkpoint hash manifests were recorded relative to the initial inference runs.
+
 ## [0.6.0] - 2026-09-26
 
 ### Added

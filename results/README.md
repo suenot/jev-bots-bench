@@ -12,10 +12,15 @@ checksums of transferred source archives and weight files, adapter checksum,
 dependency environment, response checksum and model training cutoff when
 known. The source and weight archives are large and stay outside this Git
 repository. The small dependency environment records are in `environments/`.
-Checkpoint manifests under `../adapters/` list every local model file used by
-the three published runs, including tokenizers and configuration. Their hashes
-are checked during server setup; the publication verifier pins the manifest
-files themselves and Nico's npm lockfile.
+Checkpoint manifests under `../adapters/` list the local model files expected
+by the three published adapters, including tokenizers and configuration. The
+current setup scripts check every listed file for reproduction; the publication
+verifier pins the manifests themselves and Nico's npm lockfile. These full-file
+manifests were recorded after the initial inference runs and checked against
+the retained server copies. The earlier setup checks covered source archives
+and, where applicable, weight files, so the manifests are a retrospective
+reproducibility record rather than a pre-inference commitment for auxiliary
+files.
 
 To verify the published result without the raw minute candles:
 
