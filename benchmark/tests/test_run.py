@@ -92,7 +92,7 @@ class BenchmarkTests(unittest.TestCase):
             self.assertEqual(summary["status"], "running")
             self.assertTrue(summary["runs"])
             self.assertTrue(summary["baselines"])
-            self.assertEqual(len(summary["models"]), 16)
+            self.assertEqual(len(summary["models"]), 17)
 
     def test_future_daily_gap_does_not_select_scored_sample(self):
         start, end, days, fills = self.synthetic()

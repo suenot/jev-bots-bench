@@ -66,6 +66,7 @@
   function renderSnapshot(data) {
     const models = Array.isArray(data.models) ? data.models : [];
     const runs = Array.isArray(data.runs) ? data.runs : [];
+    $('catalog-count').textContent = String(models.length);
     $('measured-count').textContent = String(models.filter((model) => model.status === 'measured').length);
     $('run-count').textContent = String(runs.length);
     const date = data.generated_at && new Date(data.generated_at);
@@ -248,7 +249,7 @@
       const links = node('div', 'model-links');
       const source = safeLink(model.source_url);
       if (source) {
-        const link = node('a', '', 'Исходный код ↗');
+        const link = node('a', '', model.id === 'kairos' ? 'Документация API ↗' : 'Исходный код ↗');
         link.href = source;
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
@@ -340,6 +341,7 @@
       $('pair-filter').addEventListener('change', () => renderRuns(dataset));
       $('year-filter').addEventListener('change', () => renderRuns(dataset));
     } catch (error) {
+      $('catalog-count').textContent = '—';
       $('measured-count').textContent = '—';
       $('run-count').textContent = '—';
       $('updated-at').textContent = 'Данные недоступны';

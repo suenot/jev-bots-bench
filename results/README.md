@@ -7,11 +7,13 @@
 fill is missing. A missing outcome is excluded for every policy; the model
 request remains in the response stream.
 
-`model-provenance.json` names the exact upstream source and weight revisions,
-checksums of transferred source archives and weight files, adapter checksum,
-dependency environment, response checksum and model training cutoff when
-known. The source and weight archives are large and stay outside this Git
-repository. The small dependency environment records are in `environments/`.
+`model-provenance.json` names upstream source and weight revisions where
+published, checksums of transferred source archives and weight files where
+applicable, adapter checksum, dependency environment, response checksum and
+model training cutoff when known. Kairos is a hosted API: its source revision
+is null and its training cutoff is unknown. The source and weight archives for
+local models are large and stay outside this Git repository. The small
+dependency environment records are in `environments/`.
 Checkpoint manifests under `../adapters/` list the local model files expected
 by the three published adapters, including tokenizers and configuration. The
 current setup scripts check every listed file for reproduction; the publication

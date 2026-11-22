@@ -1,0 +1,11 @@
+Python 3.9.6, standard library only
+Client platform: Darwin arm64
+Endpoint: https://minara.cloud/v1/systemone
+Requested model: DMIND/Kairos
+Task profile: general
+Question and candidate order: next_7_day_price_direction, up then down
+Collection: one initial request, then up to eight concurrent benchmark workers
+Recovery: two HTTP 429 responses stopped their workers. Both shards resumed from their recorded prefixes.
+Latency: benchmark invoke wall time for successful responses, including HTTP, excluding failed requests and wait before resumption
+Observed API fields: {"calibration_version": ["raw"], "model": ["kairos"], "model_version": ["kairos"], "prompt_version": ["kairos"]}
+Serving revision and training cutoff: unknown

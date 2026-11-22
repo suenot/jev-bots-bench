@@ -2,22 +2,25 @@
 
 Public, reproducible comparison of 16 open-source typed-decision engines from
 [the source inventory](https://www.suenot.com/blog/jev-open-source-alternatives/)
-when they are plugged into **one fixed long/cash trading policy**. These projects
-are decision engines and research tools, not sixteen ready-made trading bots.
+and the hosted Kairos API when they are plugged into **one fixed long/cash trading policy**. These projects
+are decision engines and research tools, not ready-made trading bots.
 The [live dashboard](https://jev-bots-bench.marketmaker.cc/) separates measured
 results from pending, blocked, and incompatible projects.
 
 ## Source and results
 
-- [`benchmark/models.json`](benchmark/models.json): all 16 upstream source URLs,
-  full pinned code commits, and distinct model-weight revisions where known.
+- [`benchmark/models.json`](benchmark/models.json): 16 open-source entries with
+  pinned code commits and distinct model-weight revisions where known, plus
+  Kairos with its official API documentation. The provider does not publish a
+  serving revision or training cutoff for Kairos.
 - [`benchmark/run.py`](benchmark/run.py) and
   [`benchmark/README.md`](benchmark/README.md): causal market preparation,
   replay, baselines, validation, and exact server-side commands.
 - [`data/weekly-v1/`](data/weekly-v1/COMMITMENT.md): 1,382 committed model inputs,
   pair coverage, and the pre-inference hash of sealed outcomes.
 - [`adapters/`](adapters/): engine-specific JSONL adapters, pinned dependencies,
-  and setup instructions. An adapter is measured only after a real model run.
+  and setup instructions, including a standard-library Kairos HTTP adapter.
+  An adapter is measured only after a real model run.
 - [`results/`](results/README.md): the dashboard aggregate, complete model
   response streams, environment records, and checksums for independent replay.
   Pending models have no P&L; no synthetic result is shown.

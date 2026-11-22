@@ -62,6 +62,40 @@
       "responses_sha256": "735e73941b891c43a104bd71af19f13aff333e78fc16c39049314fe4a157c244",
       "response_count": 1382,
       "runtime": "Python 3.12, torch 2.8.0+cpu, GLiNER2 at pinned source commit on CPU"
+    },
+    {
+      "id": "kairos",
+      "inference_date": "2026-11-22",
+      "training_cutoff": "unknown",
+      "source_revision": null,
+      "adapter_path": "adapters/kairos_decide.py",
+      "adapter_sha256": "6746a73aa3b7a5fc7aa0e47c6ba598dbc2c87be5c4ce9cacc031a08c338bf74b",
+      "environment_path": "results/environments/kairos.txt",
+      "environment_sha256": "53495194a36fa52bd4534fd9007cccf05f754a4b853993014bcd52f8e060cb53",
+      "responses_path": "results/responses/kairos.jsonl",
+      "responses_sha256": "95c2323ceadbf4924ecaa8a357c2be99ff332c97aff66397ab2dc1009a392978",
+      "response_count": 1382,
+      "runtime": "Python 3.9.6 standard library, hosted Minara Cloud System One API",
+      "requested_model": "DMIND/Kairos",
+      "observed_api_versions": {
+        "model": [
+          "kairos"
+        ],
+        "model_version": [
+          "kairos"
+        ],
+        "prompt_version": [
+          "kairos"
+        ],
+        "calibration_version": [
+          "raw"
+        ]
+      },
+      "usage": {
+        "input_tokens": 642630,
+        "output_tokens": 0,
+        "evaluated_questions": 1382
+      }
     }
   ]
 }

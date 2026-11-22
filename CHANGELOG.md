@@ -8,6 +8,18 @@ All notable changes to this project are documented here.
 
 - Clarify when checkpoint hash manifests were recorded relative to the initial inference runs.
 
+## [0.7.0] - 2026-11-22
+
+### Added
+
+- Run hosted DMind Kairos through the Minara Cloud System One API on all 1,382 weekly benchmark inputs.
+- Publish the complete Kairos response stream and its reproducibility records alongside the existing measured engines.
+
+### Changed
+
+- Include Kairos in the dashboard and distinguish hosted model provenance from pinned local source and weights.
+- Validate the dashboard catalog against the benchmark inventory.
+
 ## [0.6.0] - 2026-09-26
 
 ### Added

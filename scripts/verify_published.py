@@ -59,7 +59,10 @@ def main() -> None:
     specs = []
     for model in record["models"]:
         pinned = inventory[model["id"]]
-        if model["source_revision"] != pinned["source_sha"] or model.get("weights_revision") != pinned.get("weights_sha"):
+        if pinned.get("runtime") == "hosted_api":
+            if model.get("source_revision") is not None or model.get("weights_revision") is not None:
+                raise ValueError(f"hosted API has an unpublished source or weight revision: {model['id']}")
+        elif model["source_revision"] != pinned["source_sha"] or model.get("weights_revision") != pinned.get("weights_sha"):
             raise ValueError(f"source or weight revision differs from inventory: {model['id']}")
         verify(model["adapter_path"], model["adapter_sha256"])
         verify(model["environment_path"], model["environment_sha256"])

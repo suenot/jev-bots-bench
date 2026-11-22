@@ -186,6 +186,15 @@
       "runtime": "adapter_required",
       "status": "blocked",
       "reason": "Underlying Gemma checkpoint is gated by access terms; no authorized local weights are available."
+    },
+    {
+      "id": "kairos",
+      "name": "Kairos (DMind)",
+      "source_url": "https://www.dmind.ai/docs/kairos/api-reference",
+      "category": "decision_engine",
+      "runtime": "hosted_api",
+      "status": "pending",
+      "reason": "Hosted API; the provider does not publish a pinned serving revision or training cutoff."
     }
   ]
 }

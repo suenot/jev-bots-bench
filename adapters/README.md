@@ -1,4 +1,4 @@
-# CPU classification adapters
+# Decision adapters
 
 Each adapter accepts one
 UTF-8 JSON object per line on stdin:
@@ -7,13 +7,14 @@ UTF-8 JSON object per line on stdin:
 {"id":"opaque-event-id","state":"Causal weekly market features, without dates or absolute prices."}
 ```
 
-Each emits the same `id`, `prediction` (`up` or `down`), `latency_ms` for model
-inference, `source`, `model`, `model_revision`, and a binary long/cash
-`target_weight`. Adapters with a usable two-class distribution also emit
-`probabilities` (`up` and `down`) and `prob_up`; GLiNER's documented interface
-returns only the selected class, so its Brier score is absent. A tie maps to
+Each emits the same `id` and `prediction` (`up` or `down`). Local model
+adapters also record their source and model revisions, inference latency and a
+binary long/cash `target_weight`. The hosted Kairos serving revision is unknown.
+Adapters with a usable two-class distribution emit `probabilities` (`up` and
+`down`). GLiNER's documented interface returns only the selected class, so its
+Brier score is absent. A tie maps to
 `down`, matching the benchmark's strict positive-return definition of `up`.
-The model loads once and handles subsequent lines in the same process.
+Local models load once and handle subsequent lines in the same process.
 Diagnostics go to stderr. The benchmark runner replaces adapter-reported
 latency with wall-clock request-to-response time, including cold start on the
 first request.
@@ -163,6 +164,25 @@ Only the model files and source archive cross the network; the raw market
 history remains at the compute host. These probabilities come from a general
 language model's answer-token logits and are not calibrated to future crypto
 returns. The source and base model are separate revision pins.
+
+## Hosted Kairos API
+
+The [DMind Kairos API guide](https://www.dmind.ai/docs/kairos/api-reference)
+documents `POST https://minara.cloud/v1/systemone`. The standard-library
+[`kairos_decide.py`](kairos_decide.py) adapter reads `KAIROS_API_KEY` from the
+environment, sends only the public model-facing `state`, and asks one fixed
+`choice` question with `up` and `down` options. No third-party Python packages
+or local model weights are needed. Run it through the benchmark's measured,
+resumable invocation:
+
+```sh
+python3 benchmark/run.py invoke --events data/weekly-v1/events.jsonl \
+  --output tmp/kairos.responses.jsonl --resume \
+  -- python3 -I -S adapters/kairos_decide.py
+```
+
+The provider does not publish a serving revision or training cutoff. Keep the
+API key outside the repository and record an unknown cutoff in provenance.
 
 ## Other CPU decision engines
 

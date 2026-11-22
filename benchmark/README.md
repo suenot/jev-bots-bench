@@ -1,6 +1,6 @@
 # Reproducible weekly decision benchmark
 
-This directory contains the benchmark code and a pinned inventory of 16 decision engines. `../results/summary.json` is the small public aggregate contract. Its `running` status means the campaign is still in progress; inspect each model's status and measured rows. Never interpret a pending model as a zero-return strategy.
+This directory contains the benchmark code and an inventory of 16 pinned open decision engines plus the hosted Kairos API. `../results/summary.json` is the small public aggregate contract. Its `running` status means the campaign is still in progress; inspect each model's status and measured rows. Never interpret a pending model as a zero-return strategy.
 
 ## Market data and protocol
 
@@ -37,7 +37,18 @@ python3 benchmark/run.py evaluate \
   --output results/summary.json
 ```
 
-An adapter receives one JSON line `{"id":"e000001","state":"..."}` on stdin and must immediately flush one JSON line with the same ID on stdout. Canonical output is `{"id":"e000001","prediction":"up","probabilities":{"up":0.6,"down":0.4}}`. The predicted class must match the larger probability; ties select `down`. `invoke` replaces any adapter timing with measured wall-clock `latency_ms`, writes each response durably, and can resume an exact response prefix with `--resume`. For nonprobabilistic engines, `{"id":"...","prediction":"down"}` is valid and Brier is absent. An older adapter can return `target_weight` in `[0,1]` and optional `prob_up`. The runner rejects missing, repeated, extra, invalid or mismatched IDs. `evaluate` accepts any number of `MODEL_ID=FILE` response files from `models.json`; missing models remain pending. It rejects a response if any single request, or a conservative rolling group of up to nine requests that could share a Monday deadline, takes over one hour under serial serving. An adapter is responsible for loading the pinned source and weight revision and logging its runtime and dependencies. Its stdout must contain only JSON responses.
+An adapter receives one JSON line `{"id":"e000001","state":"..."}` on stdin and must immediately flush one JSON line with the same ID on stdout. Canonical output is `{"id":"e000001","prediction":"up","probabilities":{"up":0.6,"down":0.4}}`. The predicted class must match the larger probability; ties select `down`. `invoke` replaces any adapter timing with measured wall-clock `latency_ms`, writes each response durably, and can resume an exact response prefix with `--resume`. For nonprobabilistic engines, `{"id":"...","prediction":"down"}` is valid and Brier is absent. An older adapter can return `target_weight` in `[0,1]` and optional `prob_up`. The runner rejects missing, repeated, extra, invalid or mismatched IDs. `evaluate` accepts any number of `MODEL_ID=FILE` response files from `models.json`; missing models remain pending. It rejects a response if any single request, or a conservative rolling group of up to nine requests that could share a Monday deadline, takes over one hour under serial serving. Local adapters load pinned source and weight revisions. The hosted Kairos adapter records the API-reported model metadata. The exact serving revision is unknown. Adapter stdout must contain only JSON responses.
+
+For Kairos, provide `KAIROS_API_KEY` in the process environment and send only the public model-facing state. Its standard-library adapter calls the native `POST https://minara.cloud/v1/systemone` endpoint with a fixed `up`/`down` choice. A resumable run uses the usual `invoke` command:
+
+```sh
+python3 benchmark/run.py invoke \
+  --events data/weekly-v1/events.jsonl \
+  --output tmp/kairos.responses.jsonl --resume \
+  -- python3 -I -S adapters/kairos_decide.py
+```
+
+See the [Kairos API guide](https://www.dmind.ai/docs/kairos/api-reference) and [`../adapters/README.md`](../adapters/README.md) for the endpoint and adapter contract. The provider revision and training cutoff are unknown, so its historical result is retrospective.
 
 The public `summary.json` has `schema_version`, `generated_at`, `status`, `methodology`, `models`, `runs`, `baselines` and `provenance`. `runs` contain per-pair/per-year and full rows: `model_id`, `pair`, `period`, `n_decisions`, `accuracy`, `brier`, `return_pct`, `max_drawdown_pct`, `trade_count`, `latency_ms_p50`, and `latency_ms_p95`. `baselines` contain the same pair/period keys and trading metrics.
 `models.json` supplies fallback statuses when no response file is passed to
@@ -85,6 +96,6 @@ preparation order, but the audited adapter paths keep IDs as response metadata
 and score only the historical state plus a fixed question. Relative price
 patterns could still identify a period or pair indirectly; the protocol does
 not prove anonymity. The inventory distinguishes project source commits from
-weight revisions.
+weight revisions. Kairos is hosted and has no published revision pin.
 
 `audit` checks that truncating and mutating future settlement prices does not alter past replay results. Unit tests also change future daily bars and assert earlier model requests and settlement outcomes remain identical. This is a causality check of the harness, not proof that a third-party model was never trained on future market history. For every published model result, record the adapter commit, dependency versions, response file hash, and any documented training cutoff. An unknown cutoff must be marked unknown: that result is a retrospective diagnostic, not an out-of-sample claim.
