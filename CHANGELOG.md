@@ -7,6 +7,7 @@ All notable changes to this project are documented here.
 ### Changed
 
 - Clarify when checkpoint hash manifests were recorded relative to the initial inference runs.
+- Host the static dashboard on Cloudflare Workers with a separate, allowlisted build directory.
 
 ## [0.7.0] - 2026-11-22
 

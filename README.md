@@ -84,6 +84,21 @@ hashes recorded in `results/model-provenance.json`, then reruns `evaluate`
 and compares its pair/year metrics with the published summary. See the
 [result file guide](results/README.md) for what the checks do and do not prove.
 
+## Publish the dashboard
+
+The benchmark uses Cloudflare Workers Static Assets. From the repository root,
+with Wrangler and the deployment credentials in your environment:
+
+```sh
+python3 scripts/verify_published.py
+python3 scripts/build_site.py --output site/dist/cloudflare
+wrangler deploy
+```
+
+The Cloudflare build has its own asset directory and uploads the dashboard
+HTML, JavaScript, CSS, version, and aggregate JSON. Verify the homepage,
+`/version.txt`, and `/data/summary.json` on the public hostname after deploy.
+
 ## Previous trading-bot study
 
 The earlier [Jev trading-bot review](https://marketmaker.cc/ru/blog/post/jev-bots-three-year-profitability/)
