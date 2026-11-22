@@ -183,17 +183,17 @@
       let mn = Infinity, mx = -Infinity;
       for (let k = first; k < first + n; k++) { mn = Math.min(mn, candles[k].l); mx = Math.max(mx, candles[k].h); }
       lo += (mn - lo) * 0.04; hi += (mx - hi) * 0.04;
-      const top = H * 0.2, bot = H * 0.78, y = (v) => bot - (v - lo) / (hi - lo || 1) * (bot - top);
+      const tk = 46, top = 92, bot = H - tk - 58, y = (v) => bot - (v - lo) / (hi - lo || 1) * (bot - top);
       const x = (k) => k * step - off;
       // weekly bands
       for (let w = Math.floor(first / 7); w * 7 < first + n; w++) {
         const wk = weeks[w]; if (!wk) continue;
         const x0 = x(w * 7) - step * 0.22, x1 = x(w * 7 + 7) - step * 0.22;
         ctx.fillStyle = wk.long ? rgba(PAL.accRgb, 0.07) : rgba(PAL.fgRgb, 0.015);
-        ctx.fillRect(x0, top - 30, x1 - x0, bot - top + 60);
-        ctx.strokeStyle = rgba(PAL.fgRgb, 0.07); ctx.beginPath(); ctx.moveTo(x0 + 0.5, top - 40); ctx.lineTo(x0 + 0.5, bot + 40); ctx.stroke();
+        ctx.fillRect(x0, 0, x1 - x0, H - tk);
+        ctx.strokeStyle = rgba(PAL.fgRgb, 0.07); ctx.beginPath(); ctx.moveTo(x0 + 0.5, 0); ctx.lineTo(x0 + 0.5, H - tk); ctx.stroke();
         ctx.font = '11px ' + PAL.mono; ctx.fillStyle = wk.long ? PAL.acc : PAL.dim;
-        ctx.fillText((wk.long ? '↑ ' : '↓ ') + (wk.long ? wk.p : 1 - wk.p).toFixed(2).replace('.', LANG === 'en' ? '.' : ','), x0 + 6, bot + 32);
+        ctx.fillText((wk.long ? '↑ ' : '↓ ') + (wk.long ? wk.p : 1 - wk.p).toFixed(2).replace('.', LANG === 'en' ? '.' : ','), x0 + 6, H - tk - 20);
       }
       for (let k = first; k < first + n; k++) {
         const cd = candles[k], up = cd.c >= cd.o, xx = x(k);
