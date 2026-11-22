@@ -1,10 +1,12 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jev Bots Bench: торговые модели против простого удержания</title>
-<meta name="description" content="Открытый бенчмарк торговых моделей: 1 382 недельных решения на девяти криптопарах Binance, доходность после издержек, точность и сравнение с удержанием.">
+<title>Jev Bots Bench: trading models against plain holding</title>
+<meta name="description" content="Open benchmark of trading models: 1,382 weekly decisions on nine Binance crypto pairs, returns after costs, accuracy and a comparison with plain holding.">
+<link rel="alternate" hreflang="en" href="https://jev-bots-bench.marketmaker.cc/">
+<link rel="alternate" hreflang="ru" href="https://jev-bots-bench.marketmaker.cc/?lang=ru">
 <meta name="theme-color" content="#07080a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +18,7 @@
   if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
   document.documentElement.dataset.theme = t; document.documentElement.style.colorScheme = t;
   let l = new URLSearchParams(location.search).get('lang'); try { l = l || localStorage.getItem('jbb.lang'); } catch {}
-  if (l !== 'ru' && l !== 'en') l = /(^|\s)ru/i.test((navigator.languages || [navigator.language]).join(' ')) ? 'ru' : 'en';
+  if (l !== 'ru' && l !== 'en') l = 'en';
   document.documentElement.lang = l;
 })();
 </script>
@@ -65,11 +67,11 @@ c85 -41 130 -109 157 -240 8 -37 13 -68 12 -69 -1 -2 -48 19 -103 46 -121 59
     <span>Jev Bots<b>Bench</b></span>
   </a>
   <nav>
-    <a href="#protocol" data-i18n="nav.protocol">Протокол</a>
-    <a href="#matrix" data-i18n="nav.matrix">Результаты</a>
-    <a href="#accuracy" data-i18n="nav.accuracy">Точность</a>
-    <a href="#catalog" data-i18n="nav.catalog">Модели</a>
-    <a href="#method" data-i18n="nav.method">Методика</a>
+    <a href="#protocol" data-i18n="nav.protocol">Protocol</a>
+    <a href="#matrix" data-i18n="nav.matrix">Results</a>
+    <a href="#accuracy" data-i18n="nav.accuracy">Accuracy</a>
+    <a href="#catalog" data-i18n="nav.catalog">Models</a>
+    <a href="#method" data-i18n="nav.method">Method</a>
     <a href="https://github.com/suenot/jev-bots-bench" rel="noopener">GitHub</a>
     <button type="button" class="theme-btn" id="themeBtn"></button>
     <button type="button" class="lang-btn" id="langBtn"></button>
@@ -81,11 +83,11 @@ c85 -41 130 -109 157 -240 8 -37 13 -68 12 -69 -1 -2 -48 19 -103 46 -121 59
     <canvas id="heroCanvas" aria-hidden="true"></canvas>
     <div class="hero-inner">
       <svg class="hero-logo" aria-hidden="true"><use href="#mm-logo"/></svg>
-      <p class="kicker mono" data-i18n="hero.kicker">проект marketmaker.cc</p>
+      <p class="kicker mono" data-i18n="hero.kicker">a marketmaker.cc project</p>
       <h1 class="h-mega" id="heroTitle"><span>Jev Bots</span> <span class="accent">Bench</span></h1>
-      <p class="lead" id="heroLead" data-i18n="hero.lead">Каждый понедельник модель видит 28 дневных свечей и отвечает одним словом: рост или падение. Мы посчитали, сколько это стоит в деньгах.</p>
+      <p class="lead" id="heroLead" data-i18n="hero.lead">Every Monday a model sees 28 daily candles and gives a one-word answer: up or down. We counted what that answer is worth in money.</p>
       <div class="hero-cta">
-        <a class="btn" href="#matrix"><span data-i18n="hero.cta">Смотреть результаты</span> <i>↓</i></a>
+        <a class="btn" href="#matrix"><span data-i18n="hero.cta">See the results</span> <i>↓</i></a>
         <span class="mono dim small" id="heroFacts"></span>
       </div>
     </div>
@@ -99,41 +101,41 @@ c85 -41 130 -109 157 -240 8 -37 13 -68 12 -69 -1 -2 -48 19 -103 46 -121 59
   <section class="pin-section" id="protocol">
     <div class="pin-stage">
       <div class="pin-copy">
-        <p class="kicker mono" data-i18n="pro.kicker">01 / протокол</p>
-        <h2 class="h-big" data-i18n-html="pro.title">Одна неделя.<br><span class="accent">1 381 раз.</span></h2>
+        <p class="kicker mono" data-i18n="pro.kicker">01 / protocol</p>
+        <h2 class="h-big" data-i18n-html="pro.title">One week.<br><span class="accent">1,381 times.</span></h2>
         <p class="body" id="proText"></p>
         <ol class="legend mono" id="proLegend"></ol>
       </div>
-      <canvas id="proCanvas" role="img" data-i18n-aria="pro.aria" aria-label="Анимация: свечи превращаются в ответ модели, ответ в недельную сделку, сделки в кривую капитала"></canvas>
+      <canvas id="proCanvas" role="img" data-i18n-aria="pro.aria" aria-label="Animation: candles turn into a model answer, the answer into a weekly trade, trades into results per pair"></canvas>
     </div>
   </section>
 
   <section class="results" id="matrix">
     <div class="wrap wide">
-      <p class="kicker mono" data-i18n="mx.kicker">02 / результаты</p>
-      <h2 class="h-big" data-i18n-html="mx.title">Девять пар. <span class="accent">Одна таблица.</span></h2>
+      <p class="kicker mono" data-i18n="mx.kicker">02 / results</p>
+      <h2 class="h-big" data-i18n-html="mx.title">Nine pairs. <span class="accent">One table.</span></h2>
       <div class="controls" role="group">
-        <div class="seg" id="period-ctl" role="radiogroup" data-i18n-aria="mx.period" aria-label="Период"></div>
-        <div class="seg" id="metric-ctl" role="radiogroup" data-i18n-aria="mx.metric" aria-label="Метрика"></div>
-        <div class="seg" id="base-ctl" role="radiogroup" data-i18n-aria="mx.base" aria-label="С чем сравнивать"></div>
+        <div class="seg" id="period-ctl" role="radiogroup" data-i18n-aria="mx.period" aria-label="Period"></div>
+        <div class="seg" id="metric-ctl" role="radiogroup" data-i18n-aria="mx.metric" aria-label="Metric"></div>
+        <div class="seg" id="base-ctl" role="radiogroup" data-i18n-aria="mx.base" aria-label="Compare with"></div>
       </div>
       <p class="hint" id="matrix-hint" aria-live="polite"></p>
       <div class="matrix-scroll"><table class="matrix" id="matrix-table"></table></div>
-      <p class="note mono" data-i18n="mx.note">Издержки: комиссия 0,05% и проскальзывание 0,04% на каждую сторону. Фандинг и спред не входят. Просадка считается по недельным отметкам. Годовые строки начинают капитал заново.</p>
+      <p class="note mono" data-i18n="mx.note">Costs: 0.05% fee and 0.04% slippage on each side. Funding and spread are not included. Drawdown is sampled at weekly marks. Yearly rows restart capital.</p>
     </div>
   </section>
 
   <section class="accuracy" id="accuracy">
     <div class="wrap">
-      <p class="kicker mono" data-i18n="ac.kicker">03 / точность</p>
-      <h2 class="h-big" data-i18n-html="ac.title">Почти <span class="accent">монетка</span>.</h2>
-      <p class="body narrow" data-i18n="ac.lead">Доля недель, где модель угадала направление, по всем девяти парам вместе. Желтая строка не модель: она каждую неделю отвечает "вниз".</p>
+      <p class="kicker mono" data-i18n="ac.kicker">03 / accuracy</p>
+      <h2 class="h-big" data-i18n-html="ac.title">Almost a <span class="accent">coin flip</span>.</h2>
+      <p class="body narrow" data-i18n="ac.lead">Share of weeks where the model called the direction, all nine pairs together. The amber row is not a model: it answers "down" every week.</p>
       <div class="ac-grid">
         <div class="race" id="race"></div>
         <div class="ac-side">
           <table class="acc" id="acc-table"></table>
-          <div class="seg small-seg" id="unit-ctl" role="radiogroup" data-i18n-aria="ac.unit" aria-label="Единицы задержки"></div>
-          <p class="mono dim small" data-i18n="ac.side">Brier score: ошибка вероятностей, постоянные 50 на 50 дают 0,25, меньше значит лучше. Задержка: медиана по парам, у Kairos вместе с сетью до API.</p>
+          <div class="seg small-seg" id="unit-ctl" role="radiogroup" data-i18n-aria="ac.unit" aria-label="Latency units"></div>
+          <p class="mono dim small" data-i18n="ac.side">Brier score: error of the probabilities; a constant 50/50 gives 0.25, lower is better. Latency: median over pairs; for Kairos it includes the network to the API.</p>
         </div>
       </div>
     </div>
@@ -141,26 +143,26 @@ c85 -41 130 -109 157 -240 8 -37 13 -68 12 -69 -1 -2 -48 19 -103 46 -121 59
 
   <section class="ranks" id="ranks">
     <div class="wrap">
-      <p class="kicker mono" data-i18n="rk.kicker">04 / точность и деньги</p>
-      <h2 class="h-big" data-i18n-html="rk.title">Точнее не значит <span class="accent">богаче</span>.</h2>
+      <p class="kicker mono" data-i18n="rk.kicker">04 / accuracy and money</p>
+      <h2 class="h-big" data-i18n-html="rk.title">More accurate is not <span class="accent">richer</span>.</h2>
       <div class="rank-stage" id="rankStage"></div>
-      <p class="body" data-i18n="rk.p">В подсчете точности каждая неделя весит одинаково. В портфеле итог за три года решают несколько крупных движений: модель, которая угадывает мелкие недели и пропускает большой рост, будет точной и бедной.</p>
+      <p class="body" data-i18n="rk.p">In the accuracy count every week weighs the same. In a portfolio, three years are decided by a few large moves: a model that calls the small weeks and misses a big rally ends up accurate and poor.</p>
     </div>
   </section>
 
   <section class="catalog" id="catalog">
     <div class="wrap">
-      <p class="kicker mono" data-i18n="ct.kicker">05 / каталог</p>
+      <p class="kicker mono" data-i18n="ct.kicker">05 / catalog</p>
       <h2 class="h-big" id="catTitle"></h2>
-      <p class="body narrow" data-i18n="ct.lead">Доходность появляется только после настоящего ответа модели на все задания. Ожидающие и несовместимые проекты не получают нулей и не исчезают из списка.</p>
+      <p class="body narrow" data-i18n="ct.lead">Returns appear only after a real model answer to every task. Pending and incompatible projects get no zeros and stay on the list.</p>
       <div class="cards" id="cards"></div>
     </div>
   </section>
 
   <section class="method" id="method">
     <div class="wrap">
-      <p class="kicker mono" data-i18n="me.kicker">06 / методика</p>
-      <h2 class="h-big" data-i18n-html="me.title">Одинаково <span class="accent">для всех</span>.</h2>
+      <p class="kicker mono" data-i18n="me.kicker">06 / method</p>
+      <h2 class="h-big" data-i18n-html="me.title">The same <span class="accent">for everyone</span>.</h2>
       <div class="notes" id="params"></div>
       <ul class="refs" id="refs"></ul>
     </div>
@@ -169,8 +171,8 @@ c85 -41 130 -109 157 -240 8 -37 13 -68 12 -69 -1 -2 -48 19 -103 46 -121 59
 
 <footer class="foot">
   <svg class="foot-logo" aria-hidden="true"><use href="#mm-logo"/></svg>
-  <p class="mono" data-i18n-html="foot.by">Jev Bots Bench · проект <a href="https://marketmaker.cc" rel="noopener">marketmaker.cc</a></p>
-  <p class="mono dim small"><span data-i18n="foot.note">Ретроспективное исследование. Не инвестиционный совет.</span> <span id="version"></span></p>
+  <p class="mono" data-i18n-html="foot.by">Jev Bots Bench · a <a href="https://marketmaker.cc" rel="noopener">marketmaker.cc</a> project</p>
+  <p class="mono dim small"><span data-i18n="foot.note">Retrospective research. Not investment advice.</span> <span id="version"></span></p>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>

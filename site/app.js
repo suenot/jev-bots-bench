@@ -20,35 +20,48 @@
   };
 
   /* ---------- language ---------- */
-  let LANG = document.documentElement.lang === 'en' ? 'en' : 'ru';
+  let LANG = document.documentElement.lang === 'ru' ? 'ru' : 'en';
   const T = (ru, en) => LANG === 'en' ? en : ru;
-  const EN = {
-    'nav.protocol': 'Protocol', 'nav.matrix': 'Results', 'nav.accuracy': 'Accuracy', 'nav.catalog': 'Models', 'nav.method': 'Method',
-    'hero.kicker': 'a marketmaker.cc project',
-    'hero.lead': 'Every Monday a model sees 28 daily candles and gives a one-word answer: up or down. We counted what that answer is worth in money.',
-    'hero.cta': 'See the results',
-    'pro.kicker': '01 / protocol', 'pro.title': 'One week.<br><span class="accent">1,381 times.</span>',
-    'pro.aria': 'Animation: candles turn into a model answer, the answer into a weekly trade, trades into results per pair',
-    'mx.kicker': '02 / results', 'mx.title': 'Nine pairs. <span class="accent">One table.</span>',
-    'mx.period': 'Period', 'mx.metric': 'Metric', 'mx.base': 'Compare with',
-    'mx.note': 'Costs: 0.05% fee and 0.04% slippage on each side. Funding and spread are not included. Drawdown is sampled at weekly marks. Yearly rows restart capital.',
-    'ac.kicker': '03 / accuracy', 'ac.title': 'Almost a <span class="accent">coin flip</span>.',
-    'ac.lead': 'Share of weeks where the model called the direction, all nine pairs together. The amber row is not a model: it answers "down" every week.',
-    'ac.unit': 'Latency units',
-    'ac.side': 'Brier score: error of the probabilities; a constant 50/50 gives 0.25, lower is better. Latency: median over pairs; for Kairos it includes the network to the API.',
-    'rk.kicker': '04 / accuracy and money', 'rk.title': 'More accurate is not <span class="accent">richer</span>.',
-    'rk.p': 'In the accuracy count every week weighs the same. In a portfolio, three years are decided by a few large moves: a model that calls the small weeks and misses a big rally ends up accurate and poor.',
-    'ct.kicker': '05 / catalog',
-    'ct.lead': 'Returns appear only after a real model answer to every task. Pending and incompatible projects get no zeros and stay on the list.',
-    'me.kicker': '06 / method', 'me.title': 'The same <span class="accent">for everyone</span>.',
-    'foot.by': 'Jev Bots Bench · a <a href="https://marketmaker.cc" rel="noopener">marketmaker.cc</a> project',
-    'foot.note': 'Retrospective research. Not investment advice.',
+  const RUS = {
+    'nav.protocol': 'Протокол',
+    'nav.matrix': 'Результаты',
+    'nav.accuracy': 'Точность',
+    'nav.catalog': 'Модели',
+    'nav.method': 'Методика',
+    'hero.kicker': 'проект marketmaker.cc',
+    'hero.lead': 'Каждый понедельник модель видит 28 дневных свечей и отвечает одним словом: рост или падение. Мы посчитали, сколько это стоит в деньгах.',
+    'hero.cta': 'Смотреть результаты',
+    'pro.kicker': '01 / протокол',
+    'pro.title': 'Одна неделя.<br><span class="accent">1 381 раз.</span>',
+    'pro.aria': 'Анимация: свечи превращаются в ответ модели, ответ в недельную сделку, сделки в кривую капитала',
+    'mx.kicker': '02 / результаты',
+    'mx.title': 'Девять пар. <span class="accent">Одна таблица.</span>',
+    'mx.period': 'Период',
+    'mx.metric': 'Метрика',
+    'mx.base': 'С чем сравнивать',
+    'mx.note': 'Издержки: комиссия 0,05% и проскальзывание 0,04% на каждую сторону. Фандинг и спред не входят. Просадка считается по недельным отметкам. Годовые строки начинают капитал заново.',
+    'ac.kicker': '03 / точность',
+    'ac.title': 'Почти <span class="accent">монетка</span>.',
+    'ac.lead': 'Доля недель, где модель угадала направление, по всем девяти парам вместе. Желтая строка не модель: она каждую неделю отвечает "вниз".',
+    'ac.unit': 'Единицы задержки',
+    'ac.side': 'Brier score: ошибка вероятностей, постоянные 50 на 50 дают 0,25, меньше значит лучше. Задержка: медиана по парам, у Kairos вместе с сетью до API.',
+    'rk.kicker': '04 / точность и деньги',
+    'rk.title': 'Точнее не значит <span class="accent">богаче</span>.',
+    'rk.p': 'В подсчете точности каждая неделя весит одинаково. В портфеле итог за три года решают несколько крупных движений: модель, которая угадывает мелкие недели и пропускает большой рост, будет точной и бедной.',
+    'ct.kicker': '05 / каталог',
+    'ct.lead': 'Доходность появляется только после настоящего ответа модели на все задания. Ожидающие и несовместимые проекты не получают нулей и не исчезают из списка.',
+    'me.kicker': '06 / методика',
+    'me.title': 'Одинаково <span class="accent">для всех</span>.',
+    'foot.by': 'Jev Bots Bench · проект <a href="https://marketmaker.cc" rel="noopener">marketmaker.cc</a>',
+    'foot.note': 'Ретроспективное исследование. Не инвестиционный совет.',
   };
-  const RU = {};
+  // the HTML holds the English text; RUS holds the Russian one
+  const ENS = {};
+  const pick = (k) => LANG === 'ru' ? RUS[k] ?? ENS[k] : ENS[k];
   function applyStatic() {
-    for (const n of $$('[data-i18n]')) { const k = n.dataset.i18n; RU[k] ??= n.textContent; n.textContent = LANG === 'en' ? EN[k] ?? RU[k] : RU[k]; }
-    for (const n of $$('[data-i18n-html]')) { const k = n.dataset.i18nHtml; RU[k] ??= n.innerHTML; n.innerHTML = LANG === 'en' ? EN[k] ?? RU[k] : RU[k]; }
-    for (const n of $$('[data-i18n-aria]')) { const k = n.dataset.i18nAria; RU[k] ??= n.getAttribute('aria-label'); n.setAttribute('aria-label', LANG === 'en' ? EN[k] ?? RU[k] : RU[k]); }
+    for (const n of $$('[data-i18n]')) { const k = n.dataset.i18n; ENS[k] ??= n.textContent; n.textContent = pick(k); }
+    for (const n of $$('[data-i18n-html]')) { const k = n.dataset.i18nHtml; ENS[k] ??= n.innerHTML; n.innerHTML = pick(k); }
+    for (const n of $$('[data-i18n-aria]')) { const k = n.dataset.i18nAria; ENS[k] ??= n.getAttribute('aria-label'); n.setAttribute('aria-label', pick(k)); }
     document.documentElement.lang = LANG;
     document.title = T('Jev Bots Bench: торговые модели против простого удержания', 'Jev Bots Bench: trading models against plain holding');
     $('#langBtn').textContent = LANG === 'en' ? 'RU' : 'EN';
