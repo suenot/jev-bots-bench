@@ -8,6 +8,7 @@ All notable changes to this project are documented here.
 
 - Clarify when checkpoint hash manifests were recorded relative to the initial inference runs.
 - Host the static dashboard on Cloudflare Workers with a separate, allowlisted build directory.
+- Rebuild the dashboard around one pair-by-model matrix (return, drawdown or accuracy; full period or a single year; difference to hold or 7-day momentum), an accuracy table with Brier score and latency in microseconds or milliseconds, the full model catalog grouped by status, and the method summary. It uses the Marketmaker theme from themes.marketmaker.cc and coin logos from logos.marketmaker.cc, and follows the system light or dark mode.
 
 ## [0.7.0] - 2026-11-22
 
