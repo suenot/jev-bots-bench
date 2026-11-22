@@ -1,98 +1,180 @@
 <!doctype html>
-<html lang="ru" data-theme="marketmaker">
+<html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Jev Bots Bench: модели для трейдинга на девяти криптопарах</title>
-  <meta name="description" content="Открытый бенчмарк: Kairos и открытые альтернативы Jev раз в неделю решают, держать монету или выйти в деньги. Доходность после издержек, точность и методика на девяти парах за три года.">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Jev Bots Bench">
-  <meta property="og:description" content="Kairos и открытые альтернативы Jev на одной торговой политике: девять криптопар, три года, доходность после издержек.">
-  <meta property="og:url" content="https://jev-bots-bench.marketmaker.cc/">
-  <link rel="canonical" href="https://jev-bots-bench.marketmaker.cc/">
-  <meta name="color-scheme" content="light dark">
-  <script>if (matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.dataset.mode = 'dark';</script>
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist@5/index.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist-mono@5/index.css">
-  <link rel="stylesheet" href="https://themes.marketmaker.cc/css/marketmaker.css">
-  <link rel="stylesheet" href="./styles.css">
-  <script src="./app.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jev Bots Bench: торговые модели против простого удержания</title>
+<meta name="description" content="Открытый бенчмарк торговых моделей: 1 382 недельных решения на девяти криптопарах Binance, доходность после издержек, точность и сравнение с удержанием.">
+<meta name="theme-color" content="#07080a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;700&family=Onest:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script>
+(() => { // theme before first paint: saved choice, else system
+  let t = null; try { t = localStorage.getItem('jbb.theme'); } catch {}
+  if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  document.documentElement.dataset.theme = t; document.documentElement.style.colorScheme = t;
+  let l = new URLSearchParams(location.search).get('lang'); try { l = l || localStorage.getItem('jbb.lang'); } catch {}
+  if (l !== 'ru' && l !== 'en') l = /(^|\s)ru/i.test((navigator.languages || [navigator.language]).join(' ')) ? 'ru' : 'en';
+  document.documentElement.lang = l;
+})();
+</script>
 </head>
 <body>
-  <a class="skip" href="#main">К результатам</a>
-  <header class="top wrap">
-    <a class="brand" href="./">Jev Bots Bench</a>
-    <nav aria-label="Разделы">
-      <a href="#matrix">Доходность</a>
-      <a href="#accuracy">Точность</a>
-      <a href="#engines">Модели</a>
-      <a href="#method">Методика</a>
-      <a href="https://github.com/suenot/jev-bots-bench" rel="noopener">GitHub</a>
-    </nav>
-  </header>
+<div class="progress" id="progress"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="mm-logo" viewBox="0 0 1024 1024">
+<g transform="translate(0, 1024) scale(0.1, -0.1)" fill="currentColor" stroke="none">
+<path d="M4815 9964 c-22 -2 -92 -9 -155 -14 -1263 -113 -2506 -762 -3284
+-1714 -595 -729 -940 -1541 -1053 -2481 -22 -188 -26 -815 -5 -990 74 -626
+245 -1198 509 -1705 501 -960 1276 -1694 2272 -2154 645 -298 1302 -439 2046
+-438 757 0 1402 147 2070 471 491 238 899 521 1264 876 813 789 1298 1766
+1438 2896 22 181 25 761 5 964 -58 577 -200 1087 -439 1585 -113 236 -184 361
+-334 585 -180 270 -349 476 -574 701 -368 369 -746 646 -1200 880 -563 290
+-1104 452 -1745 520 -146 15 -715 28 -815 18z m837 -559 c1134 -135 2191 -733
+2857 -1615 188 -249 385 -590 511 -885 132 -306 245 -719 294 -1071 37 -264
+48 -690 26 -939 -123 -1364 -861 -2559 -2003 -3243 -299 -179 -487 -266 -777
+-362 -836 -277 -1714 -292 -2579 -44 -119 35 -322 102 -330 110 -2 2 52 63
+120 135 519 553 1099 890 1714 996 73 12 159 17 320 18 300 0 359 -12 924
+-184 129 -39 263 -78 298 -86 187 -43 308 9 510 218 161 168 253 322 253 425
+0 76 -23 127 -156 349 -209 348 -358 662 -426 897 -15 54 -39 167 -53 250 -14
+83 -39 196 -57 250 -83 264 -268 406 -580 447 -54 7 -95 16 -92 20 9 16 120
+50 187 59 152 19 326 -17 779 -159 531 -166 733 -192 993 -126 178 45 317 127
+445 261 71 76 177 230 165 242 -2 3 -26 -9 -52 -26 -64 -41 -147 -77 -252
+-109 -78 -24 -102 -27 -256 -27 -139 -1 -191 3 -285 22 -203 41 -423 109 -725
+227 -654 254 -862 292 -1215 220 -188 -38 -298 -48 -371 -35 -35 6 -128 38
+-208 70 -266 106 -461 155 -716 181 -163 16 -480 6 -658 -21 -265 -40 -601
+-137 -916 -265 -86 -35 -244 -99 -351 -143 -205 -83 -335 -122 -435 -129 -71
+-5 -90 5 -81 40 8 33 99 147 209 262 48 50 87 95 87 100 0 20 -24 35 -58 35
+-49 0 -145 -54 -317 -180 -237 -173 -308 -199 -451 -166 -151 34 -520 172
+-614 228 -63 39 -88 70 -96 119 -10 59 13 113 101 236 171 240 249 360 299
+463 l51 105 0 210 c1 265 10 301 128 475 102 152 288 355 495 543 l74 66 -59
+58 c-68 67 -88 119 -81 208 6 68 40 115 118 162 89 54 172 77 280 76 52 0 120
+-5 152 -12 l56 -12 144 75 c268 140 477 214 835 296 304 69 480 127 700 230
+208 98 430 246 593 394 l95 87 155 -5 c85 -3 212 -13 282 -21z m1016 -5082
+c85 -41 130 -109 157 -240 8 -37 13 -68 12 -69 -1 -2 -48 19 -103 46 -121 59
+-139 79 -136 164 0 32 -5 76 -12 97 -14 39 -13 40 8 33 11 -3 45 -17 74 -31z"/>
+<path d="M2243 7035 c-92 -42 -196 -156 -205 -225 -4 -34 23 -37 94 -10 97 36
+180 131 202 233 6 23 3 27 -16 27 -13 0 -47 -11 -75 -25z"/>
+</g>
+</symbol></svg>
 
-  <main id="main">
-    <section class="intro wrap">
-      <h1>Держать монету или выйти в&nbsp;деньги?</h1>
-      <div class="intro-text">
-        <p class="lead">Каждый понедельник модель видит 28 закрытых дневных свечей и отвечает одним словом: рост или падение. На росте портфель держит актив неделю, на падении стоит в деньгах. Так мы сравниваем Kairos и открытые альтернативы Jev на девяти парах Binance с марта 2023 по февраль 2026 года.</p>
-        <p class="facts" id="facts">Загружаем данные бенчмарка</p>
+<header class="nav">
+  <a class="brand" href="#top" aria-label="Jev Bots Bench">
+    <svg class="logo"><use href="#mm-logo"/></svg>
+    <span>Jev Bots<b>Bench</b></span>
+  </a>
+  <nav>
+    <a href="#protocol" data-i18n="nav.protocol">Протокол</a>
+    <a href="#matrix" data-i18n="nav.matrix">Результаты</a>
+    <a href="#accuracy" data-i18n="nav.accuracy">Точность</a>
+    <a href="#catalog" data-i18n="nav.catalog">Модели</a>
+    <a href="#method" data-i18n="nav.method">Методика</a>
+    <a href="https://github.com/suenot/jev-bots-bench" rel="noopener">GitHub</a>
+    <button type="button" class="theme-btn" id="themeBtn"></button>
+    <button type="button" class="lang-btn" id="langBtn"></button>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <canvas id="heroCanvas" aria-hidden="true"></canvas>
+    <div class="hero-inner">
+      <svg class="hero-logo" aria-hidden="true"><use href="#mm-logo"/></svg>
+      <p class="kicker mono" data-i18n="hero.kicker">проект marketmaker.cc</p>
+      <h1 class="h-mega" id="heroTitle"><span>Jev Bots</span> <span class="accent">Bench</span></h1>
+      <p class="lead" id="heroLead" data-i18n="hero.lead">Каждый понедельник модель видит 28 дневных свечей и отвечает одним словом: рост или падение. Мы посчитали, сколько это стоит в деньгах.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#matrix"><span data-i18n="hero.cta">Смотреть результаты</span> <i>↓</i></a>
+        <span class="mono dim small" id="heroFacts"></span>
       </div>
-    </section>
+    </div>
+    <div class="ticker mono" aria-hidden="true"><div class="ticker-track" id="tickerTrack"></div></div>
+  </section>
 
-    <section class="matrix-section wrap" id="matrix" aria-labelledby="matrix-title">
-      <div class="matrix-head">
-        <h2 id="matrix-title">Результат по парам</h2>
-        <div class="controls">
-          <div class="seg" role="radiogroup" aria-label="Период" id="period-ctl"></div>
-          <div class="seg" role="radiogroup" aria-label="Показатель" id="metric-ctl"></div>
-          <div class="seg" role="radiogroup" aria-label="С чем сравнивать" id="base-ctl"></div>
+  <section class="thesis" id="thesis">
+    <p class="big reveal-words" id="thesisText"></p>
+  </section>
+
+  <section class="pin-section" id="protocol">
+    <div class="pin-stage">
+      <div class="pin-copy">
+        <p class="kicker mono" data-i18n="pro.kicker">01 / протокол</p>
+        <h2 class="h-big" data-i18n-html="pro.title">Одна неделя.<br><span class="accent">1 381 раз.</span></h2>
+        <p class="body" id="proText"></p>
+        <ol class="legend mono" id="proLegend"></ol>
+      </div>
+      <canvas id="proCanvas" role="img" data-i18n-aria="pro.aria" aria-label="Анимация: свечи превращаются в ответ модели, ответ в недельную сделку, сделки в кривую капитала"></canvas>
+    </div>
+  </section>
+
+  <section class="results" id="matrix">
+    <div class="wrap wide">
+      <p class="kicker mono" data-i18n="mx.kicker">02 / результаты</p>
+      <h2 class="h-big" data-i18n-html="mx.title">Девять пар. <span class="accent">Одна таблица.</span></h2>
+      <div class="controls" role="group">
+        <div class="seg" id="period-ctl" role="radiogroup" data-i18n-aria="mx.period" aria-label="Период"></div>
+        <div class="seg" id="metric-ctl" role="radiogroup" data-i18n-aria="mx.metric" aria-label="Метрика"></div>
+        <div class="seg" id="base-ctl" role="radiogroup" data-i18n-aria="mx.base" aria-label="С чем сравнивать"></div>
+      </div>
+      <p class="hint" id="matrix-hint" aria-live="polite"></p>
+      <div class="matrix-scroll"><table class="matrix" id="matrix-table"></table></div>
+      <p class="note mono" data-i18n="mx.note">Издержки: комиссия 0,05% и проскальзывание 0,04% на каждую сторону. Фандинг и спред не входят. Просадка считается по недельным отметкам. Годовые строки начинают капитал заново.</p>
+    </div>
+  </section>
+
+  <section class="accuracy" id="accuracy">
+    <div class="wrap">
+      <p class="kicker mono" data-i18n="ac.kicker">03 / точность</p>
+      <h2 class="h-big" data-i18n-html="ac.title">Почти <span class="accent">монетка</span>.</h2>
+      <p class="body narrow" data-i18n="ac.lead">Доля недель, где модель угадала направление, по всем девяти парам вместе. Желтая строка не модель: она каждую неделю отвечает "вниз".</p>
+      <div class="ac-grid">
+        <div class="race" id="race"></div>
+        <div class="ac-side">
+          <table class="acc" id="acc-table"></table>
+          <div class="seg small-seg" id="unit-ctl" role="radiogroup" data-i18n-aria="ac.unit" aria-label="Единицы задержки"></div>
+          <p class="mono dim small" data-i18n="ac.side">Brier score: ошибка вероятностей, постоянные 50 на 50 дают 0,25, меньше значит лучше. Задержка: медиана по парам, у Kairos вместе с сетью до API.</p>
         </div>
       </div>
-      <p class="hint" id="matrix-hint"></p>
-      <div class="matrix-scroll" tabindex="0" aria-label="Таблица результатов, прокручивается по горизонтали">
-        <table class="matrix" id="matrix-table"><tbody><tr><td class="loading">Загружаем результаты</td></tr></tbody></table>
-      </div>
-      <p class="note" id="matrix-note">Издержки: комиссия 0,05% и проскальзывание 0,04% на каждую сторону сделки. Фандинг и спред биржи в расчет не входят. Просадка считается по недельным отметкам капитала, падения внутри недели она не видит. Годовые строки начинают капитал заново, поэтому их нельзя сложить в итог за весь период.</p>
-    </section>
+    </div>
+  </section>
 
-    <section class="wrap split" id="accuracy" aria-labelledby="accuracy-title">
-      <div>
-        <h2 id="accuracy-title">Точность прогноза</h2>
-        <p>Доля недель, где модель угадала направление, по всем девяти парам вместе. Brier score показывает ошибку вероятностей: постоянный ответ 50 на 50 дает 0,25, меньше значит лучше. Точность и доходность отвечают на разные вопросы: в портфеле несколько крупных недель весят больше сотни мелких.</p>
-        <p class="muted">Задержка у локальных моделей зависит от нашего процессора, у Kairos включает сеть до API. Это не свойство модели, а условия прогона.</p>
-      </div>
-      <div class="acc-wrap">
-        <table class="acc" id="acc-table"><tbody><tr><td class="loading">Загружаем</td></tr></tbody></table>
-        <div class="unit-toggle seg" role="radiogroup" aria-label="Единицы задержки" id="unit-ctl"></div>
-      </div>
-    </section>
+  <section class="ranks" id="ranks">
+    <div class="wrap">
+      <p class="kicker mono" data-i18n="rk.kicker">04 / точность и деньги</p>
+      <h2 class="h-big" data-i18n-html="rk.title">Точнее не значит <span class="accent">богаче</span>.</h2>
+      <div class="rank-stage" id="rankStage"></div>
+      <p class="body" data-i18n="rk.p">В подсчете точности каждая неделя весит одинаково. В портфеле итог за три года решают несколько крупных движений: модель, которая угадывает мелкие недели и пропускает большой рост, будет точной и бедной.</p>
+    </div>
+  </section>
 
-    <section class="wrap" id="engines" aria-labelledby="engines-title">
-      <h2 id="engines-title">Все модели каталога</h2>
-      <p class="section-lead">Доходность появляется только после настоящего ответа модели на все задания. Ожидающие и несовместимые проекты не получают нулей и не исчезают из списка.</p>
-      <div id="engine-list" class="engines"></div>
-    </section>
+  <section class="catalog" id="catalog">
+    <div class="wrap">
+      <p class="kicker mono" data-i18n="ct.kicker">05 / каталог</p>
+      <h2 class="h-big" id="catTitle"></h2>
+      <p class="body narrow" data-i18n="ct.lead">Доходность появляется только после настоящего ответа модели на все задания. Ожидающие и несовместимые проекты не получают нулей и не исчезают из списка.</p>
+      <div class="cards" id="cards"></div>
+    </div>
+  </section>
 
-    <section class="wrap split" id="method" aria-labelledby="method-title">
-      <div>
-        <h2 id="method-title">Как проверить самому</h2>
-        <p>Задания, исходы, ответы моделей и код расчета открыты. Будущие цены лежат в отдельном файле и не попадают в запрос. Модели вышли позже периода теста, поэтому это ретроспективная проверка, а не торговля в реальном времени.</p>
-        <ul class="links">
-          <li><a href="https://github.com/suenot/jev-bots-bench#readme" rel="noopener">Инструкция и исходный код</a></li>
-          <li><a href="https://github.com/suenot/jev-bots-bench/blob/main/benchmark/README.md" rel="noopener">Протокол бенчмарка</a></li>
-          <li><a href="./data/summary.json">Сводка результатов в JSON</a></li>
-          <li><a href="https://marketmaker.cc/ru/blog/" rel="noopener">Разборы в блоге Marketmaker</a></li>
-        </ul>
-      </div>
-      <dl class="params" id="params"></dl>
-    </section>
-  </main>
+  <section class="method" id="method">
+    <div class="wrap">
+      <p class="kicker mono" data-i18n="me.kicker">06 / методика</p>
+      <h2 class="h-big" data-i18n-html="me.title">Одинаково <span class="accent">для всех</span>.</h2>
+      <div class="notes" id="params"></div>
+      <ul class="refs" id="refs"></ul>
+    </div>
+  </section>
+</main>
 
-  <footer class="wrap foot">
-    <span>Jev Bots Bench, код под лицензией MIT. Модели и веса сохраняют свои лицензии.</span>
-    <span id="version"></span>
-  </footer>
+<footer class="foot">
+  <svg class="foot-logo" aria-hidden="true"><use href="#mm-logo"/></svg>
+  <p class="mono" data-i18n-html="foot.by">Jev Bots Bench · проект <a href="https://marketmaker.cc" rel="noopener">marketmaker.cc</a></p>
+  <p class="mono dim small"><span data-i18n="foot.note">Ретроспективное исследование. Не инвестиционный совет.</span> <span id="version"></span></p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
